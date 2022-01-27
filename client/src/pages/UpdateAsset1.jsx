@@ -157,16 +157,11 @@ function  createSecondItems(val) {
     }} />
   }
 
-  const handleSubmit = (event) => {
-    setResmsg(null);
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    event.preventDefault();
-    setValidated(true);
-    Axios.post("https://wce-asset-registry.herokuapp.com/updateAsset",{
+
+
+  const postreq=()=>
+   {
+    Axios.post("https://wce-asset-registry.herokuapp.com/addasset",{
       UID: UID,
       AssetNumber:AssetNumber,
       EqpType:EqpType,
@@ -188,10 +183,9 @@ function  createSecondItems(val) {
       Remark:Remark,
       Part:Part
     }).then((response)=>{
-      console.log(response);
       if(response.data.err)
       {
-        const msg ="Erro Updating ErrorCode:" +response.data.code;
+        const msg ="Error Adding Data ErrorCode:"+response.data.code;
         setResmsg(msg);
       }
       else
@@ -200,8 +194,26 @@ function  createSecondItems(val) {
         document.getElementById("addassetform").reset();
         setRedirect(true);
       }
-      
     });
+   }
+
+
+   
+
+  const handleSubmit = (event) => {
+    setResmsg(null);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+      setValidated(true);
+      setResmsg("Invalid Data");
+    }
+    else{
+
+      setValidated(true);
+      setResmsg("Valid Data");
+    }
   };
 
 

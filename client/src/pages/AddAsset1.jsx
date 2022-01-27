@@ -81,15 +81,8 @@ function  createSecondItems(val) {
     document.getElementById("addassetform").reset();
    }
 
-  const handleSubmit = (event) => {
-    setResmsg(null);
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    event.preventDefault();
-    setValidated(true);
+   const postreq=()=>
+   {
     Axios.post("https://wce-asset-registry.herokuapp.com/addasset",{
       UID: UID,
       AssetNumber:AssetNumber,
@@ -124,6 +117,21 @@ function  createSecondItems(val) {
         setRedirect(true);
       }
     });
+   }
+  const handleSubmit = (event) => {
+    setResmsg(null);
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+      setValidated(true);
+      setResmsg("Invalid Data");
+    }
+    else{
+
+      setValidated(true);
+      setResmsg("Valid Data");
+    }
   };
 
 
