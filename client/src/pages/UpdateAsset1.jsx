@@ -41,6 +41,7 @@ function ViewAsset(props) {
   const [Remark, setRemark] = React.useState(null);
   const [Part, setPart] = React.useState(null);
   const [Resmsg ,setResmsg]= React.useState(null);
+  const [Department, setDepartment] = React.useState("None");
 
   
 
@@ -61,7 +62,8 @@ function ViewAsset(props) {
  React.useEffect(()=>{
    if(data)
    {
-    setUID(data.UID);
+     setDepartment(data.Department);
+  setUID(data.UID);
   setEqpType(data.EqpType);
   setNameOfEqp(data.NameOfEqp);
   setStatus(data.Status);
@@ -162,7 +164,8 @@ function  createSecondItems(val) {
   const postreq=()=>
    {
     Axios.post("https://wce-asset-registry.herokuapp.com/addasset",{
-      UID: UID,
+      Department:Department,  
+    //UID: UID,
       AssetNumber:AssetNumber,
       EqpType:EqpType,
       NameOfEqp:NameOfEqp,
@@ -230,16 +233,17 @@ function  createSecondItems(val) {
       </Row>
         <Form className="formRow" id="addassetform"  noValidate validated={validated} onSubmit={handleSubmit}>
         <Row style={{paddingBottom:"10px"}}>
-        <Form.Group  as={Col} md="6" controlId="validationCustom01">
-          <Form.Label>UID</Form.Label>
-          <Form.Control
-            readOnly={true}
-            type="number"
-            placeholder="UID"
-            value={data.UID}
-            onChange={(e) => {setUID(e.target.value)} }
-          />
-        </Form.Group>
+        <Form.Group as={Col} controlId="formGridState">
+                <Form.Label>Department </Form.Label>
+                <Form.Select required as="select" onChange={(e) => {setDepartment(e.target.value)}}  custom>
+                  <option>All</option>
+                  <option>IT</option>
+                  <option>CSE</option>
+                  <option>CIVIL</option>
+                  <option>ELECTRICAL</option>
+                  <option>ELECTRONICS</option>
+                </Form.Select>
+              </Form.Group>
         <Form.Group as={Col} md="6" controlId="validationCustom02">
           <Form.Label>Asset Number</Form.Label>
           <Form.Control

@@ -30,14 +30,15 @@ function ViewAsset() {
   const [SupplierAddress, setSupplierAddress] = React.useState(null);
   const [SupplierMobNo, setSupplierMobNo] = React.useState(null);
   const [Utilization, setUtilization] = React.useState(null);
-  const [Status, setStatus] = React.useState("working");
+  const [Status, setStatus] = React.useState("Working");
   const [Remark, setRemark] = React.useState(null);
   const [Part, setPart] = React.useState(null);
   const [Resmsg ,setResmsg]= React.useState(null);
-
+  const [Department, setDepartment] = React.useState("All");
 
 
    const dropdownlist={
+     
      Camera:["Web","Analog","IP Based",	"Other"],
      Computer:["Laptop","Desktop","Server",	"Other"],
      Monitor	:["LCD",	"TFT"	,"LED"	,"Other"],
@@ -85,6 +86,7 @@ function  createSecondItems(val) {
    {
     Axios.post("https://wce-asset-registry.herokuapp.com/addasset",{
       UID: UID,
+      Department:Department,
       AssetNumber:AssetNumber,
       EqpType:EqpType,
       NameOfEqp:NameOfEqp,
@@ -125,11 +127,12 @@ function  createSecondItems(val) {
       event.preventDefault();
       event.stopPropagation();
       setValidated(true);
+      console.log(Department);
       setResmsg("Invalid Data");
     }
     else{
-
       setValidated(true);
+      
       setResmsg("Valid Data");
     }
   };
@@ -145,15 +148,18 @@ function  createSecondItems(val) {
       </Row>
         <Form className="formRow" id="addassetform"  noValidate validated={validated} onSubmit={handleSubmit}>
         <Row style={{paddingBottom:"10px"}}>
-        <Form.Group  as={Col} md="6" controlId="validationCustom01">
-          <Form.Label>UID</Form.Label>
-          <Form.Control
-            required
-            type="number"
-            placeholder="UID"
-            onChange={(e) => {setUID(e.target.value)} }
-          />
-        </Form.Group>
+        <Form.Group as={Col} controlId="formGridState">
+                <Form.Label>Department </Form.Label>
+                <Form.Select required as="select" onChange={(e) => {setDepartment(e.target.value)}}  custom>
+                  <option>All</option>
+                  <option>IT</option>
+                  <option>CSE</option>
+                  <option>CIVIL</option>
+                  <option>ELECTRICAL</option>
+                  <option>ELECTRONICS</option>
+                </Form.Select>
+              </Form.Group>
+
         <Form.Group as={Col} md="6" controlId="validationCustom02">
           <Form.Label>Asset Number</Form.Label>
           <Form.Control
@@ -185,7 +191,7 @@ function  createSecondItems(val) {
     </Form.Group>
         </Row>
         </Col>
-        <Col md="6" style={{padding:0,margin:0}}>
+    <Col md="6" style={{padding:0,margin:0}}>
          <Row style={{padding:0,margin:0}}>
          <Form.Group  as={Col} md="12" controlId="validationCustom01">
           <Form.Label>Specification/Configuration</Form.Label>

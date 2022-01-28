@@ -22,6 +22,7 @@ import AddAsset4 from "./pages/AddAsset4";
 import ImportExportCSV from "./pages/ImportExportCSV";
 import QrcodeDownload from "./pages/QrcodeDownload";
 import About from "./pages/About";
+import Public from "./pages/Public";
 
 
 
@@ -40,11 +41,15 @@ const auth = getAuth();
   return (
     <HashRouter>
      <Switch>
-       <Route path="/"  exact><LandingPage/> </Route>
+       <Route path="/" exact component={Public}/>
+       <Route path="/admin"><LandingPage/> </Route>
        <Route path="/info/:uid"> <Info/> </Route>
        <Route path="/infoall/:uid"> { uidval && <Infoall/> }</Route>
        <Route path="/login" component={LanDingPageFaculty}/>
 
+       
+       
+       
        <Route path="/addfaculty"> { uidval && <AddFaculty/> }</Route>
        <Route path="/addAsset1">{ uidval && <AddAsset1/> }</Route>
        <Route path="/addAsset2/:UID" component={AddAsset2} />
