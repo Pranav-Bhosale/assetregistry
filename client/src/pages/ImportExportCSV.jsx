@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Row, Col,Form } from "react-bootstrap";
+import { Row,Tabs,Tab, Col,Form } from "react-bootstrap";
 import Axios from "axios";
 import fileDownload from 'js-file-download';
 
@@ -9,6 +9,7 @@ function ImportExportCSV() {
   const [uploadedFile,setuploadedFile]=React.useState(null);
   const [Resmsg ,setResmsg]= React.useState(null);
   const [Resmsgexport,setResmsgexport]= React.useState(null);
+  const [key, setKey] =React.useState('home');
 
 
   const handelUpload = (event) =>
@@ -54,14 +55,25 @@ function ImportExportCSV() {
 
 
   return (
-    <div className="navfootpad">
-        <Navbar />
-        <Row style={{ margin: 0, padding: 0, }}>
+<>
+
+<div className="navfootpad">
+<Navbar />
+<div style={{margin:"30px"}}>
+    <Tabs
+      id="controlled-tab-example"
+      activeKey={key}
+      onSelect={(k) => setKey(k)}
+      className="mb-3"
+    >
+      <Tab eventKey="home" title="Home">
+
+
+      <Row style={{ margin: 0, padding: 0, }}>
         <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Add Bulk Data To Database</h1>
         <hr  style={{ margin: 0, padding: 0, }}/>
       </Row>
-
-         <div style={{textAlign:"center"}} >
+      <div style={{textAlign:"center"}} >
          <Form className="formRow"  onSubmit={handelUpload} id="csvinputform" encType="multipart/form-data" >
          <Form.Group controlId="formFile" className="mb-3" >
            <Form.Label><h6><b>Choose a CSV file</b></h6></Form.Label>
@@ -74,7 +86,11 @@ function ImportExportCSV() {
       <p style={{ textAlign:"center"}}>{Resmsg}</p>
       <hr className="hrline" style={{ padding: 0, marginTop: '20px',marginBottom: '20px' }}/>
          </div>
-         <Row style={{ margin: 0, padding: 0, }}>
+
+
+      </Tab>
+      <Tab eventKey="profile" title="Profile">
+      <Row style={{ margin: 0, padding: 0, }}>
         <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Get All Data From Database</h1>
         
       </Row>
@@ -83,8 +99,14 @@ function ImportExportCSV() {
         <button className="lanButton" onClick={getalldata}>Get Data</button>
         <p style={{ textAlign:"center"}}>{Resmsgexport}</p>
       </div>
+      </Tab>
+    </Tabs>
+
+</div>
         <Footer />
     </div>
+
+    </>
   );
 }
 
