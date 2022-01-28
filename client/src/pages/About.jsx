@@ -1,11 +1,10 @@
 import React from "react";
 import Footer from "../components/Footer";
 import TitleBar from "../components/TitleBar";
-import Card from "react-bootstrap/Card";
-import Logoimg from "../images/logoRed.png";
+
 import {Row,Col } from "react-bootstrap";
 import {SiLinkedin,SiGmail} from "react-icons/si";
-import { FcGoogle} from "react-icons/fc";
+
 
 function ViewAsset() {
  

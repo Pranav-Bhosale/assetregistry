@@ -70,7 +70,7 @@ function ImportExportCSV() {
 
 
       <Row style={{ margin: 0, padding: 0, }}>
-        <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Add Bulk Data To Database</h1>
+        <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Add CSV File To Database</h1>
         <hr  style={{ margin: 0, padding: 0, }}/>
       </Row>
       <div style={{textAlign:"center"}} >
@@ -89,6 +89,8 @@ function ImportExportCSV() {
 
 
       </Tab>
+
+
       <Tab eventKey="profile" title="Profile">
       <Row style={{ margin: 0, padding: 0, }}>
         <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Get All Data From Database</h1>

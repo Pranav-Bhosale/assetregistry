@@ -1,17 +1,14 @@
 import React from "react";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import { Row, Col, Card, Accordion,Modal,Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import { BiSearchAlt } from "react-icons/bi";
 import InputGroup from "react-bootstrap/InputGroup";
 import { FormControl } from "react-bootstrap";
 import {Redirect,useHistory} from "react-router-dom";
-
 import Axios from "axios";
 
 
-function ViewAsset() {
+function Publicsearch() {
   const history=useHistory();
   const [redirect,setRedirect]=React.useState(false);
   const [redirectUpdate,setRedirectUpdate]=React.useState(false);
@@ -68,17 +65,14 @@ if(response.data.success)
  }
 
  if (redirect) {
-  history.push("/addAsset2/"+redirectUID);
+  history.push("/infoall/"+redirectUID);
+// var routstring="/infoall/"+ redirectUID;
+//   return <Redirect to={routstring} />
   // return <Redirect to={{
   //   pathname:
   // }} />
 }
-if (redirectUpdate) {
-  history.push("/updateAsset/"+redirectUID);
-  // return <Redirect to={{
-  //   pathname:"/updateAsset/"+redirectUID
-  // }} />
-}
+
 function  createSelectItems() {
    let items = [];         
    for (const key of Object.keys(dropdownlist)) {             
@@ -140,23 +134,7 @@ function  queriedDatadisplay(queriedData) {
                      }}>View</button>
           
                   </Col>
-                  <Col>
-            
-                  <button className="simplebtn" onClick={(e)=>{
-                     setRedirectUID(element.UID);
-                     setRedirectUpdate(true);
-                     }} >Upate</button>
-                  </Col>
-                  <Col>
-                  <button className="simplebtn" onClick={(e)=>{
-                    setdeluid(element.UID);
-                    setdelid(id);
-                   
-                    handleShow();
-                  }}
-                     >Delete</button>
-          
-                  </Col>
+                 
                   </Row>
           </Accordion.Body>
         </Accordion.Item>
@@ -277,8 +255,7 @@ function  queriedDatadisplay(queriedData) {
 
 
   return (
-    <div className="navfootpad">
-      <Navbar />
+    <>
       <Row style={{ margin: 0, padding: 0, }}>
         <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Search Asset</h1>
         <hr  style={{ margin: 0, padding: 0, }}/>
@@ -363,9 +340,8 @@ function  queriedDatadisplay(queriedData) {
 {queriedDatadisplay(queriedData)}
 
       </div>
- <Footer />
-    </div>
+      </>
   );
 }
 
-export default ViewAsset;
+export default Publicsearch;
