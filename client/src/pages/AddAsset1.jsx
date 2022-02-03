@@ -35,6 +35,7 @@ function ViewAsset() {
   const [Part, setPart] = React.useState(null);
   const [Resmsg ,setResmsg]= React.useState(null);
   const [Department, setDepartment] = React.useState("All");
+  const [uploadedFile,setuploadedFile]=React.useState(null);
 
 
    const dropdownlist={
@@ -148,6 +149,9 @@ function  createSecondItems(val) {
       </Row>
         <Form className="formRow" id="addassetform"  noValidate validated={validated} onSubmit={handleSubmit}>
         <Row style={{paddingBottom:"10px"}}>
+        
+        <Col>
+            <Row>
         <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Department </Form.Label>
                 <Form.Select required as="select" onChange={(e) => {setDepartment(e.target.value)}}  custom>
@@ -159,6 +163,16 @@ function  createSecondItems(val) {
                   <option>ELECTRONICS</option>
                 </Form.Select>
               </Form.Group>
+             
+        
+         <Form.Group as={Col} controlId="formFile" className="mb-3" >
+           <Form.Label>Choose Image</Form.Label>
+           <Form.Control type="file" accept="image/*" onChange={(e) => {setuploadedFile(e.target.files[0])} }/>
+         </Form.Group>
+        
+             
+            </Row>
+        </Col>
 
         <Form.Group as={Col} md="6" controlId="validationCustom02">
           <Form.Label>Asset Number</Form.Label>
@@ -169,12 +183,16 @@ function  createSecondItems(val) {
             onChange={(e) => setAssetNumber(e.target.value)}
           />
         </Form.Group>
+
+
       </Row>
 
 
 
       <Row style={{paddingBottom:"10px"}}>
       <Col md="6" style={{padding:0,margin:0}}>
+
+
          <Row style={{padding:0,margin:0}}>
          <Form.Group as={Col} controlId="formGridState">
       <Form.Label>Equipment type</Form.Label>
@@ -190,7 +208,11 @@ function  createSecondItems(val) {
       </Form.Select>
     </Form.Group>
         </Row>
+
+
         </Col>
+
+
     <Col md="6" style={{padding:0,margin:0}}>
          <Row style={{padding:0,margin:0}}>
          <Form.Group  as={Col} md="12" controlId="validationCustom01">

@@ -23,6 +23,7 @@ import ImportExportCSV from "./pages/ImportExportCSV";
 import QrcodeDownload from "./pages/QrcodeDownload";
 import About from "./pages/About";
 import Public from "./pages/Public";
+import Dropdown from "./pages/Dynamicdropdown";
 
 
 
@@ -46,7 +47,7 @@ const auth = getAuth();
        <Route path="/info/:uid"> <Info/> </Route>
        <Route path="/infoall/:uid"> { uidval && <Infoall/> }</Route>
        <Route path="/login" component={LanDingPageFaculty}/>
-
+      <Route path="/dropdown"><Dropdown/> </Route>
        
        
        
