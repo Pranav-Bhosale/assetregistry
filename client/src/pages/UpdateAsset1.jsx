@@ -233,6 +233,8 @@ function  createSecondItems(val) {
       </Row>
         <Form className="formRow" id="addassetform"  noValidate validated={validated} onSubmit={handleSubmit}>
         <Row style={{paddingBottom:"10px"}}>
+        <Col>
+            <Row>
         <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Department </Form.Label>
                 <Form.Select required as="select" onChange={(e) => {setDepartment(e.target.value)}}  custom>
@@ -244,6 +246,19 @@ function  createSecondItems(val) {
                   <option>ELECTRONICS</option>
                 </Form.Select>
               </Form.Group>
+             
+        
+         <Form.Group as={Col} controlId="formFile" className="mb-3" >
+           <Form.Label>Choose Image</Form.Label>
+           <Form.Control type="file" accept="image/*" />
+         </Form.Group>
+        
+             
+            </Row>
+        </Col>
+
+
+
         <Form.Group as={Col} md="6" controlId="validationCustom02">
           <Form.Label>Asset Number</Form.Label>
           <Form.Control

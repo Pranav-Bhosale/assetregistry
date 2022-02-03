@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+
+  pre_build:
+    commands:
+      - echo Installing dependencies
+      - npm install
+
+  build:
+    commands:
+      - echo Running tests
+      - npm test
+      - echo Building and tagging Docker image
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 220052277279.dkr.ecr.us-east-1.amazonaws.com
+      - docker build -t asset-registry .
+      - docker tag asset-registry:latest 220052277279.dkr.ecr.us-east-1.amazonaws.com/asset-registry:latest
+
+  post_build:
+    commands:
+      - echo Pushing to ECR
+      - docker push 220052277279.dkr.ecr.us-east-1.amazonaws.com/asset-registry:latest
+      - printf '[{"name":"asset-registry","imageUri":"220052277279.dkr.ecr.us-east-1.amazonaws.com/asset-registry"}]' > imagedefinitions.json
+
+#artifacts:
+#  files:
+#    - imagedefinitions.json
