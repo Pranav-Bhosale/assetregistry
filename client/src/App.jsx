@@ -44,7 +44,7 @@ const auth = getAuth();
        <Route path="/" exact component={Public}/>
        <Route path="/admin"><LandingPage/> </Route>
        <Route path="/info/:uid"> <Info/> </Route>
-       <Route path="/infoall/:uid"> { uidval && <Infoall/> }</Route>
+       <Route path="/infoall/:uid">  <Infoall/> </Route>
        <Route path="/login" component={LanDingPageFaculty}/>
 
        
