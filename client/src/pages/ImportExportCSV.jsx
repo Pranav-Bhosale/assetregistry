@@ -9,7 +9,8 @@ function ImportExportCSV() {
   const [uploadedFile,setuploadedFile]=React.useState(null);
   const [Resmsg ,setResmsg]= React.useState(null);
   const [Resmsgexport,setResmsgexport]= React.useState(null);
-  const [key, setKey] =React.useState('home');
+  const [key, setKey] =React.useState('Upload');
+  const [Department, setDepartment] = React.useState("All");//set the dept......
 
 
   const handelUpload = (event) =>
@@ -66,7 +67,7 @@ function ImportExportCSV() {
       onSelect={(k) => setKey(k)}
       className="mb-3"
     >
-      <Tab eventKey="home" title="Home">
+      <Tab eventKey="Upload" title="Upload">
 
 
       <Row style={{ margin: 0, padding: 0, }}>
@@ -75,11 +76,28 @@ function ImportExportCSV() {
       </Row>
       <div style={{textAlign:"center"}} >
          <Form className="formRow"  onSubmit={handelUpload} id="csvinputform" encType="multipart/form-data" >
+
+         <Row>
+         <Form.Group as={Col} controlId="formGridState">
+                <Form.Label><h6><b>Select Department</b> </h6></Form.Label>
+                <Form.Select required as="select" onChange={(e) => {setDepartment(e.target.value)}}  custom>
+                  <option>All</option>
+                  <option>IT</option>
+                  <option>CSE</option>
+                  <option>CIVIL</option>
+                  <option>ELECTRICAL</option>
+                  <option>ELECTRONICS</option>
+                </Form.Select>
+              </Form.Group>
+
+         <Col>
          <Form.Group controlId="formFile" className="mb-3" >
            <Form.Label><h6><b>Choose a CSV file</b></h6></Form.Label>
            <Form.Control type="file" accept=".csv" onChange={(e) => {setuploadedFile(e.target.files[0])} }/>
          </Form.Group>
+         </Col>
          <br/>
+         </Row>
          <button className="lanButton" type="submit">Upload</button>
          </Form>
 
@@ -91,7 +109,7 @@ function ImportExportCSV() {
       </Tab>
 
 
-      <Tab eventKey="profile" title="Profile">
+      <Tab eventKey="Download" title="Download">
       <Row style={{ margin: 0, padding: 0, }}>
         <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Get All Data From Database</h1>
         

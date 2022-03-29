@@ -24,6 +24,7 @@ import QrcodeDownload from "./pages/QrcodeDownload";
 import About from "./pages/About";
 import Public from "./pages/Public";
 import Dropdown from "./pages/Dynamicdropdown";
+import AdminProfile from "./pages/AdminProfile";
 
 
 
@@ -48,7 +49,7 @@ const auth = getAuth();
        <Route path="/infoall/:uid">  <Infoall/> </Route>
        <Route path="/login" component={LanDingPageFaculty}/>
       <Route path="/dropdown"><Dropdown/> </Route>
-       
+       <Route path="/adminprofile"> <AdminProfile/> </Route>
        
        
        <Route path="/addfaculty"> { uidval && <AddFaculty/> }</Route>
