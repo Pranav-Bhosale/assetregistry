@@ -5,6 +5,11 @@ const multer  = require('multer')
 const upload=multer({ 
   dest: './uploads/'
 });
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const auth=require("./MiddleWare/Auth");
+const cookieParser = require("cookie-parser");
+const User = require("./models/User");
 const cors=require("cors");
 const port = 3002;
 app.use(express.json());
@@ -95,6 +100,54 @@ catch(err)
 }  
 });
 
+app.post("/photodept",upload.single("fileInput"),async (req,res)=>
+{
+ 
+   const file=req.file;
+   console.log(file.mimetype);
+//    if(file.mimetype!=="text/csv")
+//    {
+//      console.log("Not a CSV File!!..deleting file");
+//      res.send("Not a CSV File!!");
+//    }
+//    else
+//    {
+//      try{
+//    await csvtojson().fromFile(file.path).then( async source => {
+//       var i,cnt=0,tot=source.length;
+//         try{
+//           for (i = 0; i < source.length; i++) {
+//           const newasset=new AssetDB(source[i]);
+//           newasset._id=source[i].UID;
+//           const success=await newasset.save();
+//             cnt++;
+//           }
+//         }catch(err) {
+//            res.send(err.message+" ...first "+cnt+" entries were added ");
+//         };
+
+//       if(file &&tot===cnt)
+//   {
+//    res.send("All Entries were added successfully");
+//   }    
+//   });
+// }
+// catch(err)
+// {
+//   console.log(err);
+// }
+
+//    }
+//    try{
+//    await unlinkAsync(file.path).then(function (response)
+//    {
+//      console.log("file Deleted!");
+//    });
+//   }
+//   catch(err){
+// console.log(err);
+//   }
+});
 
 
 
@@ -248,10 +301,155 @@ app.get("/viewasset/sort",async (req,res)=>
   
 });
 
-   
+
+
+ router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const userLogin = await User.findOne({ email: email });
+    if (userLogin) {
+      const isMatch = await bcrypt.compare(password, userLogin.password);
+      if (isMatch) {
+        const token = await userLogin.generateAuthToken();
+        res.cookie("ASSETREGISTRY", token, {
+          expires: new Date(Date.now() + 51840000),
+          httpOnly: true,
+        });
+        res.status(201).json({ message: "Logged in success" });
+      } else {
+        res.status(400).json({ error: "Invalid Credentials" });
+      }
+    } else {
+      res.status(400).json({ error: "Invalid Credentials" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
+
+router.post("/register", async (req, res) => {
+  const { username, email, password, deptID } = req.body;
+  try {
+    const userExist = await User.findOne({ email: email });
+    const userNamexist = await User.findOne({ username: username });
+    if (userExist) {
+      return res.status(422).json({ error: "User alredy exist" });
+    }
+    if (userNamexist) {
+      return res.status(422).json({ error: "User Name alredy exist" });
+    }
+    const user = new User({email,deptID, username, password });
+    const userRegistered = await user.save();
+    if (userRegistered) {
+      res.status(201).json({ message: "User registered Successfully" });
+    } else {
+      res.status(500).json({ message: "Falied to register" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
+router.get("/logout", async (req, res) => {
+  res.cookie("ASSETREGISTRY", "", { expires: new Date(1)});
+  res.clearCookie("ASSETREGISTRY");
+  return res.status(201).json({ message: "SuccessFuly Logout" });
+});
+
+
+
+router.patch("/changePassword", auth, async (req, res) => {
+
+  try {
+    const user = await User.findOne({email: req.email});
+    const email = user.email;
+    var password = req.body.password; ///new pass
+    password = await bcrypt.hash(password, 12);
+
+    const filter = {
+      email: email,
+    };
+    const update = {
+      password: password,
+    };
+
+    const success = await User.findOneAndUpdate(filter, update);
+    if (!success) {
+      return res.status(400).json({ message: "Error occured" });
+    } else {
+      return res.status(201).json({ message: "Password Changed Successfully" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+router.patch("/forgotPassword", async (req, res) => {
+  try {
+    const email = req.body.email;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(400).json({ message: "User not exist" });
+    }
+
+    var OTP = Math.random() * 1000000;
+    OTP = Math.floor(OTP) + "WCE";
+    var password = OTP;
+    password = await bcrypt.hash(password, 12);
+    const filter = {
+      email: email,
+    };
+    const update = {
+      password: password,
+    };
+    const success = await User.findOneAndUpdate(filter, update);
+    if (!success) {
+      return res.status(400).json({ message: "Error occured" });
+    }
+
+    const accessToken = await oAuth2Client.getAccessToken();
+
+    const transport = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAuth2",
+        user: "placementapp1234@gmail.com",
+        clientId: CLIENT_ID,
+        clientSecret: CLEINT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+        accessToken: accessToken,
+      },
+    });
+    const mailOptions = {
+      from: "TPO@WCE <placementapp1234@gmail.com>",
+      to: email,
+      subject: "Hello from gmail using API",
+      text: "Your New Password for PlacementAssist is:" + OTP,
+      // html: '<h1>Hello from gmail email using API</h1>',
+    };
+    const result = await transport.sendMail(mailOptions);
+    if (result) {
+      return res.status(201).json({ message: "Mail Sent Success" });
+    } else {
+      return res.status(500).json({ message: "Falied to send" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 
 
 app.listen(process.env.PORT||port, () => {
-        console.log(`Example app listening on port ${port}!`)
-      });
+  console.log(`Example app listening on port ${port}!`)
+});
+
+
+
+
+
 
