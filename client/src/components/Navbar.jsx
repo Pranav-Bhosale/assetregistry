@@ -10,16 +10,21 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
+  const hide =() => setSidebar(false);
+  const show =() => setSidebar(true);
+
 
   return (
     <>
    <IconContext.Provider value={{ color: '#fff' }}>
-          
+
+   
+
    <Container fluid  className="navcontainer" style={{paddingLeft:0,paddingRight:0}}>
   <Row style={{padding:0,margin:0}}>
     <Col sm={4}  className="navbarleft" >
          <Link to='#' className='menu-bars'>
-            <FaIcons.FaBars onClick={showSidebar} style={{paddingTop:"0px"}} />
+            <FaIcons.FaBars onClick={showSidebar}  onBlur={hide} onFocus={show} style={{paddingTop:"0px"}} />
           </Link>
           <Logo style={{height:"80px",marginTop:"5px",marginBottom:"5px",paddingBottom:"5px"}}/>
     </Col>
@@ -34,7 +39,7 @@ function Navbar() {
 
 
 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className='nav-menu-items' style={{paddingLeft:'0'}} onClick={showSidebar}>
+          <ul className='nav-menu-items' style={{paddingLeft:'0'}} onClick={showSidebar} onBlur={hide} onFocus={show}>
             {Sidebardata.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
