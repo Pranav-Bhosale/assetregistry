@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Row,Tabs,Tab } from "react-bootstrap";
+import { Row,Tabs,Tab,Col,Form, Container,Button } from "react-bootstrap";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseconfig.js"
@@ -111,6 +111,9 @@ function ViewAsset() {
       <Tab eventKey="Manage Admin" title="Manage Admin">
         <p>empty</p>
       </Tab>
+
+
+      
       <Tab eventKey="Add Admin" title="Add Admin">
       <Row style={{ margin: 0, padding: 0, }}>
         <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Add Admin</h1>
@@ -118,15 +121,85 @@ function ViewAsset() {
       </Row>
         <div style={{textAlign:"center", marginTop:"30px"}}>
   <form onSubmit={handleLogin}>
-    <input  spellCheck={false} type="email" onChange={(e) => setEmail(e.target.value)} className="email" placeholder="Email" />
-    <br/>
-    <input type="password" className="password" onChange={(e) => setPass(e.target.value)} placeholder="Password" />
-    <br />
-    <input type="password" className="password" onChange={(e) => setPassConf(e.target.value)} placeholder="Confirm Password" />
-    <br/>
-    <button type="submit" className="lanButton" >Sign Up</button>
-    <br/>
-     <p>{text}</p> 
+<Container style={{ paddingLeft:'20px', paddingRight:'20px', alignContent:"center"}}>
+  <Row className="justify-content-md-center">
+    <Col xs={ {span:3,offset:1 }} style={{textAlign:'left'}}>
+    Admin Name :
+    </Col>
+    <Col xs={{ span: 7, offset: 0 }}>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Control type="text" placeholder="Enter Name" />
+  </Form.Group>
+    </Col>
+  </Row>
+  <Row className="justify-content-md-center">
+    <Col xs={ {span:3,offset:1 }} style={{textAlign:'left'}}>
+    Email :
+    </Col>
+    <Col xs={{ span: 7, offset: 0 }}>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Control type="email" placeholder="Email" />
+  </Form.Group>
+    </Col>
+  </Row>
+  <Row className="justify-content-md-center">
+    <Col xs={ {span:3,offset:1 }} style={{textAlign:'left'}}>
+   Department:
+    </Col>
+    <Col xs={{ span: 7, offset: 0 }}>
+    <Form.Group className="mb-3" controlId="formGridState">
+                
+                <Form.Select required as="select"   custom>
+                  <option>All</option>
+                  <option>IT</option>
+                  <option>CSE</option>
+                  <option>CIVIL</option>
+                  <option>ELECTRICAL</option>
+                  <option>ELECTRONICS</option>
+                </Form.Select>
+              </Form.Group>
+              </Col>
+  </Row>
+  <Row className="justify-content-md-center">
+    <Col xs={ {span:3,offset:1 }} style={{textAlign:'left'}}>
+    Set Password:
+    </Col>
+    <Col xs={{ span: 7, offset: 0 }}>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Control type="password" placeholder="Enter Password" />
+  </Form.Group>
+    </Col>
+  </Row>
+
+  <Row className="justify-content-md-center">
+    <Col xs={ {span:3,offset:1 }} style={{textAlign:'left'}}>
+    Confirm Password:
+    </Col>
+    <Col xs={{ span: 7, offset: 0 }}>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Control type="password" placeholder="Enter Password Again" />
+  </Form.Group>
+    </Col>
+  </Row>
+<Row>
+<Row></Row>
+<Row></Row>
+<Col xs={{ span:3,offset:5}}>
+<Button variant="primary" type="reset">
+   Reset
+  </Button>
+  </Col>
+<Col xs={ {span:3,offset:0}}>
+<Button variant="primary" type="submit">
+    Submit
+  </Button>
+  </Col>
+  
+
+</Row>
+  
+  </Container>
+
   </form>
 </div>
       </Tab>
