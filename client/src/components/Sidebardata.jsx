@@ -31,8 +31,8 @@ export const Sidebardata = [
         cName:'nav-text'
     },
     {
-        title: 'Manage Admin',
-        path :'/addfaculty',
+        title: 'Manage Admins',
+        path :'/ManageAdmins',
         icon : <AiOutlineUserAdd/>,
         cName:'nav-text'
     },

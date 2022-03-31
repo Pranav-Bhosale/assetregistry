@@ -8,7 +8,7 @@ import NotFound from "./pages/NotFound";
 // import Qr from "./components/Qr";
 import LanDingPageFaculty from "./pages/LanDingPageFaculty"
 import Profile from "./pages/Profile";
-import AddFaculty from "./pages/AddFaculty"
+import ManageAdmins from "./pages/ManageAdmins"
 import UpdateAsset1 from "./pages/UpdateAsset1";
 import UpdateAsset2 from "./pages/UpdateAsset2";
 
@@ -52,7 +52,7 @@ const auth = getAuth();
        <Route path="/adminprofile"> <AdminProfile/> </Route>
        
        
-       <Route path="/addfaculty"> { uidval && <AddFaculty/> }</Route>
+       <Route path="/manageadmins"> { uidval && <ManageAdmins/> }</Route>
        <Route path="/addAsset1">{ uidval && <AddAsset1/> }</Route>
        <Route path="/addAsset2/:UID" component={AddAsset2} />
        <Route path="/updateAsset/:UID" component={UpdateAsset1} />

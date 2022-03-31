@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Row } from "react-bootstrap";
+import { Row,Tabs,Tab } from "react-bootstrap";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseconfig.js"
@@ -19,7 +19,7 @@ function ViewAsset() {
   const [pass, setPass] = useState("");
   const [text, settext] = useState("");
   const [passConf, setPassConf] = useState("");
-
+  const [key, setKey] = useState('Manage Admin');
 
   function handleLogin(e){
     settext(null);
@@ -99,8 +99,21 @@ function ViewAsset() {
   return (
     <div className="navfootpad">
         <Navbar />
-        <Row style={{ margin: 0, padding: 0, }}>
-        <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Add Faculty</h1>
+
+        <div style={{margin:"30px"}}>
+        <Tabs
+      id="controlled-tab-example"
+      activeKey={key}
+      onSelect={(k) => setKey(k)}
+      className="mb-3"
+    >
+      
+      <Tab eventKey="Manage Admin" title="Manage Admin">
+        <p>empty</p>
+      </Tab>
+      <Tab eventKey="Add Admin" title="Add Admin">
+      <Row style={{ margin: 0, padding: 0, }}>
+        <h1 style={{ textAlign: 'center', paddingLeft: '0', paddingRight: '0', marginRight: '0' }}>Add Admin</h1>
         <hr style={{ margin: 0, padding: 0, }} />
       </Row>
         <div style={{textAlign:"center", marginTop:"30px"}}>
@@ -115,7 +128,12 @@ function ViewAsset() {
     <br/>
      <p>{text}</p> 
   </form>
+</div>
+      </Tab>
+
+    </Tabs>
     </div>
+
         <Footer />
     </div>
   );
