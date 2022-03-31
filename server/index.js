@@ -303,7 +303,7 @@ app.get("/viewasset/sort",async (req,res)=>
 
 
 
- router.post("/login", async (req, res) => {
+ app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const userLogin = await User.findOne({ email: email });
@@ -328,7 +328,7 @@ app.get("/viewasset/sort",async (req,res)=>
 });
 
 
-router.post("/register", async (req, res) => {
+app.post("/register", async (req, res) => {
   const { username, email, password, deptID } = req.body;
   try {
     const userExist = await User.findOne({ email: email });
@@ -347,12 +347,13 @@ router.post("/register", async (req, res) => {
       res.status(500).json({ message: "Falied to register" });
     }
   } catch (err) {
+    res.status(500).json({ message: "Falied to register" });
     console.log(err);
   }
 });
 
 
-router.get("/logout", async (req, res) => {
+app.get("/logout", async (req, res) => {
   res.cookie("ASSETREGISTRY", "", { expires: new Date(1)});
   res.clearCookie("ASSETREGISTRY");
   return res.status(201).json({ message: "SuccessFuly Logout" });
@@ -360,7 +361,7 @@ router.get("/logout", async (req, res) => {
 
 
 
-router.patch("/changePassword", auth, async (req, res) => {
+app.patch("/changePassword", auth, async (req, res) => {
 
   try {
     const user = await User.findOne({email: req.email});
@@ -387,7 +388,7 @@ router.patch("/changePassword", auth, async (req, res) => {
 });
 
 
-router.patch("/forgotPassword", async (req, res) => {
+app.patch("/forgotPassword", async (req, res) => {
   try {
     const email = req.body.email;
     const user = await User.findOne({ email: email });
