@@ -87,7 +87,6 @@ function  createSecondItems(val) {
    {
     Axios.post("https://wce-asset-registry.herokuapp.com/addasset",{
       UID: UID,
-      Department:Department,
       AssetNumber:AssetNumber,
       EqpType:EqpType,
       NameOfEqp:NameOfEqp,
@@ -133,7 +132,19 @@ function  createSecondItems(val) {
     }
     else{
       setValidated(true);
-      
+      if(uploadedFile)
+      {
+        const data =new FormData();
+        data.append("fileInput",uploadedFile);
+        data.append("Department",Department);
+       Axios.post("http://localhost:3002/photodept",data).then((response)=>{
+          setResmsg(response.data);
+      }) .catch(function (error) {
+        setuploadedFile(null);
+        document.getElementById("csvinputform").reset();
+        setResmsg("Uploaded file changed or Netwok Issue...Re-input file and try again");
+      });;
+    }
       setResmsg("Valid Data");
     }
   };
