@@ -328,7 +328,6 @@ app.get("/viewasset/sort",async (req,res)=>
 });
 
 
-
 router.post("/register", async (req, res) => {
   const { username, email, password, deptID } = req.body;
   try {
