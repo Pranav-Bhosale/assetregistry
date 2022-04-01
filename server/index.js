@@ -283,10 +283,10 @@ app.post("/register", async (req, res) => {
     const userExist = await User.findOne({ email: email });
     const userNamexist = await User.findOne({ username: username });
     if (userExist) {
-      return res.status(422).json({ error: "User alredy exist" });
+      return res.status(230).json({ error: "User alredy exist" });
     }
     if (userNamexist) {
-      return res.status(422).json({ error: "User Name alredy exist" });
+      return res.status(230).json({ error: "User Name alredy exist" });
     }
     const user = new User({ email, deptID, username, password });
     const userRegistered = await user.save();

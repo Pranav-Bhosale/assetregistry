@@ -33,11 +33,6 @@ function ViewAsset() {
     e.preventDefault(e);
     if (email && pass && passConf) {
       if (pass === passConf) {
-        console.log("User Name:"+ UserName+"\n"
-          +"Email: "+email +"\n"
-          +"pass: "+pass +"\n"
-          +"Department :"+Department+"\n"
-        );
         // --------------------
         Axios.post("http://localhost:3002/register",{
           
@@ -48,7 +43,7 @@ function ViewAsset() {
         }).then((response)=>{
 
           console.log(response);
-          if(response.status===422)
+          if(response.status===230)
           {
             settext(response.data.error);
           }
