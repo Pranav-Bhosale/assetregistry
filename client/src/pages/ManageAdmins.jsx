@@ -6,6 +6,7 @@ import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseconfig.js";
 import { getDatabase, ref, set, onValue } from "firebase/database";
+import Axios from "axios";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -25,12 +26,44 @@ function ViewAsset() {
   const [passConf, setPassConf] = useState("");
   const [key, setKey] = useState("Manage Admin");
   const [Department, setDepartment] = React.useState("All");
+  const [UserName, setUserName] = useState("");
 
   function handleLogin(e) {
     settext(null);
     e.preventDefault(e);
     if (email && pass && passConf) {
       if (pass === passConf) {
+        console.log("User Name:"+ UserName+"\n"
+          +"Email: "+email +"\n"
+          +"pass: "+pass +"\n"
+          +"Department :"+Department+"\n"
+        );
+        // --------------------
+        Axios.post("http://localhost:3002/register",{
+          
+          username:UserName,
+          email:email,
+          password:pass,
+          deptID:Department //change to id
+        }).then((response)=>{
+          if(response.status===422)
+          {
+            settext(response.data.error);
+          }
+          else if(response.status===201)
+          {
+            settext(response.data.message);
+            document.getElementById("addAdmin").reset();
+          }
+          else if(response.status===500)
+          {
+            settext(response.data.message+" "+response.data.error);
+          }
+        });
+
+
+
+        // ---------------------------------
       } else {
         settext("Password not matched!");
       }
@@ -69,13 +102,14 @@ function ViewAsset() {
               <hr style={{ margin: 0, padding: 0 }} />
             </Row>
             <div style={{ textAlign: "center", marginTop: "30px" }}>
-              <form onSubmit={handleLogin}>
+              <form id="addAdmin" onSubmit={handleLogin}>
                 <Container
                   style={{
                     paddingLeft: "20px",
                     paddingRight: "20px",
                     alignContent: "center",
                   }}
+                  
                 >
                   <Row className="justify-content-md-center">
                     <Col
@@ -86,7 +120,9 @@ function ViewAsset() {
                     </Col>
                     <Col xs={{ span: 7, offset: 0 }}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" placeholder="Enter Name" />
+                        <Form.Control type="text"
+                        onChange={(e) => setUserName(e.target.value)}
+                         placeholder="Enter Name" />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -172,21 +208,24 @@ function ViewAsset() {
                   <Row>
                     <Row></Row>
                     <Row></Row>
-                    <Col xs={{ span: 3, offset: 5 }}>
-                      <Button variant="primary" type="reset">
+                    <Col md={{ span: 3, offset: 5 }}>
+                      <button className="lanButton" type="reset">
                         Reset
-                      </Button>
+                      </button>
                     </Col>
-                    <Col xs={{ span: 3, offset: 0 }}>
-                      <Button variant="primary" type="submit">
+                    <Col md={{ span: 3, offset: 0 }}>
+                      <button className="lanButton" type="submit">
                         Submit
-                      </Button>
+                      </button>
                     </Col>
                   </Row>
+                  <Row className="justify-content-md-center">
+            <Col md={{ span: 4, offset: 4 }} ><p style={{textAlign:"center"}}>{text}</p></Col>
+            </Row>
                 </Container>
               </form>
             </div>
-            <p>{text}</p>
+           
           </Tab>
         </Tabs>
       </div>
