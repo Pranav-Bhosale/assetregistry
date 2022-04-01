@@ -296,7 +296,7 @@ app.post("/register", async (req, res) => {
       res.status(500).json({ message: "Falied to register" });
     }
   } catch (err) {
-    res.status(500).json({ message: "Falied to register" });
+    res.status(500).json({ message: "Falied to register", error: err });
     console.log(err);
   }
 });
