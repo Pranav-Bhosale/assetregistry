@@ -3,21 +3,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { Row, Tabs, Tab, Col, Form, Container, Button } from "react-bootstrap";
 import { useState } from "react";
-import { initializeApp } from "firebase/app";
-import firebaseConfig from "../firebaseconfig.js";
-import { getDatabase, ref, set, onValue } from "firebase/database";
 import Axios from "axios";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-  browserSessionPersistence,
-  setPersistence,
-} from "firebase/auth";
-const app = initializeApp(firebaseConfig);
-
-const database = getDatabase(app);
-const auth = getAuth();
 
 function ViewAsset() {
   const [email, setEmail] = useState("");
@@ -34,27 +20,24 @@ function ViewAsset() {
     if (email && pass && passConf) {
       if (pass === passConf) {
         // --------------------
-        Axios.post("http://localhost:3002/register",{
-          
-          username:UserName,
-          email:email,
-          password:pass,
-          deptID:Department //change to id
-        }).then((response)=>{
+        Axios.post("http://localhost:3002/register", {
+
+          username: UserName,
+          email: email,
+          password: pass,
+          deptID: Department //change to id
+        }).then((response) => {
 
           console.log(response);
-          if(response.status===230)
-          {
+          if (response.status === 230) {
             settext(response.data.error);
           }
-          else if(response.status===201)
-          {
+          else if (response.status === 201) {
             settext(response.data.message);
             document.getElementById("addAdmin").reset();
           }
-          else if(response.status===203)
-          {
-            settext(response.data.message+" "+response.data.error.name);
+          else if (response.status === 203) {
+            settext(response.data.message + " " + response.data.error.name);
           }
         });
 
@@ -106,7 +89,7 @@ function ViewAsset() {
                     paddingRight: "20px",
                     alignContent: "center",
                   }}
-                  
+
                 >
                   <Row className="justify-content-md-center">
                     <Col
@@ -118,8 +101,8 @@ function ViewAsset() {
                     <Col xs={{ span: 7, offset: 0 }}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Control type="text"
-                        onChange={(e) => setUserName(e.target.value)}
-                         placeholder="Enter Name" />
+                          onChange={(e) => setUserName(e.target.value)}
+                          placeholder="Enter Name" />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -217,12 +200,12 @@ function ViewAsset() {
                     </Col>
                   </Row>
                   <Row className="justify-content-md-center">
-            <Col md={{ span: 4, offset: 4 }} ><p style={{textAlign:"center"}}>{text}</p></Col>
-            </Row>
+                    <Col md={{ span: 4, offset: 4 }} ><p style={{ textAlign: "center" }}>{text}</p></Col>
+                  </Row>
                 </Container>
               </form>
             </div>
-           
+
           </Tab>
         </Tabs>
       </div>
