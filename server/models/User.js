@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   deptID: {
-    type: Number,
+    type: String,
     required: true,
   },
   username: {

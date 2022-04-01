@@ -25,7 +25,7 @@ function ViewAsset() {
   const [text, settext] = useState("");
   const [passConf, setPassConf] = useState("");
   const [key, setKey] = useState("Manage Admin");
-  const [Department, setDepartment] = React.useState("All");
+  const [Department, setDepartment] = React.useState("ALL");
   const [UserName, setUserName] = useState("");
 
   function handleLogin(e) {
@@ -46,6 +46,8 @@ function ViewAsset() {
           password:pass,
           deptID:Department //change to id
         }).then((response)=>{
+
+          console.log(response);
           if(response.status===422)
           {
             settext(response.data.error);
@@ -55,9 +57,9 @@ function ViewAsset() {
             settext(response.data.message);
             document.getElementById("addAdmin").reset();
           }
-          else if(response.status===500)
+          else if(response.status===203)
           {
-            settext(response.data.message+" "+response.data.error);
+            settext(response.data.message+" "+response.data.error.name);
           }
         });
 

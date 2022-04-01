@@ -293,10 +293,10 @@ app.post("/register", async (req, res) => {
     if (userRegistered) {
       res.status(201).json({ message: "User registered Successfully" });
     } else {
-      res.status(500).json({ message: "Falied to register" });
+      res.status(203).json({ message: "Falied to register" });
     }
   } catch (err) {
-    res.status(500).json({ message: "Falied to register", error: err });
+    res.status(203).json({ message: "Falied to register", error: err });
     console.log(err);
   }
 });
@@ -379,7 +379,7 @@ app.patch("/forgotPassword", async (req, res) => {
     if (result) {
       return res.status(201).json({ message: "Mail Sent Success" });
     } else {
-      return res.status(500).json({ message: "Falied to send" });
+      return res.status(203).json({ message: "Falied to send" });
     }
   } catch (error) {
     console.log(error);
