@@ -9,11 +9,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./MiddleWare/Auth");
 const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 const User = require("./models/User");
 const cors = require("cors");
 const port = 3002;
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 const AssetDB = require("./models/Assets");
 const fs = require("fs");
 const { promisify } = require("util");
@@ -34,9 +36,11 @@ mongoose
   });
 
 const Json2csvParser = require("json2csv").Parser;
-const { Mongoose } = require("mongoose");
+app.post("/islogedin", auth, async (req, res) => {
+  res.status(266).json({ message: "User Loged In" });
+});
 
-app.post("/addasset", async (req, res) => {
+app.post("/addasset", auth, async (req, res) => {
   try {
     const newasset = new AssetDB(req.body);
     newasset._id = req.body.UID;
@@ -51,7 +55,7 @@ app.post("/addasset", async (req, res) => {
   }
 });
 
-app.get("/addasset/:uid", async (req, res) => {
+app.get("/addasset/:uid", auth, async (req, res) => {
   const uid = req.params.uid;
   try {
     var newdata = await AssetDB.find({ UID: uid });
@@ -61,7 +65,7 @@ app.get("/addasset/:uid", async (req, res) => {
   }
 });
 
-app.post("/updateAsset", async (req, res) => {
+app.post("/updateAsset", auth, async (req, res) => {
   const uid = req.body.UID;
   AssetDB.findByIdAndUpdate(uid, req.body, function (err, docs) {
     if (err) {
@@ -74,7 +78,7 @@ app.post("/updateAsset", async (req, res) => {
   });
 });
 
-app.post("/deleteasset", async (req, res) => {
+app.post("/deleteasset", auth, async (req, res) => {
   var a = 0;
   const uid = req.body.UID;
   console.log("deleting" + uid);
@@ -86,7 +90,7 @@ app.post("/deleteasset", async (req, res) => {
   }
 });
 
-app.post("/photodept", upload.single("fileInput"), async (req, res) => {
+app.post("/photodept", auth, upload.single("fileInput"), async (req, res) => {
   const file = req.file;
   console.log(file.mimetype);
   //    if(file.mimetype!=="text/csv")
@@ -133,7 +137,7 @@ app.post("/photodept", upload.single("fileInput"), async (req, res) => {
   //   }
 });
 
-app.post("/importCSV", upload.single("fileInput"), async (req, res) => {
+app.post("/importCSV", auth, upload.single("fileInput"), async (req, res) => {
   const file = req.file;
   console.log(req.file);
   if (file.mimetype !== "text/csv") {
@@ -175,7 +179,7 @@ app.post("/importCSV", upload.single("fileInput"), async (req, res) => {
   }
 });
 
-app.get("/alldata", async (req, res) => {
+app.get("/alldata", auth, async (req, res) => {
   try {
     var data = await AssetDB.find({});
     var jsonData = JSON.parse(JSON.stringify(data));
@@ -202,7 +206,7 @@ app.get("/alldata", async (req, res) => {
 });
 
 //with uid
-app.get("/viewasset/:uid", async (req, res) => {
+app.get("/viewasset/:uid", auth, async (req, res) => {
   const uid = req.params.uid;
   try {
     var newdata = await AssetDB.find({ UID: uid });
@@ -213,7 +217,7 @@ app.get("/viewasset/:uid", async (req, res) => {
 });
 
 //with dept name +type+eqp name
-app.post("/viewasset", async (req, res) => {
+app.post("/viewasset", auth, async (req, res) => {
   const EqpType = req.body.EqpType;
   const NameOfEqp = req.body.NameOfEqp;
   const data = await AssetDB.find({
@@ -224,7 +228,7 @@ app.post("/viewasset", async (req, res) => {
 });
 
 //with type+eqp name
-app.post("/viewasset/choose", async (req, res) => {
+app.post("/viewasset/choose", auth, async (req, res) => {
   const EqpType = req.body.EqpType;
   const NameOfEqp = req.body.NameOfEqp;
   const Department = req.body.Department;
@@ -236,7 +240,7 @@ app.post("/viewasset/choose", async (req, res) => {
   res.json(data);
 });
 
-app.post("/viewasset/choose2", async (req, res) => {
+app.post("/viewasset/choose2", auth, async (req, res) => {
   const Department = req.body.Department;
   const data = await AssetDB.find({
     AssetNumber: { $regex: Department },
@@ -245,7 +249,7 @@ app.post("/viewasset/choose2", async (req, res) => {
   res.json(data);
 });
 
-app.get("/viewasset/sort", async (req, res) => {
+app.get("/viewasset/sort", auth, async (req, res) => {
   const uid = req.params.uid;
   const data = await AssetDB.find({
     UID: uid,
@@ -265,19 +269,20 @@ app.post("/login", async (req, res) => {
           expires: new Date(Date.now() + 51840000),
           httpOnly: true,
         });
-        res.status(201).json({ message: "Logged in success" });
+        console.log(token);
+        res.status(201).json({ message: "Logged in success", cookie: token });
       } else {
-        res.status(400).json({ error: "Invalid Credentials" });
+        res.status(231).json({ error: "Invalid Credentials" });
       }
     } else {
-      res.status(400).json({ error: "Invalid Credentials" });
+      res.status(231).json({ error: "Invalid Credentials" });
     }
   } catch (err) {
     console.log(err);
   }
 });
 
-app.post("/register", async (req, res) => {
+app.post("/register", auth, async (req, res) => {
   const { username, email, password, deptID } = req.body;
   try {
     const userExist = await User.findOne({ email: email });
@@ -301,7 +306,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get("/logout", async (req, res) => {
+app.get("/logout", auth, async (req, res) => {
   res.cookie("ASSETREGISTRY", "", { expires: new Date(1) });
   res.clearCookie("ASSETREGISTRY");
   return res.status(201).json({ message: "SuccessFuly Logout" });
