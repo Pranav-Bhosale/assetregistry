@@ -8,11 +8,9 @@ const UserAuth = async (req, res, next) => {
     const verify = jwt.verify(token, process.env.TOKEN_CODE);
     const rootUser = User.findOne({ email: verify.email, token: token });
     if (!rootUser) {
-      console.log("\n User Not found");
       throw new Error("User not found");
     } else {
       res.status(201);
-      console.log("\n Userfound");
     }
     req.email = verify.email;
     next();
