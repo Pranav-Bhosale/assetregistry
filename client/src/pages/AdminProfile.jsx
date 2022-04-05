@@ -4,9 +4,6 @@ import Navbar from "../components/Navbar";
 import { Row, Col, Container, Modal, Button } from "react-bootstrap";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
-var AWS = require("aws-sdk");
-
-AWS.config.update({ region: "ap-south-1" });
 
 function ViewAsset() {
   const [show, setShow] = React.useState(false);
@@ -50,65 +47,21 @@ function ViewAsset() {
 
   function dummyforchangepass() {
     setShowChangePass(false);
-    mail();
+    try {
+      Axios.get("http://localhost:3002/getOTP", {}).then((response) => {
+        if (response && response.status == 201) {
+          console.log("mail sent");
+        } else {
+          console.log(response);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      window.alert("Error!");
+    }
   }
 
   //SES
-
-  var params = {
-    Destination: {
-      /* required */
-      CcAddresses: [
-        /* more items */
-      ],
-      ToAddresses: [
-        "swarangi.patil@gmail.com",
-        /* more items */
-      ],
-    },
-    Message: {
-      /* required */
-      Body: {
-        /* required */
-        Html: {
-          Charset: "UTF-8",
-          Data: "HTML_FORMAT_BODY",
-        },
-        Text: {
-          Charset: "UTF-8",
-          Data: "TEXT_FORMAT_BODY",
-        },
-      },
-      Subject: {
-        Charset: "UTF-8",
-        Data: "Test email",
-      },
-    },
-    Source: "wce.asset.registry@gmail.com" /* required */,
-    ReplyToAddresses: [
-      "wce.asset.registry@gmail.com",
-      /* more items */
-    ],
-  };
-
-  function mail() {
-    var sendPromise = new AWS.SES({
-      accessKeyId: "AKIA533U6AWI6MKHV3XV",
-      secretAccessKey: "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",
-      apiVersion: "2010-12-01",
-    })
-      .sendEmail(params)
-      .promise();
-
-    // Handle promise's fulfilled/rejected states
-    sendPromise
-      .then(function (data) {
-        console.log(data.MessageId);
-      })
-      .catch(function (err) {
-        console.error(err, err.stack);
-      });
-  }
   //SES
   return (
     <div className="navfootpad">
