@@ -1,14 +1,12 @@
 import React from "react";
-import { HashRouter , Switch,Route } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Redirect, HashRouter, Switch, Route } from "react-router-dom";
 import Info from "./pages/Info";
-import Infoall from "./pages/Infoall"
+import Infoall from "./pages/Infoall";
 import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 // import Qr from "./components/Qr";
-import LanDingPageFaculty from "./pages/LanDingPageFaculty"
-import Profile from "./pages/Profile";
-import ManageAdmins from "./pages/ManageAdmins"
+import LanDingPageFaculty from "./pages/LanDingPageFaculty";
+import ManageAdmins from "./pages/ManageAdmins";
 import UpdateAsset1 from "./pages/UpdateAsset1";
 import UpdateAsset2 from "./pages/UpdateAsset2";
 
@@ -25,53 +23,68 @@ import About from "./pages/About";
 import Public from "./pages/Public";
 import Dropdown from "./pages/Dynamicdropdown";
 import AdminProfile from "./pages/AdminProfile";
-
-
-
-
+import Axios from "axios";
 function App() {
-
-  const [uidval,setuidval]=React.useState(null);
-const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-       setuidval(user.uid);
-    } else {
-      setuidval(null);
-    }
-  });
   return (
     <HashRouter>
-     <Switch>
-       <Route path="/" exact component={Public}/>
-       <Route path="/admin"><LandingPage/> </Route>
-       <Route path="/info/:uid"> <Info/> </Route>
-       <Route path="/infoall/:uid">  <Infoall/> </Route>
-       <Route path="/login" component={LanDingPageFaculty}/>
-      <Route path="/dropdown"><Dropdown/> </Route>
-       <Route path="/adminprofile"> <AdminProfile/> </Route>
-       
-       
-       <Route path="/manageadmins"> { uidval && <ManageAdmins/> }</Route>
-       <Route path="/addAsset1">{ uidval && <AddAsset1/> }</Route>
-       <Route path="/addAsset2/:UID" component={AddAsset2} />
-       <Route path="/updateAsset/:UID" component={UpdateAsset1} />
-       <Route path="/addAsset3">{ uidval && <AddAsset3/> }</Route>
-       <Route path="/addAsset4"> { uidval &&<AddAsset4/> }</Route>
+      <Switch>
+        <Route path="/" exact component={Public} />
+        <Route path="/admin">
+          <LandingPage />
+        </Route>
+        <Route path="/info/:uid">
+          {" "}
+          <Info />{" "}
+        </Route>
+        <Route path="/infoall/:uid">
+          {" "}
+          <Infoall />{" "}
+        </Route>
+        <Route path="/login" component={LanDingPageFaculty} />
+        <Route path="/dropdown">
+          <Dropdown />{" "}
+        </Route>
+        <Route path="/adminprofile">
+          {" "}
+          <AdminProfile />{" "}
+        </Route>
 
-       {/* <Route path="/profile">{ uidval && <Profile /> } </Route> */}
-       <Route path="/about" component={About}/>
+        <Route path="/manageadmins">
+          <ManageAdmins />
+        </Route>
+        <Route path="/addAsset1">
+          <AddAsset1 />
+        </Route>
+        <Route path="/addAsset2/:UID" component={AddAsset2} />
+        <Route path="/updateAsset/:UID" component={UpdateAsset1} />
+        <Route path="/addAsset3">
+          <AddAsset3 />
+        </Route>
+        <Route path="/addAsset4">
+          <AddAsset4 />
+        </Route>
 
-       <Route path="/import-export">{ uidval && <ImportExportCSV /> } </Route>
+        {/* <Route path="/profile">{ uidval && <Profile /> } </Route> */}
+        <Route path="/about" component={About} />
 
-       <Route path="/viewAsset1">{ uidval &&  <ViewAsset1/> }</Route>
-       <Route path="/qrcodeDownload">{ uidval && <QrcodeDownload/>}</Route>
-       {/* <Route path="/updateAsset1">{ uidval && <UpdateAsset1/>}</Route> */}
-       <Route path="/updateAsset2">{ uidval && <UpdateAsset2/>}</Route>
+        <Route path="/import-export">
+          <ImportExportCSV />
+        </Route>
 
-       <Route component={NotFound} />
-     </Switch>
-    </HashRouter> 
+        <Route path="/viewAsset1">
+          <ViewAsset1 />
+        </Route>
+        <Route path="/qrcodeDownload">
+          <QrcodeDownload />
+        </Route>
+        {/* <Route path="/updateAsset1">{ uidval && <UpdateAsset1/>}</Route> */}
+        <Route path="/updateAsset2">
+          <UpdateAsset2 />
+        </Route>
+
+        <Route component={NotFound} />
+      </Switch>
+    </HashRouter>
   );
 }
 
