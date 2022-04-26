@@ -186,7 +186,7 @@
   transform: scale(1.2);
 }
 .nav-menu {
-  background-image: linear-gradient(to bottom, #023d77, #023d77, #023d77);
+  background-image: linear-gradient(to bottom, #195591,#195591,#023d77, #023d77, #023d77);
   width: 230px;
   padding-top: 90px;
   height: 100vh;

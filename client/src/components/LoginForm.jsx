@@ -8,13 +8,35 @@ function LoginForm() {
   const [pass, setPass] = useState("");
   const [text, settext] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [mailplaceholder, setmailplaceholder] = useState("Password");
+
+  function otpremove() {
+    setmailplaceholder("Password");
+    document.getElementById("signinbtn").style.display = "";
+    document.getElementById("forgetpassbtn").innerHTML = "Forgot Password";
+  }
+  function otptake() {
+    setmailplaceholder("OTP");
+    document.getElementById("signinbtn").style.display = "none";
+    document.getElementById("forgetpassbtn").innerHTML = "Verify OTP";
+  }
 
   if (redirect) {
     return <Redirect to="/viewAsset1" />;
   }
   function resetPass() {
     if (email) {
-      // reset pass
+      setRedirect(null);
+      Axios.post("http://localhost:3002/getOTPforget", { email: email }).then(
+        (response) => {
+          if (response && response.status == 201) {
+            settext("OTP has been sent to above email");
+          } else {
+            console.log(response);
+            settext("This Email is not a registered email");
+          }
+        }
+      );
     } else {
       settext("Enter Email First! ");
     }
@@ -42,7 +64,7 @@ function LoginForm() {
   }
   return (
     <div>
-      <form onSubmit={handleLogin}>
+      <form>
         <h1 className="loginText">Sign In</h1>
         <input
           spellCheck={false}
@@ -56,13 +78,13 @@ function LoginForm() {
           type="password"
           className="password"
           onChange={(e) => setPass(e.target.value)}
-          placeholder="Password"
+          placeholder={mailplaceholder}
         />
         <br />
-        <button type="submit" className="lanButton">
+        <button id="signinbtn" onClick={handleLogin} className="lanButton">
           Sign In
         </button>
-        <button onClick={resetPass} className="lanButton">
+        <button id="forgetpassbtn" onClick={resetPass} className="lanButton">
           Forgot Password
         </button>
         <br />

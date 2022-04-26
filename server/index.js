@@ -315,6 +315,71 @@ app.get("/logout", auth, async (req, res) => {
   return res.status(201).json({ message: "SuccessFuly Logout" });
 });
 
+app.get("/userdetails", auth, async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.email });
+
+    if (!user) {
+      return res.status(266).json({ message: "Error occured 2" });
+    } else {
+      const email = user.email;
+      const name = user.username;
+      const deptID = user.deptID;
+      return res.status(201).json({ email: email, name: name, dep: deptID });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(266).json({ message: "Error occured 1" });
+  }
+});
+
+app.post("/verifyotp", auth, async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.email });
+    if (!user) {
+      return res.status(266).json({ message: "Error occured 2" });
+    } else {
+      const OTP = user.OTP;
+      if (OTP == req.body.OTP) return res.status(201);
+      else return res.status(202);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(266).json({ message: "Error occured 1" });
+  }
+});
+
+app.post("/getOTPforget", async (req, res) => {
+  try {
+    console.log(req.body.email);
+    const user = await User.findOne({ email: req.body.email });
+    const email = user.email;
+    const name = user.username;
+    var digits = "0123456789";
+    let OTP = "";
+    for (let i = 0; i < 6; i++) {
+      OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    const filter = {
+      email: email,
+    };
+    const update = {
+      OTP: OTP,
+    };
+
+    const success = await User.findOneAndUpdate(filter, update);
+    if (!success) {
+      return res.status(266).json({ message: "Error occured 2" });
+    } else {
+      mail(OTP, email, name);
+      return res.status(201).json({ message: "OTP has been sent.." });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(266).json({ message: "Error occured 1" });
+  }
+});
+
 app.get("/getOTP", auth, async (req, res) => {
   try {
     const user = await User.findOne({ email: req.email });
