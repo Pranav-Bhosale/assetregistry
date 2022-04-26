@@ -5,9 +5,9 @@ import{CgProfile} from "react-icons/cg";
 import {AiOutlineUserAdd} from "react-icons/ai";
 export const Sidebardata = [
     {
-        title: 'Search Asset',
-        path :'/viewAsset1',
-        icon : <BiSearchAlt/>,
+        title: 'Search Asset',    
+        path :'/viewAsset1'    ,  
+        icon : <BiSearchAlt/> ,
         cName:'nav-text'
     },
     {

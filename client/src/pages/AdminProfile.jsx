@@ -167,9 +167,7 @@ function handleResetPass(){
         >
           <br></br>
           <Row className="justify-content-md-center">
-            <Col md={{ span: 3, offset: 4 }}>
-              User Name :
-            </Col>
+          
             <Col md={{ span: 3, offset: 4 }}>User Name :</Col>
             <Col md={{ span: 5, offset: 0 }}>
               <p style={{ color: "#707070" }}> rishijadhav211@gmail.com</p>
