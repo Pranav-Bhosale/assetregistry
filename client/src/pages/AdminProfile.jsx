@@ -113,7 +113,21 @@ function ViewAsset() {
   //SES
   return (
     <div className="navfootpad">
+      <Navbar />
       <div>
+        <Row style={{ margin: 0, padding: 0 }}>
+          <h1
+            style={{
+              textAlign: "center",
+              paddingLeft: "0",
+              paddingRight: "0",
+              marginRight: "0",
+            }}
+          >
+            Profile
+          </h1>
+          <hr style={{ margin: 0, padding: 0 }} />
+        </Row>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Loging Out</Modal.Title>
@@ -153,19 +167,6 @@ function ViewAsset() {
           </Modal.Footer>
         </Modal>
 
-        <Navbar />
-
-        <h1
-          style={{
-            textAlign: "center",
-            paddingLeft: "0",
-            paddingRight: "0",
-            marginRight: "0",
-          }}
-        >
-          Profile
-        </h1>
-        <hr></hr>
         <div>
           <Container
             style={{

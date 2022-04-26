@@ -1,9 +1,14 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Row, Tabs, Tab, Col, Form, Container, Button } from "react-bootstrap";
+import { Row, Tabs, Tab, Col, Form, Container, Button, Card, Modal } from "react-bootstrap";
 import { useState } from "react";
 import Axios from "axios";
+import { Dummyadmindata } from "../components/Dummyadmindata";
+
+
+import { TiUserDelete } from "react-icons/ti";
+import { useSSRSafeId } from "@react-aria/ssr";
 
 function ViewAsset() {
   const [email, setEmail] = useState("");
@@ -13,6 +18,9 @@ function ViewAsset() {
   const [key, setKey] = useState("Manage Admin");
   const [Department, setDepartment] = React.useState("ALL");
   const [UserName, setUserName] = useState("");
+  const [show, setShow] = React.useState(false);
+  const [userdata,setUserdata] = React.useState(Dummyadmindata);
+  const [currentIndex,setCurrentIndex]= React.useState(null);
 
   function handleLogin(e) {
     settext(null);
@@ -51,9 +59,37 @@ function ViewAsset() {
       settext("Please Enter Complete Details!");
     }
   }
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleShow = (index) =>{
+     setShow(true);
+     setCurrentIndex(index);
+  }
+
+  function handeldel(){
+    setShow(false);
+    const copyPostArray = Object.assign([],userdata);
+    copyPostArray.splice(currentIndex,1);
+    setUserdata(copyPostArray);
+    // delete of user code goes here
+  }
 
   return (
     <div className="navfootpad">
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Alert!!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Do you really want to delete Admin!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handeldel}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Navbar />
 
       <div style={{ margin: "30px" }}>
@@ -63,8 +99,76 @@ function ViewAsset() {
           onSelect={(k) => setKey(k)}
           className="mb-3"
         >
+
+
           <Tab eventKey="Manage Admin" title="Manage Admin">
-            <p>empty</p>
+            <Row style={{ margin: 0, padding: 0 }}>
+              <h1
+                style={{
+                  textAlign: "center",
+                  paddingLeft: "0",
+                  paddingRight: "0",
+                  marginRight: "0",
+                }}
+              >
+                Admin List
+              </h1>
+              <hr style={{ margin: 0, padding: 0 }} />
+            </Row>
+
+
+
+
+            <div className="showitems">
+         <Container>
+            <Row xs={3}>
+            {userdata.map((item, index) => {
+                return (
+                  <Col>
+
+                  <Card style={{ width: '18rem', margin:"10px" }} key={index+item.username}>
+                  
+          <Card.Body>
+
+                    <Row style={{ margin: "20px" }}>
+                      <Col style={{ color: "grey" }}>
+                        <i>Username:</i>
+                      </Col>
+                      <Col>
+                      {item.username}
+                      </Col>
+                    </Row>
+                    <Row style={{ margin: "20px" }}>
+                      <Col style={{ color: "grey" }}>
+                        <i>Email:</i>
+                      </Col>
+                      <Col >
+                      {item.email}
+                      </Col>
+                    </Row>
+                    <Row style={{ margin: "20px" }}>
+                      <Col style={{ color: "grey" }}>
+                        <i>Department:</i>
+                      </Col>
+                      <Col>
+                      {item.department}
+                      </Col>
+                    </Row>
+                    <Row style={{ margin: "20px" }} className="justify-content-md-center">
+
+                      <Button variant="danger" onClick={() => handleShow(index)}>Delete Admin</Button>
+                    </Row>
+                  </Card.Body>
+                </Card>
+                </Col>
+                )
+            })}
+            </Row>
+        </Container>
+
+            </div>
+
+
           </Tab>
 
           <Tab eventKey="Add Admin" title="Add Admin">
