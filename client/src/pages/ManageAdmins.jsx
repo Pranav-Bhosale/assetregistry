@@ -1,11 +1,20 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Row, Tabs, Tab, Col, Form, Container, Button, Card, Modal } from "react-bootstrap";
+import {
+  Row,
+  Tabs,
+  Tab,
+  Col,
+  Form,
+  Container,
+  Button,
+  Card,
+  Modal,
+} from "react-bootstrap";
 import { useState } from "react";
 import Axios from "axios";
 import { Dummyadmindata } from "../components/Dummyadmindata";
-
 
 import { TiUserDelete } from "react-icons/ti";
 import { useSSRSafeId } from "@react-aria/ssr";
@@ -19,8 +28,13 @@ function ViewAsset() {
   const [Department, setDepartment] = React.useState("ALL");
   const [UserName, setUserName] = useState("");
   const [show, setShow] = React.useState(false);
-  const [userdata,setUserdata] = React.useState(Dummyadmindata);
-  const [currentIndex,setCurrentIndex]= React.useState(null);
+  const [userdata, setUserdata] = React.useState(Dummyadmindata);
+  const [currentIndex, setCurrentIndex] = React.useState(null);
+  try {
+    //axios get route..if(respoise){ data assin var}..else setTet(error fetchoin data)
+  } catch (e) {
+    //settext("error fetibg data")
+  }
 
   function handleLogin(e) {
     settext(null);
@@ -29,27 +43,21 @@ function ViewAsset() {
       if (pass === passConf) {
         // --------------------
         Axios.post("http://localhost:3002/register", {
-
           username: UserName,
           email: email,
           password: pass,
-          deptID: Department //change to id
+          deptID: Department, //change to id
         }).then((response) => {
-
           console.log(response);
           if (response.status === 230) {
             settext(response.data.error);
-          }
-          else if (response.status === 201) {
+          } else if (response.status === 201) {
             settext(response.data.message);
             document.getElementById("addAdmin").reset();
-          }
-          else if (response.status === 203) {
+          } else if (response.status === 203) {
             settext(response.data.message + " " + response.data.error.name);
           }
         });
-
-
 
         // ---------------------------------
       } else {
@@ -63,15 +71,16 @@ function ViewAsset() {
     setShow(false);
   };
 
-  const handleShow = (index) =>{
-     setShow(true);
-     setCurrentIndex(index);
-  }
+  const handleShow = (index) => {
+    setShow(true);
+    setCurrentIndex(index);
+  };
 
-  function handeldel(){
+  function handeldel() {
+    //Axios req post {email:email}--> res{if() below line ....else(){ error deleting}}
     setShow(false);
-    const copyPostArray = Object.assign([],userdata);
-    copyPostArray.splice(currentIndex,1);
+    const copyPostArray = Object.assign([], userdata);
+    copyPostArray.splice(currentIndex, 1);
     setUserdata(copyPostArray);
     // delete of user code goes here
   }
@@ -99,8 +108,6 @@ function ViewAsset() {
           onSelect={(k) => setKey(k)}
           className="mb-3"
         >
-
-
           <Tab eventKey="Manage Admin" title="Manage Admin">
             <Row style={{ margin: 0, padding: 0 }}>
               <h1
@@ -116,59 +123,54 @@ function ViewAsset() {
               <hr style={{ margin: 0, padding: 0 }} />
             </Row>
 
-
-
-
             <div className="showitems">
-         <Container>
-            <Row xs={3}>
-            {userdata.map((item, index) => {
-                return (
-                  <Col>
-
-                  <Card style={{ width: '18rem', margin:"10px" }} key={index+item.username}>
-                  
-          <Card.Body>
-
-                    <Row style={{ margin: "20px" }}>
-                      <Col style={{ color: "grey" }}>
-                        <i>Username:</i>
-                      </Col>
+              <Container>
+                <Row xs={3}>
+                  {userdata.map((item, index) => {
+                    return (
                       <Col>
-                      {item.username}
+                        <Card
+                          style={{ width: "18rem", margin: "10px" }}
+                          key={index + item.username}
+                        >
+                          <Card.Body>
+                            <Row style={{ margin: "20px" }}>
+                              <Col style={{ color: "grey" }}>
+                                <i>Username:</i>
+                              </Col>
+                              <Col>{item.username}</Col>
+                            </Row>
+                            <Row style={{ margin: "20px" }}>
+                              <Col style={{ color: "grey" }}>
+                                <i>Email:</i>
+                              </Col>
+                              <Col>{item.email}</Col>
+                            </Row>
+                            <Row style={{ margin: "20px" }}>
+                              <Col style={{ color: "grey" }}>
+                                <i>Department:</i>
+                              </Col>
+                              <Col>{item.department}</Col>
+                            </Row>
+                            <Row
+                              style={{ margin: "20px" }}
+                              className="justify-content-md-center"
+                            >
+                              <Button
+                                variant="danger"
+                                onClick={() => handleShow(index)}
+                              >
+                                Delete Admin
+                              </Button>
+                            </Row>
+                          </Card.Body>
+                        </Card>
                       </Col>
-                    </Row>
-                    <Row style={{ margin: "20px" }}>
-                      <Col style={{ color: "grey" }}>
-                        <i>Email:</i>
-                      </Col>
-                      <Col >
-                      {item.email}
-                      </Col>
-                    </Row>
-                    <Row style={{ margin: "20px" }}>
-                      <Col style={{ color: "grey" }}>
-                        <i>Department:</i>
-                      </Col>
-                      <Col>
-                      {item.department}
-                      </Col>
-                    </Row>
-                    <Row style={{ margin: "20px" }} className="justify-content-md-center">
-
-                      <Button variant="danger" onClick={() => handleShow(index)}>Delete Admin</Button>
-                    </Row>
-                  </Card.Body>
-                </Card>
-                </Col>
-                )
-            })}
-            </Row>
-        </Container>
-
+                    );
+                  })}
+                </Row>
+              </Container>
             </div>
-
-
           </Tab>
 
           <Tab eventKey="Add Admin" title="Add Admin">
@@ -193,7 +195,6 @@ function ViewAsset() {
                     paddingRight: "20px",
                     alignContent: "center",
                   }}
-
                 >
                   <Row className="justify-content-md-center">
                     <Col
@@ -204,9 +205,11 @@ function ViewAsset() {
                     </Col>
                     <Col xs={{ span: 7, offset: 0 }}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text"
+                        <Form.Control
+                          type="text"
                           onChange={(e) => setUserName(e.target.value)}
-                          placeholder="Enter Name" />
+                          placeholder="Enter Name"
+                        />
                       </Form.Group>
                     </Col>
                   </Row>
@@ -304,12 +307,13 @@ function ViewAsset() {
                     </Col>
                   </Row>
                   <Row className="justify-content-md-center">
-                    <Col md={{ span: 4, offset: 4 }} ><p style={{ textAlign: "center" }}>{text}</p></Col>
+                    <Col md={{ span: 4, offset: 4 }}>
+                      <p style={{ textAlign: "center" }}>{text}</p>
+                    </Col>
                   </Row>
                 </Container>
               </form>
             </div>
-
           </Tab>
         </Tabs>
       </div>

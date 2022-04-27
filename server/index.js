@@ -543,6 +543,20 @@ function mail(OTP, email, name) {
   }
 }
 
+app.get("/getalladmin", auth, async (req, res) => {
+  try {
+    const users = await User.findOne();
+    if (!users) {
+      return res.status(266).json({ message: "Error occured 2" });
+    } else {
+      return res.status(201).json({ users: users });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(266).json({ message: "Error occured 1" });
+  }
+});
+
 app.listen(process.env.PORT || port, () => {
   console.log(`Example app listening on port ${port}!`);
 });
