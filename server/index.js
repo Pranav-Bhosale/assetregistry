@@ -545,7 +545,7 @@ function mail(OTP, email, name) {
 
 app.get("/getalladmin", auth, async (req, res) => {
   try {
-    const users = await User.findOne();
+    const users = await User.find();
     if (!users) {
       return res.status(266).json({ message: "Error occured 2" });
     } else {
