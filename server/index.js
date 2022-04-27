@@ -348,7 +348,21 @@ app.post("/verifyotp", auth, async (req, res) => {
     return res.status(266).json({ message: "Error occured 1" });
   }
 });
-
+app.post("/validateOTP", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (user && user.OTP == req.body.OTP) {
+      console.log("otp verified");
+      return res.status(244).json({ message: "OTP verified" });
+    } else {
+      console.log("otp not verified");
+      return res.status(266).json({ message: "OTP verification failed" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(266).json({ message: "OTP verification failed 1" });
+  }
+});
 app.post("/getOTPforget", async (req, res) => {
   try {
     console.log(req.body.email);
@@ -410,13 +424,12 @@ app.get("/getOTP", auth, async (req, res) => {
   }
 });
 
-app.patch("/changePassword", auth, async (req, res) => {
+app.post("/setnewpass", async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.email });
+    const user = await User.findOne({ email: req.body.email });
     const email = user.email;
-    var password = req.body.password; ///new pass
+    var password = req.body.pass; ///new pass
     password = await bcrypt.hash(password, 12);
-
     const filter = {
       email: email,
     };
@@ -426,12 +439,16 @@ app.patch("/changePassword", auth, async (req, res) => {
 
     const success = await User.findOneAndUpdate(filter, update);
     if (!success) {
-      return res.status(400).json({ message: "Error occured" });
+      console.log("Error pass");
+      return res.status(255).json({ message: "Error occured" });
     } else {
-      return res.status(201).json({ message: "Password Changed Successfully" });
+      console.log("Error pass");
+      return res.status(244).json({ message: "Password Changed Successfully" });
     }
   } catch (error) {
+    console.log("Error pass");
     console.log(error);
+    return res.status(255).json({ message: "Error occured" });
   }
 });
 

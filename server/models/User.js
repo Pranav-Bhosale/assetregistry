@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   OTP: {
-    type: Number,
+    type: String,
   },
 });
 

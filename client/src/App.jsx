@@ -23,6 +23,7 @@ import About from "./pages/About";
 import Public from "./pages/Public";
 import Dropdown from "./pages/Dynamicdropdown";
 import AdminProfile from "./pages/AdminProfile";
+import PassReset from "./pages/PassReset";
 import Axios from "axios";
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/admin">
           <LandingPage />
         </Route>
+        <Route path="/passReset" component={PassReset} />
         <Route path="/info/:uid">
           {" "}
           <Info />{" "}

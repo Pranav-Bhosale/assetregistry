@@ -23,7 +23,7 @@ function ViewAsset() {
           <Tab eventKey="Search" title="Search Asset">
             <Publicsearch />
           </Tab>
-          <Tab eventKey="profile" title="Server"></Tab>
+          {/* <Tab eventKey="profile" title="Server"></Tab> */}
           <Tab eventKey="Login" title="Admin Login">
             {key === "Login" && history.push("/admin")}
           </Tab>

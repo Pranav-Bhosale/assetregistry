@@ -8,6 +8,7 @@ function LoginForm() {
   const [pass, setPass] = useState("");
   const [text, settext] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [redirect2, setRedirect2] = useState(false);
   const [mailplaceholder, setmailplaceholder] = useState("Password");
 
   function otpremove() {
@@ -24,13 +25,23 @@ function LoginForm() {
   if (redirect) {
     return <Redirect to="/viewAsset1" />;
   }
+  if (redirect2) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/passReset",
+          state: { email: email },
+        }}
+      />
+    );
+  }
   function resetPass() {
     if (email) {
       setRedirect(null);
       Axios.post("http://localhost:3002/getOTPforget", { email: email }).then(
         (response) => {
           if (response && response.status == 201) {
-            settext("OTP has been sent to above email");
+            setRedirect2(true);
           } else {
             console.log(response);
             settext("This Email is not a registered email");
