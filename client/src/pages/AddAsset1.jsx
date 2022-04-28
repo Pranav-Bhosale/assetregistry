@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import {Row,Col } from "react-bootstrap";
@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from "axios";
 import Logo from "../components/Logo";
+import Child from "./DeptDropdown";
 
 
 
@@ -58,6 +59,15 @@ function ViewAsset() {
     }
     return items;
 }  
+
+
+function childToParent(deptstring){
+  setDepartment(deptstring);
+}
+
+useEffect(()=>{
+  console.log(Department);
+},[Department]);
 
 function  createSecondItems(val) {
   let items = [];
@@ -163,7 +173,11 @@ function  createSecondItems(val) {
         
         <Col>
             <Row>
-        <Form.Group as={Col} controlId="formGridState">
+
+
+      
+        <Child childToParent={childToParent}/>
+        {/* <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Department </Form.Label>
                 <Form.Select required as="select" onChange={(e) => {setDepartment(e.target.value)}}  custom>
                   <option>All</option>
@@ -173,7 +187,7 @@ function  createSecondItems(val) {
                   <option>ELECTRICAL</option>
                   <option>ELECTRONICS</option>
                 </Form.Select>
-              </Form.Group>
+              </Form.Group> */}
              
         
          <Form.Group as={Col} controlId="formFile" className="mb-3" >

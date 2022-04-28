@@ -7,6 +7,7 @@ import { BiSearchAlt } from "react-icons/bi";
 import InputGroup from "react-bootstrap/InputGroup";
 import { FormControl } from "react-bootstrap";
 import { Redirect, useHistory } from "react-router-dom";
+import Child from "./DeptDropdown";
 
 import Axios from "axios";
 
@@ -25,6 +26,7 @@ function ViewAsset() {
   const [deluid, setdeluid] = React.useState(null);
   const [delid, setdelid] = React.useState(null);
   const [show, setShow] = React.useState(false);
+  
 
   const [logedIN, setlogedIN] = React.useState(true);
   React.useEffect(() => {
@@ -34,7 +36,7 @@ function ViewAsset() {
           setlogedIN(true);
           console.log("266");
         } else {
-          console.log("login aain");
+          console.log("login again");
           setlogedIN(false);
         }
       });
@@ -60,13 +62,20 @@ function ViewAsset() {
       UID: uid,
     }).then((response) => {
       if (response.data.success) {
-        document.getElementById(id).remove();
+        const copyPostArray = Object.assign([], queriedData);
+        copyPostArray.splice(id, 1);
+        setqueriedData(copyPostArray);
         setdelid(null);
         setdeluid(null);
         handleClose();
       }
     });
   }
+
+  function childToParent(deptstring){
+    setDepartment(deptstring);
+  }
+
 
   const dropdownlist = {
     Camera: ["Web", "Analog", "IP Based", "Other"],
@@ -120,15 +129,12 @@ function ViewAsset() {
   }
 
   function queriedDatadisplay(queriedData) {
-    
-    var data = queriedData;
     let items = [];
-    let n = 0;
-    data.forEach((element) => {
-      n++;
-      var id = n;
+    queriedData.map((element, index) => {
+      
+      var id = index;
       items.push(
-        <Accordion id={id} key={n} defaultActiveKey="1">
+        <Accordion id={id} key={id+1} defaultActiveKey="1">
           <Accordion.Item
             eventKey="0"
             border="primary"
@@ -147,7 +153,7 @@ function ViewAsset() {
                 margin: 0,
               }}
             >
-              {n}
+              {id+1}
             </p>
             <Accordion.Header>
               <Card
@@ -208,7 +214,6 @@ function ViewAsset() {
                     onClick={(e) => {
                       setdeluid(element.UID);
                       setdelid(id);
-
                       handleShow();
                     }}
                   >
@@ -236,7 +241,7 @@ function ViewAsset() {
         const res = response.data[0];
         setqueriedData(response.data);
         if (res) {
-          setResmsg("Total " + response.data.length + " Entries Found!");
+          setResmsg("Total " + response.data.length + " Entries were Found!");
           queriedDatadisplay(queriedData);
           setResmesgcolor("black");
         } else {
@@ -252,7 +257,7 @@ function ViewAsset() {
         const res = response.data[0];
         setqueriedData(response.data);
         if (res) {
-          setResmsg("Total " + response.data.length + " Entries Found!");
+          setResmsg("Total " + response.data.length + " Entries were Found!");
           queriedDatadisplay(queriedData);
           setResmesgcolor("black");
         } else {
@@ -267,7 +272,7 @@ function ViewAsset() {
         const res = response.data[0];
         setqueriedData(response.data);
         if (res) {
-          setResmsg("Total " + response.data.length + " Entries Found!");
+          setResmsg("Total " + response.data.length + " Entries were Found!");
           queriedDatadisplay(queriedData);
           setResmesgcolor("black");
         } else {
@@ -281,6 +286,8 @@ function ViewAsset() {
     }
   }
 
+  <drop pops></drop>
+
   function handleClick() {
     setResmsg(null);
     if (UID !== "") {
@@ -289,7 +296,7 @@ function ViewAsset() {
           const res = response.data[0];
           setqueriedData(response.data);
           if (res) {
-            setResmsg("Total " + response.data.length + " Entries Found!");
+            setResmsg("Total " + response.data.length + " Entries were Found!");
             queriedDatadisplay(queriedData);
             setResmesgcolor("black");
           } else {
@@ -391,7 +398,9 @@ function ViewAsset() {
           <Col md="6" style={{ padding: 0, margin: 0 }}>
             <Row style={{ padding: 0, margin: 0 }}>
               <Col style={{ margin: 0, paddingRight: 0 }}>
-                <Form.Group as={Col} controlId="formGridState">
+
+              <Child childToParent={childToParent}/>
+                {/* <Form.Group as={Col} controlId="formGridState">
                   <Form.Label>Department </Form.Label>
                   <Form.Select
                     required
@@ -408,7 +417,7 @@ function ViewAsset() {
                     <option>EL</option>
                     <option>ET</option>
                   </Form.Select>
-                </Form.Group>
+                </Form.Group> */}
               </Col>
               <Col style={{ alignItems: "center", textAlign: "center" }}>
                 <button

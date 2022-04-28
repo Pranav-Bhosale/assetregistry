@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { Row,Tabs,Tab, Col,Form } from "react-bootstrap";
 import Axios from "axios";
 import fileDownload from 'js-file-download';
+import Child from "./DeptDropdown";
 
 function ImportExportCSV() {
   const [uploadedFile,setuploadedFile]=React.useState(null);
@@ -11,6 +12,14 @@ function ImportExportCSV() {
   const [Resmsgexport,setResmsgexport]= React.useState(null);
   const [key, setKey] =React.useState('Upload');
   const [Department, setDepartment] = React.useState("All");//set the dept......
+
+  function childToParent(deptstring){
+    setDepartment(deptstring);
+    //Department is not used;
+  }
+
+
+
 
 
   const handelUpload = (event) =>
@@ -52,7 +61,9 @@ function ImportExportCSV() {
    }
 
 
-
+   React.useEffect(()=>{
+    console.log(Department);
+  },[Department]);
 
 
   return (
@@ -78,17 +89,9 @@ function ImportExportCSV() {
          <Form className="formRow"  onSubmit={handelUpload} id="csvinputform" encType="multipart/form-data" >
 
          <Row>
-         <Form.Group as={Col} controlId="formGridState">
-                <Form.Label><h6><b>Select Department</b> </h6></Form.Label>
-                <Form.Select required as="select" onChange={(e) => {setDepartment(e.target.value)}}  custom>
-                  <option>All</option>
-                  <option>IT</option>
-                  <option>CSE</option>
-                  <option>CIVIL</option>
-                  <option>ELECTRICAL</option>
-                  <option>ELECTRONICS</option>
-                </Form.Select>
-              </Form.Group>
+         <Col>
+         <Child childToParent={childToParent}/>
+         </Col>
 
          <Col>
          <Form.Group controlId="formFile" className="mb-3" >
