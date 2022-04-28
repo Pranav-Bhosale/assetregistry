@@ -18,7 +18,7 @@ function AddAsset2(props) {
 
   React.useEffect(() => {
     Axios.get(
-      "https://wce-asset-registry.herokuapp.com/addasset/" +
+      "http://localhost:3002/addasset/" +
         props.match.params.UID
     )
       .then(function (response) {

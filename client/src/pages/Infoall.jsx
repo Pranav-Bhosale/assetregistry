@@ -12,7 +12,7 @@ const [Resmsg ,setResmsg]= React.useState(null);
 
 
 React.useEffect(()=>{
-  Axios.get('https://wce-asset-registry.herokuapp.com/addasset/'+uid)
+  Axios.get('http://localhost:3002/addasset/'+uid)
   .then(function (response) {
     if(response.data.err)
     {

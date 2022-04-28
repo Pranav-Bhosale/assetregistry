@@ -85,7 +85,7 @@ function  createSecondItems(val) {
 
    const postreq=()=>
    {
-    Axios.post("https://wce-asset-registry.herokuapp.com/addasset",{
+    Axios.post("http://localhost:3002/addasset",{
       UID: UID,
       AssetNumber:AssetNumber,
       EqpType:EqpType,

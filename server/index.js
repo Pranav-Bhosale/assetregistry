@@ -558,13 +558,13 @@ app.get("/getalladmin", auth, async (req, res) => {
 });
 app.post("/deleteadmin", auth, async (req, res) => {
   try {
-    const usersdeleted = await User.findOneAndDelete()({
+    const usersdeleted = await User.findOneAndDelete({
       email: req.body.email,
     });
     if (!usersdeleted) {
       return res.status(266).json({ message: "Error occured 2" });
     } else {
-      console.log("Admin deleted " + email);
+      console.log("Admin deleted " + req.body.email);
       return res.status(201).json({ message: "Admin Deleted" });
     }
   } catch (error) {

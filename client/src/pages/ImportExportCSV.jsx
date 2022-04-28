@@ -22,7 +22,7 @@ function ImportExportCSV() {
     {
       const data =new FormData();
       data.append("fileInput",uploadedFile);
-     Axios.post("https://wce-asset-registry.herokuapp.com/importCSV",data).then((response)=>{
+     Axios.post("http://localhost:3002/importCSV",data).then((response)=>{
         setResmsg(response.data);
     }) .catch(function (error) {
       setuploadedFile(null);
@@ -39,7 +39,7 @@ function ImportExportCSV() {
    function getalldata()
    {
     setResmsgexport("Wait..file will be downloaded soon!!");
-    Axios.get('https://wce-asset-registry.herokuapp.com/alldata')
+    Axios.get('http://localhost:3002ss/alldata')
     .then(function (response) {
       console.log(response);
       fileDownload(response.data, 'WCE_AssetRegister.csv');

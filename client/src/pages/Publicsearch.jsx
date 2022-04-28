@@ -35,7 +35,7 @@ const[delid,setdelid]=React.useState(null);
   {
     var id=delid;
     var uid=deluid
-    Axios.post("https://wce-asset-registry.herokuapp.com/deleteasset",{
+    Axios.post("http://localhost:3002/deleteasset",{
     UID:uid
 }).then((response)=>{
 if(response.data.success)

@@ -56,7 +56,7 @@ function ViewAsset() {
   function handeldel() {
     var id = delid;
     var uid = deluid;
-    Axios.post("https://wce-asset-registry.herokuapp.com/deleteasset", {
+    Axios.post("http://localhost:3002/deleteasset", {
       UID: uid,
     }).then((response) => {
       if (response.data.success) {
@@ -120,6 +120,7 @@ function ViewAsset() {
   }
 
   function queriedDatadisplay(queriedData) {
+    
     var data = queriedData;
     let items = [];
     let n = 0;
@@ -227,7 +228,7 @@ function ViewAsset() {
     setResmsg(null);
 
     if (Department !== "None" && EqpType !== "None") {
-      Axios.post("https://wce-asset-registry.herokuapp.com/viewasset/choose", {
+      Axios.post("http://localhost:3002/viewasset/choose", {
         EqpType: EqpType,
         NameOfEqp: NameOfEqp,
         Department: Department,
@@ -244,7 +245,7 @@ function ViewAsset() {
         }
       });
     } else if (EqpType !== "None") {
-      Axios.post("https://wce-asset-registry.herokuapp.com/viewasset", {
+      Axios.post("http://localhost:3002/viewasset", {
         EqpType: EqpType,
         NameOfEqp: NameOfEqp,
       }).then((response) => {
@@ -260,7 +261,7 @@ function ViewAsset() {
         }
       });
     } else if (EqpType === "None") {
-      Axios.post("https://wce-asset-registry.herokuapp.com/viewasset/choose2", {
+      Axios.post("http://localhost:3002/viewasset/choose2", {
         Department: Department,
       }).then((response) => {
         const res = response.data[0];
@@ -283,7 +284,7 @@ function ViewAsset() {
   function handleClick() {
     setResmsg(null);
     if (UID !== "") {
-      Axios.get("https://wce-asset-registry.herokuapp.com/addasset/" + UID)
+      Axios.get("http://localhost:3002/addasset/" + UID)
         .then(function (response) {
           const res = response.data[0];
           setqueriedData(response.data);
