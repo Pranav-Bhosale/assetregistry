@@ -556,6 +556,22 @@ app.get("/getalladmin", auth, async (req, res) => {
     return res.status(266).json({ message: "Error occured 1" });
   }
 });
+app.post("/deleteadmin", auth, async (req, res) => {
+  try {
+    const usersdeleted = await User.findOneAndDelete()({
+      email: req.body.email,
+    });
+    if (!usersdeleted) {
+      return res.status(266).json({ message: "Error occured 2" });
+    } else {
+      console.log("Admin deleted " + email);
+      return res.status(201).json({ message: "Admin Deleted" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(266).json({ message: "Error occured 1" });
+  }
+});
 
 app.listen(process.env.PORT || port, () => {
   console.log(`Example app listening on port ${port}!`);
