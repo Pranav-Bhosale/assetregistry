@@ -22,6 +22,27 @@ function ViewAsset(props) {
   const handleCloseforchangePass = () => setShowChangePass(false);
   const handleShowchangePass = () => setShowChangePass(true);
 
+  const [logedIN, setlogedIN] = React.useState(true);
+  React.useEffect(() => {
+    try {
+      Axios.post("http://localhost:3002/islogedin", {}).then((response) => {
+        if (response && response.status == 266) {
+          setlogedIN(true);
+          console.log("266");
+        } else {
+          console.log("login aain");
+          setlogedIN(false);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      window.alert("Error!");
+    }
+  }, []);
+  if (!logedIN) {
+    return <Redirect to="/admin" />;
+  }
+
   function dummyforchangepass() {
     setShowChangePass(false);
     setText(null);

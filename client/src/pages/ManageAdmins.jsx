@@ -14,8 +14,9 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import Axios from "axios";
-import { Dummyadmindata } from "../components/Dummyadmindata";
+import { Redirect } from "react-router-dom";
 
+import { Dummyadmindata } from "../components/Dummyadmindata";
 import { TiUserDelete } from "react-icons/ti";
 import { useSSRSafeId } from "@react-aria/ssr";
 
@@ -35,11 +36,40 @@ function ViewAsset() {
   const [currentemail, setCurrentemail] = React.useState("");
   const [showdelete, setShowdelete] = React.useState(false);
   const [textdelmodal, setTextdelmodal] = React.useState("");
+  const [logedIN, setlogedIN] = React.useState(true);
 
-  try {
-    //axios get route..if(respoise){ data assin var}..else setTet(error fetchoin data)
-  } catch (e) {
-    //settext("error fetibg data")
+  React.useEffect(() => {
+    try {
+      Axios.post("http://localhost:3002/islogedin", {}).then((response) => {
+        if (response && response.status == 266) {
+          setlogedIN(true);
+          console.log("266");
+        } else {
+          console.log("login aain");
+          setlogedIN(false);
+        }
+      });
+      Axios.get("http://localhost:3002/getalladmin")
+        .then(function (response) {
+          // const res = response.data[0];
+          if (response.status == 201) {
+            setUserdata(response.data.users);
+            console.log(response.data.users);
+          } else {
+            setLefttabtext("Data not found");
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          setLefttabtext("Data not found");
+        });
+    } catch (error) {
+      console.log(error);
+      window.alert("Error!");
+    }
+  }, []);
+  if (!logedIN) {
+    return <Redirect to="/admin" />;
   }
 
   function handleLogin(e) {
@@ -113,25 +143,6 @@ function ViewAsset() {
 
     // delete of user code goes here
   }
-
-  React.useEffect(() => {
-    //Runs only on the first render
-
-    Axios.get("http://localhost:3002/getalladmin")
-      .then(function (response) {
-        // const res = response.data[0];
-        if (response.status == 201) {
-          setUserdata(response.data.users);
-          console.log(response.data.users);
-        } else {
-          setLefttabtext("Data not found");
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        setLefttabtext("Data not found");
-      });
-  }, []);
 
   function renderadmins(userdata) {
     let items = [];

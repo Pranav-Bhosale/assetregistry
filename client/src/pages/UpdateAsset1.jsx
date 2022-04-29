@@ -37,6 +37,7 @@ function ViewAsset(props) {
   const [Resmsg, setResmsg] = React.useState(null);
   const [Department, setDepartment] = React.useState("None");
 
+  const [logedIN, setlogedIN] = React.useState(true);
   const dropdownlist = {
     Camera: ["Web", "Analog", "IP Based", "Other"],
     Computer: ["Laptop", "Desktop", "Server", "Other"],
@@ -87,10 +88,7 @@ function ViewAsset(props) {
   }, [data]);
 
   React.useEffect(() => {
-    Axios.get(
-      "http://localhost:3002/addasset/" +
-        props.match.params.UID
-    )
+    Axios.get("http://localhost:3002/addasset/" + props.match.params.UID)
       .then(function (response) {
         console.log(response.data[0]);
         setdata(response.data[0]);
@@ -99,7 +97,25 @@ function ViewAsset(props) {
         console.log(error);
       });
   }, []);
-
+  React.useEffect(() => {
+    try {
+      Axios.post("http://localhost:3002/islogedin", {}).then((response) => {
+        if (response && response.status == 266) {
+          setlogedIN(true);
+          console.log("266");
+        } else {
+          console.log("login aain");
+          setlogedIN(false);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      window.alert("Error!");
+    }
+  }, []);
+  if (!logedIN) {
+    return <Redirect to="/admin" />;
+  }
   function createSelectItems() {
     let items = [];
     for (const key of Object.keys(dropdownlist)) {
