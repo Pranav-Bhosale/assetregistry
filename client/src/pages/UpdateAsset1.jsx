@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Axios from "axios";
+import Child from "./DeptDropdown";
 
 function ViewAsset(props) {
   const reqpath = window.location.origin + "/info/" + props.match.params.UID;
@@ -37,6 +38,7 @@ function ViewAsset(props) {
   const [Resmsg, setResmsg] = React.useState(null);
   const [Department, setDepartment] = React.useState("None");
 
+  const [logedIN, setlogedIN] = React.useState(true);
   const dropdownlist = {
     Camera: ["Web", "Analog", "IP Based", "Other"],
     Computer: ["Laptop", "Desktop", "Server", "Other"],
@@ -86,11 +88,13 @@ function ViewAsset(props) {
     }
   }, [data]);
 
+  function childToParent(deptstring){
+    setDepartment(deptstring);
+  }
+
+
   React.useEffect(() => {
-    Axios.get(
-      "http://localhost:3002/addasset/" +
-        props.match.params.UID
-    )
+    Axios.get("http://localhost:3002/addasset/" + props.match.params.UID)
       .then(function (response) {
         console.log(response.data[0]);
         setdata(response.data[0]);
@@ -99,7 +103,25 @@ function ViewAsset(props) {
         console.log(error);
       });
   }, []);
-
+  React.useEffect(() => {
+    try {
+      Axios.post("http://localhost:3002/islogedin", {}).then((response) => {
+        if (response && response.status == 266) {
+          setlogedIN(true);
+          console.log("266");
+        } else {
+          console.log("login aain");
+          setlogedIN(false);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      window.alert("Error!");
+    }
+  }, []);
+  if (!logedIN) {
+    return <Redirect to="/admin" />;
+  }
   function createSelectItems() {
     let items = [];
     for (const key of Object.keys(dropdownlist)) {
@@ -240,21 +262,7 @@ function ViewAsset(props) {
               <Row>
                 <Form.Group as={Col} controlId="formGridState">
                   <Form.Label>Department </Form.Label>
-                  <Form.Select
-                    required
-                    as="select"
-                    onChange={(e) => {
-                      setDepartment(e.target.value);
-                    }}
-                    custom
-                  >
-                    <option>All</option>
-                    <option>IT</option>
-                    <option>CSE</option>
-                    <option>CIVIL</option>
-                    <option>ELECTRICAL</option>
-                    <option>ELECTRONICS</option>
-                  </Form.Select>
+                  <Child childToParent={childToParent}/>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formFile" className="mb-3">

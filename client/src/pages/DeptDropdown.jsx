@@ -143,8 +143,8 @@ function  createSelectItems() {
 
     return (
         <div>
-            <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Department </Form.Label>
+            <Form.Group  className="mb-3"  controlId="formGridState">
+                {/* <Form.Label>Department </Form.Label> */}
                 <Form.Select required as="select" onChange={(e) => {childToParent(e.target.value)}}  custom>
                 {createSelectItems()}
                 </Form.Select>

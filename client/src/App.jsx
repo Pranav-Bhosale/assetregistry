@@ -59,14 +59,6 @@ function App() {
         </Route>
         <Route path="/addAsset2/:UID" component={AddAsset2} />
         <Route path="/updateAsset/:UID" component={UpdateAsset1} />
-        <Route path="/addAsset3">
-          <AddAsset3 />
-        </Route>
-        <Route path="/addAsset4">
-          <AddAsset4 />
-        </Route>
-
-        {/* <Route path="/profile">{ uidval && <Profile /> } </Route> */}
         <Route path="/about" component={About} />
 
         <Route path="/import-export">

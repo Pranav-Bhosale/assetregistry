@@ -66,7 +66,7 @@ function childToParent(deptstring){
 }
 
 useEffect(()=>{
-  console.log(Department+"-------------------");
+  console.log(Department);
 },[Department]);
 
 function  createSecondItems(val) {
@@ -173,21 +173,11 @@ function  createSecondItems(val) {
         
         <Col>
             <Row>
-
-
       
-        <Child childToParent={childToParent}/>
-        {/* <Form.Group as={Col} controlId="formGridState">
+         <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Department </Form.Label>
-                <Form.Select required as="select" onChange={(e) => {setDepartment(e.target.value)}}  custom>
-                  <option>All</option>
-                  <option>IT</option>
-                  <option>CSE</option>
-                  <option>CIVIL</option>
-                  <option>ELECTRICAL</option>
-                  <option>ELECTRONICS</option>
-                </Form.Select>
-              </Form.Group> */}
+             <Child childToParent={childToParent}/> 
+              </Form.Group> 
              
         
          <Form.Group as={Col} controlId="formFile" className="mb-3" >
@@ -195,7 +185,7 @@ function  createSecondItems(val) {
            <Form.Control type="file" accept="image/*" onChange={(e) => {setuploadedFile(e.target.files[0])} }/>
          </Form.Group>
         
-             
+            
             </Row>
         </Col>
 
