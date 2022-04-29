@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { Row, Col } from "react-bootstrap";
@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Axios from "axios";
 import Logo from "../components/Logo";
+import Child from "./DeptDropdown";
 
 function ViewAsset() {
   const [redirect, setRedirect] = React.useState(false);

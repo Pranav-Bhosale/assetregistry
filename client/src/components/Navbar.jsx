@@ -5,14 +5,76 @@ import { Sidebardata } from "./Sidebardata";
 import { IconContext } from "react-icons";
 import Logo from "./Logo";
 import { Container, Row, Col } from "react-bootstrap";
+import Axios from "axios";
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
-
+  const [currentuserDep,setcurrentuserDep]= useState('');
   const showSidebar = () => setSidebar(!sidebar);
   const hide = () => setSidebar(false);
   const show = () => setSidebar(true);
 
+
+  window.addEventListener('load', (event) => {
+    Axios.get("http://localhost:3002/userdetails")
+    .then(function (response) {
+  
+      if(response.status==201){
+        console.log(response);
+        setcurrentuserDep(response.data.dep);
+      }
+      else{
+        console.log("error fetching user info");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      return(<p>Error fetching user detail</p>);
+    });
+  
+    if(currentuserDep!='ALL'){
+         Sidebardata.splice(3, 1);
+         console.log("char");
+    }
+  });
+
+  // React.useEffect(() => {
+   
+  // });
+
+  function rendersidebar(){
+  //   Axios.get("http://localhost:3002/userdetails")
+  // .then(function (response) {
+
+  //   if(response.status==201){
+  //     console.log(response);
+  //     setcurrentuserDep(response.data.dep);
+  //   }
+  //   else{
+  //     console.log("error fetching user info");
+  //   }
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  //   return(<p>Error fetching user detail</p>);
+  // });
+
+  // if(currentuserDep!='ALL'){
+  //      Sidebardata.splice(5, 1);
+  // }
+ let items=[];
+  Sidebardata.map((item, index) => {
+    items.push (
+      <li key={index} className={item.cName}>
+        <Link to={item.path}>
+          {item.icon}
+          <span style={{ marginLeft: "10px" }}>{item.title}</span>
+        </Link>
+      </li>
+    );
+  })
+  return items;
+  }
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -57,7 +119,7 @@ function Navbar() {
             onBlur={hide}
             onFocus={show}
           >
-            {Sidebardata.map((item, index) => {
+            {/* {Sidebardata.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
                   <Link to={item.path}>
@@ -66,7 +128,8 @@ function Navbar() {
                   </Link>
                 </li>
               );
-            })}
+            })} */}
+            {rendersidebar()}
           </ul>
         </nav>
       </IconContext.Provider>
