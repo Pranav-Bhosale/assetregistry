@@ -17,6 +17,7 @@ app.use(express.json());
 // app.use(cors());
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 const AssetDB = require("./models/Assets");
+const AllDept = require("./models/AllDept");
 const fs = require("fs");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
@@ -315,24 +316,6 @@ app.get("/logout", auth, async (req, res) => {
   return res.status(201).json({ message: "SuccessFuly Logout" });
 });
 
-app.get("/userdetails", auth, async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.email });
-
-    if (!user) {
-      return res.status(266).json({ message: "Error occured 2" });
-    } else {
-      const email = user.email;
-      const name = user.username;
-      const deptID = user.deptID;
-      return res.status(201).json({ email: email, name: name, dep: deptID });
-    }
-  } catch (error) {
-    console.log(error);
-    return res.status(266).json({ message: "Error occured 1" });
-  }
-});
-
 app.post("/verifyotp", auth, async (req, res) => {
   try {
     const user = await User.findOne({ email: req.email });
@@ -566,6 +549,57 @@ app.post("/deleteadmin", auth, async (req, res) => {
     } else {
       console.log("Admin deleted " + req.body.email);
       return res.status(201).json({ message: "Admin Deleted" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(266).json({ message: "Error occured 1" });
+  }
+});
+
+app.get("/alldeptinfo", auth, async (req, res) => {
+  try {
+    var newdata = await AllDept.find();
+    if (newdata) res.status(201).json(newdata);
+  } catch (err) {
+    res.status(266).json({ err: err });
+  }
+});
+
+app.get("/deptinfo", auth, async (req, res) => {
+  try {
+    var newdata = await AllDept.find({ deptID: req.body.department });
+    if (newdata) res.status(201).json(newdata);
+  } catch (err) {
+    res.status(266).json({ err: err });
+  }
+});
+
+app.post("/adddept", auth, async (req, res) => {
+  try {
+    const newDept = new AllDept(req.body);
+    const success = await newDept.save();
+    if (success) {
+      return res.status(201).json({ message: " Dept Added Successfully" });
+    } else {
+      return res.status(266).json({ err: "Error adding data" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(266).json({ err: "Error adding data", code: err.code });
+  }
+});
+
+app.get("/userdetails", auth, async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.email });
+
+    if (!user) {
+      return res.status(266).json({ message: "Error occured 2" });
+    } else {
+      const email = user.email;
+      const name = user.username;
+      const deptID = user.deptID;
+      return res.status(201).json({ email: email, name: name, dep: deptID });
     }
   } catch (error) {
     console.log(error);

@@ -62,7 +62,6 @@ function Navbar() {
   // if(currentuserDep!='ALL'){
   //      Sidebardata.splice(5, 1);
   // }
-console.log("var")
  let items=[];
   Sidebardata.map((item, index) => {
     items.push (

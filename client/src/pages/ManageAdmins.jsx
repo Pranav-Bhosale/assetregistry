@@ -20,12 +20,6 @@ import { TiUserDelete } from "react-icons/ti";
 import { useSSRSafeId } from "@react-aria/ssr";
 
 function ViewAsset() {
-
-
-
-
-
-
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [text, settext] = useState("");
@@ -83,16 +77,16 @@ function ViewAsset() {
     setShow(false);
   };
 
-  const handleClosedelete=()=>{
+  const handleClosedelete = () => {
     setShowdelete(false);
-  }
+  };
 
-  const handleshowfordelete=(text) =>{
+  const handleshowfordelete = (text) => {
     setShowdelete(true);
     setTextdelmodal(text);
-  }
+  };
 
-  const handleShow = (index, username,email) => {
+  const handleShow = (index, username, email) => {
     setShow(true);
     setCurrentIndex(index);
     setCurrentUserName(username);
@@ -102,17 +96,16 @@ function ViewAsset() {
   function handeldel() {
     //Axios req post {email:email}--> res{if() below line ....else(){ error deleting}}
     Axios.post("http://localhost:3002/deleteadmin", {
-      email: currentemail 
+      email: currentemail,
     }).then((response) => {
-       setShow(false);
-       console.log(response);
-       if (response.status==201) {
-       const copyPostArray = Object.assign([], userdata);
-       copyPostArray.splice(currentIndex, 1);
-       setUserdata(copyPostArray);
-       handleshowfordelete("Admin Deleted!")
-      }
-      else{
+      setShow(false);
+      console.log(response);
+      if (response.status == 201) {
+        const copyPostArray = Object.assign([], userdata);
+        copyPostArray.splice(currentIndex, 1);
+        setUserdata(copyPostArray);
+        handleshowfordelete("Admin Deleted!");
+      } else {
         handleshowfordelete("Error deleting admin");
         // setLefttabtext("Error deleting admin")
       }
@@ -138,74 +131,72 @@ function ViewAsset() {
         .catch(function (error) {
           console.log(error);
           setLefttabtext("Data not found");
-        });
-    
+        })
+      .catch(function (error) {
+        console.log(error);
+        setLefttabtext("Data not found");
+      });
   }, []);
- 
 
 
-  function renderadmins(userdata){
-    let items=[];
-    
+  function renderadmins(userdata) {
+    let items = [];
+
     userdata.map((item, index) => {
-      if(item.deptID!="ALL"){
-      items.push(
-        <Col>
-          <Card
-            style={{ width: "20rem", margin: "10px" }}
-            key={index + item.username}
-          >
-            <Card.Body>
-              <Row  style={{ marginLeft: "20px", marginRight:"20px" }}>
-                <Col style={{ color: "grey" }}>
-                  <i>Username:</i>
-                </Col>
-                
-              </Row>
-            
-            <Row  style={{ marginLeft: "20px", marginRight:"20px" }}>
-            <Col>{item.username}</Col>
-            </Row>
+      if (item.deptID != "ALL") {
+        items.push(
+          <Col>
+            <Card
+              style={{ width: "20rem", margin: "10px" }}
+              key={index + item.username}
+            >
+              <Card.Body>
+                <Row style={{ marginLeft: "20px", marginRight: "20px" }}>
+                  <Col style={{ color: "grey" }}>
+                    <i>Username:</i>
+                  </Col>
+                </Row>
 
-              <Row  style={{ marginLeft: "20px", marginRight:"20px" }}>
-                <Col style={{ color: "grey" }}>
-                  <i>Email:</i>
-                </Col>
-                
-              </Row>
+                <Row style={{ marginLeft: "20px", marginRight: "20px" }}>
+                  <Col>{item.username}</Col>
+                </Row>
 
-            <Row  style={{ marginLeft: "20px", marginRight:"20px" }}>
-            <Col>{item.email}</Col>
-            </Row>
+                <Row style={{ marginLeft: "20px", marginRight: "20px" }}>
+                  <Col style={{ color: "grey" }}>
+                    <i>Email:</i>
+                  </Col>
+                </Row>
 
+                <Row style={{ marginLeft: "20px", marginRight: "20px" }}>
+                  <Col>{item.email}</Col>
+                </Row>
 
-              <Row  style={{ marginLeft: "20px", marginRight:"20px" }}>
-                <Col style={{ color: "grey" }}>
-                  <i>Department:</i>
-                </Col>
-                
-              </Row>
-              <Row   style={{ marginLeft: "20px", marginRight:"20px" }}>
-              <Col>{item.deptID}</Col>
-              </Row>
+                <Row style={{ marginLeft: "20px", marginRight: "20px" }}>
+                  <Col style={{ color: "grey" }}>
+                    <i>Department:</i>
+                  </Col>
+                </Row>
+                <Row style={{ marginLeft: "20px", marginRight: "20px" }}>
+                  <Col>{item.deptID}</Col>
+                </Row>
 
-              <Row
-                style={{ margin: "20px" }}
-                className="justify-content-md-center"
-              >
-                <Button
-                  variant="danger"
-                  onClick={() => handleShow(index,item.username,item.email)}
+                <Row
+                  style={{ margin: "20px" }}
+                  className="justify-content-md-center"
                 >
-                  Delete Admin
-                </Button>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      );
+                  <Button
+                    variant="danger"
+                    onClick={() => handleShow(index, item.username, item.email)}
+                  >
+                    Delete Admin
+                  </Button>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        );
       }
-    })
+    });
     return items;
   }
 
@@ -277,8 +268,10 @@ function ViewAsset() {
                 </Row>
               </Container>
               <Row className="justify-content-md-center">
-                  <p style={{color:"red", textAlign: "center"}}>{lefttabtext}</p>
-                </Row>
+                <p style={{ color: "red", textAlign: "center" }}>
+                  {lefttabtext}
+                </p>
+              </Row>
             </div>
           </Tab>
 
