@@ -29,13 +29,12 @@ function Navbar() {
     })
     .catch(function (error) {
       console.log(error);
-      return(<p>Error fetching user detail</p>);
     });
   
-    if(currentuserDep!='ALL'){
-         Sidebardata.splice(3, 1);
-         console.log("char");
-    }
+    // if(currentuserDep!='ALL'){
+    //      Sidebardata.splice(3, 1);
+    //      console.log("---------------");
+    // }
   });
 
   // React.useEffect(() => {

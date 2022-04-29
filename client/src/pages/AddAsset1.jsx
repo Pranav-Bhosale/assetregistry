@@ -66,7 +66,7 @@ function childToParent(deptstring){
 }
 
 useEffect(()=>{
-  console.log(Department);
+  console.log(Department+"-------------------");
 },[Department]);
 
 function  createSecondItems(val) {

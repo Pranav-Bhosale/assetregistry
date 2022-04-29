@@ -225,7 +225,6 @@ function ViewAsset() {
   .then(function (response) {
 
     if(response.status==201){
-      console.log(response);
       setcurrentuserDep(response.data.dep);
     }
     else{

@@ -5,6 +5,7 @@ import Axios from "axios";
 export default function Child({childToParent}) {
     
 const [departmentdata,setDepartmentdata]=React.useState([]);
+const [dataarray,setdataarray]=React.useState([]);
 
 function  createSelectItems() {
     let items = [];         
@@ -13,21 +14,33 @@ function  createSelectItems() {
       );
     return items;
  }  
-
+ let ar=[];
     React.useEffect(() => {
         
-          Axios.get("http://localhost:3002/userdetails")
+        Axios.get("http://localhost:3002/deptinfo")
+        .then(function (response){
+          console.log(response);
+            response.data.forEach(element => {
+              ar.push(element.deptName );
+            });
+            console.log(ar);
+            setdataarray(ar);
+            
+
+            Axios.get("http://localhost:3002/userdetails")
             .then(function (response) {
       
               // const res = response.data[0];
               if(response.status==201){
             //    console.log(response);
+            let array=[];
                switch (response.data.dep) {
                 case "ALL":
-                  setDepartmentdata(arr=> [...arr,'All','IT','CSE','CIVIL','ELECTRICAL','ELECTRONICS','MECHANICAL']);
-                  childToParent("ALL");
+                   setDepartmentdata(ar);
+                  childToParent("Lib");
                   break;
                 case "IT":
+                   
                     setDepartmentdata(arr=> [...arr,'IT']);
                     childToParent("IT");
                     break;
@@ -43,7 +56,7 @@ function  createSelectItems() {
                 case "ELECTRICAL":
                 setDepartmentdata(arr=> [...arr,'ELECTRICAL']);
                 childToParent("ELECTRICAL");
-                break;
+                break; 
 
                 case "ELECTRONICS":
                     setDepartmentdata(arr=> [...arr,'ELECTRONICS']);
@@ -61,8 +74,66 @@ function  createSelectItems() {
             })
             .catch(function (error) {
               console.log(error);
-              return(<p>Error fetching user detail</p>);
             });
+
+
+
+
+
+
+        }).catch(function (error) {
+          console.log(error);
+        });
+
+        
+          // Axios.get("http://localhost:3002/userdetails")
+          //   .then(function (response) {
+      
+          //     // const res = response.data[0];
+          //     if(response.status==201){
+          //   //    console.log(response);
+          //   let array=[];
+          //      switch (response.data.dep) {
+          //       case "ALL":
+          //          setDepartmentdata(dataarray);
+          //         childToParent("Lib");
+          //         break;
+          //       case "IT":
+          //           array.push('IT')
+          //           setDepartmentdata(arr=> [...arr,'IT']);
+          //           childToParent("IT");
+          //           break;
+          //       case "CSE":
+          //           setDepartmentdata(arr=> [...arr,'CSE']);
+          //           childToParent("CSE");
+          //           break;
+          //       case "CIVIL":
+          //       setDepartmentdata(arr=> [...arr,'CIVIL']);
+          //       childToParent("CIVIL");
+          //       break;
+
+          //       case "ELECTRICAL":
+          //       setDepartmentdata(arr=> [...arr,'ELECTRICAL']);
+          //       childToParent("ELECTRICAL");
+          //       break; 
+
+          //       case "ELECTRONICS":
+          //           setDepartmentdata(arr=> [...arr,'ELECTRONICS']);
+          //           childToParent("ELECTRONICS");
+          //           break;
+          //       case "MECHANICAL":
+          //           setDepartmentdata(arr=> [...arr,'MECHANICAL']);
+          //           childToParent("MECHANICAL");
+          //           break;
+          //     }
+          //     }
+          //     else{
+          //       console.log("error fetching user info");
+          //     }
+          //   })
+          //   .catch(function (error) {
+          //     console.log(error);
+          //   });
         
       }, []);
 
