@@ -5,6 +5,7 @@ import { Row, Tabs, Tab, Col, Form } from "react-bootstrap";
 import Axios from "axios";
 import fileDownload from "js-file-download";
 import { Redirect } from "react-router-dom";
+import Child from "./DeptDropdown";
 
 function ImportExportCSV() {
   const [uploadedFile, setuploadedFile] = React.useState(null);
@@ -33,7 +34,9 @@ function ImportExportCSV() {
   if (!logedIN) {
     return <Redirect to="/admin" />;
   }
-
+  function childToParent(deptstring){
+    setDepartment(deptstring);
+  }
   const handelUpload = (event) => {
     setResmsg(null);
     event.preventDefault();
@@ -109,21 +112,7 @@ function ImportExportCSV() {
                           <b>Select Department</b>{" "}
                         </h6>
                       </Form.Label>
-                      <Form.Select
-                        required
-                        as="select"
-                        onChange={(e) => {
-                          setDepartment(e.target.value);
-                        }}
-                        custom
-                      >
-                        <option>All</option>
-                        <option>IT</option>
-                        <option>CSE</option>
-                        <option>CIVIL</option>
-                        <option>ELECTRICAL</option>
-                        <option>ELECTRONICS</option>
-                      </Form.Select>
+                      <Child childToParent={childToParent}/>
                     </Form.Group>
 
                     <Col>

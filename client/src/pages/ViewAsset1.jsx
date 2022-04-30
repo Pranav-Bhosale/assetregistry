@@ -77,6 +77,7 @@ function ViewAsset() {
   }
 
 
+
   const dropdownlist = {
     Camera: ["Web", "Analog", "IP Based", "Other"],
     Computer: ["Laptop", "Desktop", "Server", "Other"],
@@ -399,25 +400,11 @@ function ViewAsset() {
             <Row style={{ padding: 0, margin: 0 }}>
               <Col style={{ margin: 0, paddingRight: 0 }}>
 
-              <Child childToParent={childToParent}/>
-                {/* <Form.Group as={Col} controlId="formGridState">
+             
+                 <Form.Group as={Col} controlId="formGridState">
                   <Form.Label>Department </Form.Label>
-                  <Form.Select
-                    required
-                    as="select"
-                    onChange={(e) => {
-                      setDepartment(e.target.value);
-                    }}
-                    custom
-                  >
-                    <option>ALL</option>
-                    <option>IT</option>
-                    <option>CS</option>
-                    <option>CV</option>
-                    <option>EL</option>
-                    <option>ET</option>
-                  </Form.Select>
-                </Form.Group> */}
+                   <Child childToParent={childToParent}/>
+                </Form.Group> 
               </Col>
               <Col style={{ alignItems: "center", textAlign: "center" }}>
                 <button

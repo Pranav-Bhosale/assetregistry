@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Axios from "axios";
+import Child from "./DeptDropdown";
 
 function ViewAsset(props) {
   const reqpath = window.location.origin + "/info/" + props.match.params.UID;
@@ -86,6 +87,11 @@ function ViewAsset(props) {
       setSupplierMobNo(data.SupplierMobNo);
     }
   }, [data]);
+
+  function childToParent(deptstring){
+    setDepartment(deptstring);
+  }
+
 
   React.useEffect(() => {
     Axios.get("http://localhost:3002/addasset/" + props.match.params.UID)
@@ -256,21 +262,7 @@ function ViewAsset(props) {
               <Row>
                 <Form.Group as={Col} controlId="formGridState">
                   <Form.Label>Department </Form.Label>
-                  <Form.Select
-                    required
-                    as="select"
-                    onChange={(e) => {
-                      setDepartment(e.target.value);
-                    }}
-                    custom
-                  >
-                    <option>All</option>
-                    <option>IT</option>
-                    <option>CSE</option>
-                    <option>CIVIL</option>
-                    <option>ELECTRICAL</option>
-                    <option>ELECTRONICS</option>
-                  </Form.Select>
+                  <Child childToParent={childToParent}/>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formFile" className="mb-3">

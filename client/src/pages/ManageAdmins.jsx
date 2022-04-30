@@ -19,6 +19,7 @@ import { Redirect } from "react-router-dom";
 import { Dummyadmindata } from "../components/Dummyadmindata";
 import { TiUserDelete } from "react-icons/ti";
 import { useSSRSafeId } from "@react-aria/ssr";
+import Child from "./DeptDropdown";
 
 function ViewAsset() {
   const [currentuserDep, setcurrentuserDep] = React.useState("");
@@ -61,6 +62,10 @@ function ViewAsset() {
       });
   }, []);
 
+  function childToParent(deptstring){
+    setDepartment(deptstring);
+  }
+
   React.useEffect(() => {
     try {
       Axios.post("http://localhost:3002/islogedin", {}).then((response) => {
@@ -77,7 +82,7 @@ function ViewAsset() {
           // const res = response.data[0];
           if (response.status == 201) {
             setUserdata(response.data.users);
-            console.log(response.data.users);
+            // console.log(response.data.users);
           } else {
             setLefttabtext("Data not found");
           }
@@ -252,7 +257,7 @@ function ViewAsset() {
     Axios.get("http://localhost:3002/userdetails")
       .then(function (response) {
         if (response.status == 201) {
-          console.log(response);
+          // console.log(response);
           setcurrentuserDep(response.data.dep);
         } else {
           console.log("error fetching user info");
@@ -260,7 +265,6 @@ function ViewAsset() {
       })
       .catch(function (error) {
         console.log(error);
-        return <p>Error fetching user detail</p>;
       });
 
     if (currentuserDep === "ALL") {
@@ -364,7 +368,7 @@ function ViewAsset() {
                         Department:
                       </Col>
                       <Col xs={{ span: 7, offset: 0 }}>
-                        <Form.Group className="mb-3" controlId="formGridState">
+                        {/* <Form.Group className="mb-3" controlId="formGridState">
                           <Form.Select
                             required
                             as="select"
@@ -380,7 +384,8 @@ function ViewAsset() {
                             <option>ELECTRICAL</option>
                             <option>ELECTRONICS</option>
                           </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
+                        <Child childToParent={childToParent}/> 
                       </Col>
                     </Row>
                     <Row className="justify-content-md-center">
@@ -503,7 +508,6 @@ function ViewAsset() {
               </h1>
               <hr style={{ margin: 0, padding: 0 }} />
             </Row>
-
             <div className="showitems">
               <Container>
                 <Row md={3}>
@@ -515,7 +519,6 @@ function ViewAsset() {
                 </Row>
             </div>
           </Tab>
-
           <Tab eventKey="Add Admin" title="Add Admin">
             <Row style={{ margin: 0, padding: 0 }}>
               <h1
@@ -617,7 +620,6 @@ function ViewAsset() {
                       </Form.Group>
                     </Col>
                   </Row>
-
                   <Row className="justify-content-md-center">
                     <Col
                       xs={{ span: 3, offset: 1 }}

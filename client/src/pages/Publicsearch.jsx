@@ -6,6 +6,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import { FormControl } from "react-bootstrap";
 import {Redirect,useHistory} from "react-router-dom";
 import Axios from "axios";
+import Child from "./DeptDropdown";
 
 
 function Publicsearch() {
@@ -89,6 +90,10 @@ function  createSecondItems(val) {
  });
  return items;
 } 
+
+function childToParent(deptstring){
+  setDepartment(deptstring);
+}
 
 function  queriedDatadisplay(queriedData) {
   var data=queriedData;
@@ -316,14 +321,7 @@ function  queriedDatadisplay(queriedData) {
           <Col style={{ margin: 0, paddingRight: 0, }}>
             <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Department </Form.Label>
-                <Form.Select required as="select" onChange={(e) => {setDepartment(e.target.value)}}  custom>
-                  <option>ALL</option>
-                  <option>IT</option>
-                  <option>CS</option>
-                  <option>CV</option>
-                  <option>EL</option>
-                  <option>ET</option>
-                </Form.Select>
+                <Child childToParent={childToParent}/>
               </Form.Group>
             </Col>
             <Col  style={{alignItems:"center", textAlign:"center"}}>
