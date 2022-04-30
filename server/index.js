@@ -45,6 +45,7 @@ app.post("/islogedin", auth, async (req, res) => {
 });
 
 app.post("/addasset", auth, async (req, res) => {
+  console.log(req.body);
   try {
     const newasset = new AssetDB(req.body);
     newasset._id = req.body.UID;
@@ -55,6 +56,7 @@ app.post("/addasset", auth, async (req, res) => {
       res.json({ err: "Error adding data" });
     }
   } catch (err) {
+    console.log(err);
     res.json({ err: "Error adding data", code: err.code });
   }
 });
@@ -567,11 +569,14 @@ app.get("/alldeptinfo", async (req, res) => {
   }
 });
 
-app.get("/deptinfo", auth, async (req, res) => {
+app.post("/deptinfo", auth, async (req, res) => {
   try {
-    var newdata = await AllDept.find({ deptID: req.body.department });
+    console.log(req.body);
+    var newdata = await AllDept.find({ deptName: req.body.Department });
     if (newdata) res.status(201).json(newdata);
+    else res.status(266).json({ message: "failed to get dept info backend" });
   } catch (err) {
+    console.log(err);
     res.status(266).json({ err: err });
   }
 });
