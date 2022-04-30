@@ -223,7 +223,7 @@ app.get("/viewasset/:uid", auth, async (req, res) => {
 });
 
 //with dept name +type+eqp name
-app.post("/viewasset", auth, async (req, res) => {
+app.post("/viewasset", async (req, res) => {
   const EqpType = req.body.EqpType;
   const NameOfEqp = req.body.NameOfEqp;
   const data = await AssetDB.find({
@@ -234,7 +234,7 @@ app.post("/viewasset", auth, async (req, res) => {
 });
 
 //with type+eqp name
-app.post("/viewasset/choose", auth, async (req, res) => {
+app.post("/viewasset/choose", async (req, res) => {
   const EqpType = req.body.EqpType;
   const NameOfEqp = req.body.NameOfEqp;
   const Department = req.body.Department;
@@ -246,7 +246,7 @@ app.post("/viewasset/choose", auth, async (req, res) => {
   res.json(data);
 });
 
-app.post("/viewasset/choose2", auth, async (req, res) => {
+app.post("/viewasset/choose2", async (req, res) => {
   const Department = req.body.Department;
   const data = await AssetDB.find({
     AssetNumber: { $regex: Department },
