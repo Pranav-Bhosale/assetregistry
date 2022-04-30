@@ -34,7 +34,7 @@ function ImportExportCSV() {
   if (!logedIN) {
     return <Redirect to="/admin" />;
   }
-  function childToParent(deptstring){
+  function childToParent(deptstring) {
     setDepartment(deptstring);
   }
   const handelUpload = (event) => {
@@ -44,6 +44,7 @@ function ImportExportCSV() {
     if (uploadedFile) {
       const data = new FormData();
       data.append("fileInput", uploadedFile);
+      data.append("Department", Department);
       Axios.post("http://localhost:3002/importCSV", data)
         .then((response) => {
           setResmsg(response.data);
@@ -62,7 +63,7 @@ function ImportExportCSV() {
 
   function getalldata() {
     setResmsgexport("Wait..file will be downloaded soon!!");
-    Axios.get("http://localhost:3002ss/alldata")
+    Axios.get("http://localhost:3002/alldata")
       .then(function (response) {
         console.log(response);
         fileDownload(response.data, "WCE_AssetRegister.csv");
@@ -112,7 +113,7 @@ function ImportExportCSV() {
                           <b>Select Department</b>{" "}
                         </h6>
                       </Form.Label>
-                      <Child childToParent={childToParent}/>
+                      <Child childToParent={childToParent} />
                     </Form.Group>
 
                     <Col>

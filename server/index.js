@@ -143,6 +143,8 @@ app.post("/photodept", auth, upload.single("fileInput"), async (req, res) => {
 
 app.post("/importCSV", auth, upload.single("fileInput"), async (req, res) => {
   const file = req.file;
+  const department = req.body.Department;
+  console.log(department);
   console.log(req.file);
   if (file.mimetype !== "text/csv") {
     console.log("Not a CSV File!!..deleting file");
@@ -157,6 +159,7 @@ app.post("/importCSV", auth, upload.single("fileInput"), async (req, res) => {
             tot = source.length;
           try {
             for (i = 0; i < source.length; i++) {
+              source[i].append("Department", department);
               const newasset = new AssetDB(source[i]);
               newasset._id = source[i].UID;
               const success = await newasset.save();
@@ -165,7 +168,6 @@ app.post("/importCSV", auth, upload.single("fileInput"), async (req, res) => {
           } catch (err) {
             res.send(err.message + " ...first " + cnt + " entries were added ");
           }
-
           if (file && tot === cnt) {
             res.send("All Entries were added successfully");
           }
@@ -556,7 +558,7 @@ app.post("/deleteadmin", auth, async (req, res) => {
   }
 });
 
-app.get("/alldeptinfo", auth, async (req, res) => {
+app.get("/alldeptinfo", async (req, res) => {
   try {
     var newdata = await AllDept.find();
     if (newdata) res.status(201).json(newdata);
