@@ -17,7 +17,7 @@ function  createSelectItems() {
  let ar=[];
     React.useEffect(() => {
         
-        Axios.get("http://localhost:3002/deptinfo")
+        Axios.get("http://localhost:3002/alldeptinfo")
         .then(function (response){
           console.log(response);
             response.data.forEach(element => {
@@ -29,7 +29,7 @@ function  createSelectItems() {
 
             Axios.get("http://localhost:3002/userdetails")
             .then(function (response) {
-      
+              console.log(response);
               // const res = response.data[0];
               if(response.status==201){
             //    console.log(response);
@@ -67,6 +67,10 @@ function  createSelectItems() {
                     childToParent("MECHANICAL");
                     break;
               }
+              }
+              else if(response.status==260){
+                setDepartmentdata(ar);
+                childToParent("Lib");
               }
               else{
                 console.log("error fetching user info");

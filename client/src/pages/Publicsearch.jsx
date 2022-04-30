@@ -14,7 +14,7 @@ function Publicsearch() {
   const [redirect,setRedirect]=React.useState(false);
   const [redirectUpdate,setRedirectUpdate]=React.useState(false);
   const [redirectUID,setRedirectUID]=React.useState(null);
-  const [UID ,setUID]= React.useState(null);
+  const [UID ,setUID]= React.useState('');
   const [Resmsg ,setResmsg]= React.useState(null);
   const [Resmsgcolor,setResmesgcolor]=React.useState("black");
   const [EqpType, setEqpType] = React.useState("Camera");
@@ -165,9 +165,9 @@ function  queriedDatadisplay(queriedData) {
 
   function handleClickSort(){
     setResmsg(null);
-
+    
     if(Department!=="None"&&EqpType!=="None"){
-      Axios.post("https://wce-asset-registry.herokuapp.com/viewasset/choose",{
+      Axios.post("http://localhost:3002/viewasset/choose",{
         EqpType:EqpType,
         NameOfEqp:NameOfEqp,
         Department:Department
@@ -186,7 +186,7 @@ function  queriedDatadisplay(queriedData) {
       });
     }
     else if( EqpType!=="None"){
-      Axios.post("https://wce-asset-registry.herokuapp.com/viewasset",{
+      Axios.post("http://localhost:3002/viewasset",{
         EqpType:EqpType,
         NameOfEqp:NameOfEqp
       }).then((response)=>{
@@ -204,7 +204,7 @@ function  queriedDatadisplay(queriedData) {
       });
     }
     else if(EqpType==="None"){
-      Axios.post("https://wce-asset-registry.herokuapp.com/viewasset/choose2",{
+      Axios.post("http://localhost:3002/viewasset/choose2",{
         Department:Department
       }).then((response)=>{
         const res=response.data[0];
@@ -227,9 +227,10 @@ function  queriedDatadisplay(queriedData) {
   }
 
   function handleClick(){
+
     setResmsg(null);
     if(UID!==""){
-    Axios.get('https://wce-asset-registry.herokuapp.com/addasset/'+UID)
+    Axios.get('http://localhost:3002/addasset/'+UID)
   .then(function (response) {
     const res=response.data[0];
     setqueriedData(response.data);
@@ -251,7 +252,6 @@ function  queriedDatadisplay(queriedData) {
       setResmsg("Enter UID!!");
       setResmesgcolor("red");
     }
-    
   }
 
 
@@ -288,7 +288,7 @@ function  queriedDatadisplay(queriedData) {
                 placeholder="Search Using UID"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                type="number"
+                type="text"
                 onChange={(e) => {setUID(e.target.value)}}
               />
             </InputGroup>
