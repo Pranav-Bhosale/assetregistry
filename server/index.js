@@ -59,7 +59,7 @@ app.post("/addasset", auth, async (req, res) => {
   }
 });
 
-app.get("/addasset/:uid", auth, async (req, res) => {
+app.get("/addasset/:uid", async (req, res) => {
   const uid = req.params.uid;
   try {
     var newdata = await AssetDB.find({ UID: uid });
