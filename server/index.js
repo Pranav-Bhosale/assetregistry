@@ -159,7 +159,7 @@ app.post("/importCSV", auth, upload.single("fileInput"), async (req, res) => {
             tot = source.length;
           try {
             for (i = 0; i < source.length; i++) {
-              source[i].append("Department", department);
+              source[i].Department = department;
               const newasset = new AssetDB(source[i]);
               newasset._id = source[i].UID;
               const success = await newasset.save();
