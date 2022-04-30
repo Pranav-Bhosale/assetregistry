@@ -227,7 +227,7 @@ function  queriedDatadisplay(queriedData) {
   }
 
   function handleClick(){
-
+    console.log('.')
     setResmsg(null);
     if(UID!==""){
     Axios.get('http://localhost:3002/addasset/'+UID)

@@ -13,9 +13,31 @@ function ImportExportCSV() {
   const [Resmsgexport, setResmsgexport] = React.useState(null);
   const [key, setKey] = React.useState("Upload");
   const [Department, setDepartment] = React.useState("All"); //set the dept......
-
   const [logedIN, setlogedIN] = React.useState(true);
+  const [currentuserDep, setcurrentuserDep] = React.useState("");
+  function childToParent(deptstring) {
+    setDepartment(deptstring);
+  }
+
+  React.useEffect(()=>{
+    console.log(Department);
+  },[Department]);
+
   React.useEffect(() => {
+    Axios.get("http://localhost:3002/userdetails")
+      .then(function (response) {
+        console.log(response.data.dep);
+        if (response.status == 201) {
+          setcurrentuserDep(response.data.dep);
+        }
+        else {
+          console.log("error fetching user info");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     try {
       Axios.post("http://localhost:3002/islogedin", {}).then((response) => {
         if (response && response.status == 266) {
@@ -37,6 +59,7 @@ function ImportExportCSV() {
   function childToParent(deptstring) {
     setDepartment(deptstring);
   }
+
   const handelUpload = (event) => {
     setResmsg(null);
     event.preventDefault();
@@ -72,6 +95,96 @@ function ImportExportCSV() {
       .catch(function (error) {
         console.log(error);
       });
+  }
+  function getonlydeptdata() {
+    setResmsgexport("Wait..file will be downloaded soon, function not set yet!!");
+    //axios change above line
+  }
+  function deptwiseexport() {
+    // Axios.get("http://localhost:3002/userdetails")
+    //   .then(function (response) {
+    //     console.log(response.data.dep);
+    //     if (response.status == 201) {
+    //       setcurrentuserDep(response.data.dep);
+    //     }
+    //     else {
+    //       console.log("error fetching user info");
+    //     }
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    if (currentuserDep === "ALL") {
+      return (
+        <div style={{ margin: "30px", textAlign: "center" }}>
+         
+         <Row style={{ margin: 0, padding: 0 , textAlign:"center"}}>
+                <h1
+                  style={{
+                    textAlign: "center",
+                    paddingLeft: "0",
+                    paddingRight: "0",
+                    marginRight: "0",
+                  }}
+                >
+                  Get All Data From Database
+                </h1>
+              </Row>
+          <button className="lanButton" onClick={getalldata}>
+            Get All Data
+          </button>
+          <hr className="hrline"/>
+          <Row style={{ textAlign: "center",margin:"20px" }}>
+            <Col style={{marginLeft:"20px"}}>
+            <Form.Group controlId="formGridState">
+              <Form.Label> <b>Department</b> </Form.Label>
+              <Child childToParent={childToParent}/>
+            </Form.Group>
+            </Col>
+            <Col style={{paddingTop:"10px"}}>
+            <button className="lanButton" onClick={getonlydeptdata}>
+            Get Data
+          </button>
+            </Col>
+            
+          </Row>
+        </div>
+      );
+    } else {
+      return (
+        <div style={{marginLeft:"20px"}}>
+        <Row style={{ margin: 0, padding: 0 }}>
+                <h1
+                  style={{
+                    textAlign: "center",
+                    paddingLeft: "0",
+                    paddingRight: "0",
+                    marginRight: "0",
+                  }}
+                >
+                  Get Data From Database
+                </h1>
+              </Row>
+              <hr className="hrline"/>
+
+        <Row style={{ textAlign: "center" }}>
+        <Col style={{marginLeft:"20px"}}>
+          <Form.Group  controlId="formGridState">
+            <Form.Label>Department </Form.Label>
+            <Child childToParent={childToParent}/>
+          </Form.Group>
+          </Col>
+          <Col style={{paddingTop:"14px"}} >
+            <button className="lanButton" onClick={getonlydeptdata}>
+            Get Data
+          </button>
+            </Col>
+        </Row>
+        </div>
+      );
+    }
+
+
   }
 
   return (
@@ -152,7 +265,7 @@ function ImportExportCSV() {
             </Tab>
 
             <Tab eventKey="Download" title="Download">
-              <Row style={{ margin: 0, padding: 0 }}>
+              {/* <Row style={{ margin: 0, padding: 0 }}>
                 <h1
                   style={{
                     textAlign: "center",
@@ -163,14 +276,16 @@ function ImportExportCSV() {
                 >
                   Get All Data From Database
                 </h1>
-              </Row>
+              </Row> */}
 
-              <div style={{ textAlign: "center" }}>
+              {/* <div style={{ textAlign: "center" }}>
                 <button className="lanButton" onClick={getalldata}>
                   Get Data
                 </button>
-                <p style={{ textAlign: "center" }}>{Resmsgexport}</p>
-              </div>
+              </div> */}
+              {deptwiseexport()}
+
+              <p style={{ textAlign: "center" }}>{Resmsgexport}</p>
             </Tab>
           </Tabs>
         </div>
