@@ -5,7 +5,7 @@ const multer = require("multer");
 const upload = multer({
   dest: "./uploads/",
 });
-const axios = require("axios");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./MiddleWare/Auth");
@@ -48,17 +48,7 @@ async function uploadFile(file) {
     Key: file.filename,
   };
   const uploadURL = await s3.getSignedUrlPromise("putObject", uploadParams);
-  axios
-    .post(uploadURL, file)
-    .then((response) => {
-      const imageUrl = uploadURL.split("?")[0];
-      console.log(imageUrl);
-      return imageUrl;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
+  return uploadURL;
   // return s3.upload(uploadParams).promise(); // this will upload file to S3
 }
 
@@ -152,7 +142,7 @@ app.post("/photodept", auth, upload.single("fileInput"), async (req, res) => {
     });
     res.send({
       status: 201,
-      message: result,
+      url: result,
     });
   } catch (err) {
     console.log(err);

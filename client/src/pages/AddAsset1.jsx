@@ -113,14 +113,26 @@ function ViewAsset() {
         data.append("Department", Department);
         Axios.post("http://localhost:3002/photodept", data)
           .then((response) => {
-            setResmsg(response.data);
+            try {
+              Axios.post(response.url, uploadedFile, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }).then((response) => {
+                const imageUrl = response.url.split("?")[0];
+                console.log(imageUrl);
+              });
+            } catch (e) {
+              console.log(e);
+            }
           })
           .catch(function (error) {
-            setuploadedFile(null);
-            document.getElementById("csvinputform").reset();
-            setResmsg(
-              "Uploaded file changed or Netwok Issue...Re-input file and try again"
-            );
+            console.log(error); // setuploadedFile(null);
+            // document.getElementById("csvinputform").reset();
+            // setResmsg(
+            //   "Uploaded file changed or Netwok Issue...Re-input file and try again"
+            // );
           });
       } else {
         console.log(Department);
