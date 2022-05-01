@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
 });
-
+``;
 userSchema.pre("save", async function (next) {
   try {
     if (this.isModified("password")) {
@@ -52,5 +52,4 @@ userSchema.methods.generateAuthToken = async function () {
 };
 
 const User = mongoose.model("USER", userSchema);
-
 module.exports = User;

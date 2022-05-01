@@ -142,10 +142,35 @@ app.post("/photodept", auth, upload.single("fileInput"), async (req, res) => {
   // console.log(err);
   //   }
 });
+app.post("/deptincrement", auth, async (req, res) => {
+  try {
+    console.log(req.body);
+    var newdata = await AllDept.find({ deptName: req.body.Department });
+    console.log(newdata.No);
+    if (newdata) {
+      const filter = {
+        deptName: req.body.Department,
+      };
+      const update = {
+        No: req.body.number,
+      };
+      const success = await AllDept.findOneAndUpdate(filter, update);
+      if (!success) {
+        return res.status(266).json({ message: "failed to increment dept No" });
+      } else {
+        return res.status(201).json({ message: " Increment dept Success" });
+      }
+    } else res.status(266).json({ message: "failed to increment dept No" });
+  } catch (err) {
+    console.log(err);
+    res.status(266).json({ err: err });
+  }
+});
 
 app.post("/importCSV", auth, upload.single("fileInput"), async (req, res) => {
   const file = req.file;
   const department = req.body.Department;
+  var a = req.body.number;
   console.log(department);
   console.log(req.file);
   if (file.mimetype !== "text/csv") {
@@ -163,14 +188,30 @@ app.post("/importCSV", auth, upload.single("fileInput"), async (req, res) => {
             for (i = 0; i < source.length; i++) {
               source[i].Department = department;
               const newasset = new AssetDB(source[i]);
-              newasset._id = source[i].UID;
+              newasset._id = source[i].Department + a;
+              newasset.UID = newasset._id;
+              a++;
               const success = await newasset.save();
               cnt++;
             }
           } catch (err) {
+            const filter = {
+              deptName: req.body.Department,
+            };
+            const update = {
+              No: a,
+            };
+            const success = await AllDept.findOneAndUpdate(filter, update);
             res.send(err.message + " ...first " + cnt + " entries were added ");
           }
           if (file && tot === cnt) {
+            const filter = {
+              deptName: req.body.Department,
+            };
+            const update = {
+              No: a,
+            };
+            const success = await AllDept.findOneAndUpdate(filter, update);
             res.send("All Entries were added successfully");
           }
         });
@@ -575,6 +616,30 @@ app.post("/deptinfo", auth, async (req, res) => {
     var newdata = await AllDept.find({ deptName: req.body.Department });
     if (newdata) res.status(201).json(newdata);
     else res.status(266).json({ message: "failed to get dept info backend" });
+  } catch (err) {
+    console.log(err);
+    res.status(266).json({ err: err });
+  }
+});
+app.post("/deptincrement", auth, async (req, res) => {
+  try {
+    console.log(req.body);
+    var newdata = await AllDept.find({ deptName: req.body.Department });
+    console.log(newdata.No);
+    if (newdata) {
+      const filter = {
+        deptName: req.body.Department,
+      };
+      const update = {
+        No: req.body.number,
+      };
+      const success = await AllDept.findOneAndUpdate(filter, update);
+      if (!success) {
+        return res.status(266).json({ message: "failed to increment dept No" });
+      } else {
+        return res.status(201).json({ message: " Increment dept Success" });
+      }
+    } else res.status(266).json({ message: "failed to increment dept No" });
   } catch (err) {
     console.log(err);
     res.status(266).json({ err: err });

@@ -91,16 +91,13 @@ function ViewAsset() {
       />
     );
   }
-
   function resetform() {
     setResmsg(null);
     setValidated(false);
     document.getElementById("addassetform").reset();
   }
 
-  const postreq = () => {};
-
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     setResmsg(null);
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -127,15 +124,17 @@ function ViewAsset() {
           });
       } else {
         console.log(Department);
-        Axios.post("http://localhost:3002/deptinfo", {
+        await Axios.post("http://localhost:3002/deptinfo", {
           Department: Department,
         }).then((response) => {
           console.log(response);
           if (response.status == 201) {
-            var a = Department;
+            var a = Department + response.data[0].No;
+            var number = response.data[0].No + 1;
+            console.log(a);
             setUID(a);
             Axios.post("http://localhost:3002/addasset", {
-              UID: UID,
+              UID: a,
               AssetNumber: AssetNumber,
               EqpType: EqpType,
               NameOfEqp: NameOfEqp,
@@ -160,10 +159,21 @@ function ViewAsset() {
                 const msg = "Error Adding Data ErrorCode:" + response.data.code;
                 setResmsg(msg);
               } else {
-                setResmsg(null);
-                setValidated(false);
-                // document.getElementById("addassetform").reset();
-                // setRedirect(true);
+                Axios.post("http://localhost:3002/deptincrement", {
+                  Department: Department,
+                  number: number,
+                }).then((response) => {
+                  console.log(response);
+                  if (response.status == 201) {
+                    setResmsg(null);
+                    setValidated(false);
+                    // document.getElementById("addassetform").reset();
+                    // setRedirect(true);
+                  } else {
+                    const msg = "Error in Incrementing UID";
+                    setResmsg(msg);
+                  }
+                });
               }
             });
           } else {
@@ -174,7 +184,7 @@ function ViewAsset() {
         });
       }
     }
-  };
+  }
 
   return (
     <div className="navfootpad">

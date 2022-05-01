@@ -19,9 +19,9 @@ function ImportExportCSV() {
     setDepartment(deptstring);
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     console.log(Department);
-  },[Department]);
+  }, [Department]);
 
   React.useEffect(() => {
     Axios.get("http://localhost:3002/userdetails")
@@ -29,8 +29,7 @@ function ImportExportCSV() {
         console.log(response.data.dep);
         if (response.status == 201) {
           setcurrentuserDep(response.data.dep);
-        }
-        else {
+        } else {
           console.log("error fetching user info");
         }
       })
@@ -68,17 +67,30 @@ function ImportExportCSV() {
       const data = new FormData();
       data.append("fileInput", uploadedFile);
       data.append("Department", Department);
-      Axios.post("http://localhost:3002/importCSV", data)
-        .then((response) => {
-          setResmsg(response.data);
-        })
-        .catch(function (error) {
-          setuploadedFile(null);
-          document.getElementById("csvinputform").reset();
-          setResmsg(
-            "Uploaded file changed or Netwok Issue...Re-input file and try again"
-          );
-        });
+      Axios.post("http://localhost:3002/deptinfo", {
+        Department: Department,
+      }).then((response) => {
+        console.log(response);
+        if (response.status == 201) {
+          var number = response.data[0].No;
+          data.append("number", number);
+          Axios.post("http://localhost:3002/importCSV", data)
+            .then((response) => {
+              setResmsg(response.data);
+            })
+            .catch(function (error) {
+              setuploadedFile(null);
+              document.getElementById("csvinputform").reset();
+              setResmsg(
+                "Uploaded file changed or Netwok Issue...Re-input file and try again"
+              );
+            });
+        } else {
+          const msg =
+            "Error Adding Data ErrorCode:" + response.data.err.message;
+          setResmsg(msg);
+        }
+      });
     } else {
       setResmsg("Add File To Upload!!");
     }
@@ -97,7 +109,9 @@ function ImportExportCSV() {
       });
   }
   function getonlydeptdata() {
-    setResmsgexport("Wait..file will be downloaded soon, function not set yet!!");
+    setResmsgexport(
+      "Wait..file will be downloaded soon, function not set yet!!"
+    );
     //axios change above line
   }
   function deptwiseexport() {
@@ -117,74 +131,73 @@ function ImportExportCSV() {
     if (currentuserDep === "ALL") {
       return (
         <div style={{ margin: "30px", textAlign: "center" }}>
-         
-         <Row style={{ margin: 0, padding: 0 , textAlign:"center"}}>
-                <h1
-                  style={{
-                    textAlign: "center",
-                    paddingLeft: "0",
-                    paddingRight: "0",
-                    marginRight: "0",
-                  }}
-                >
-                  Get All Data From Database
-                </h1>
-              </Row>
+          <Row style={{ margin: 0, padding: 0, textAlign: "center" }}>
+            <h1
+              style={{
+                textAlign: "center",
+                paddingLeft: "0",
+                paddingRight: "0",
+                marginRight: "0",
+              }}
+            >
+              Get All Data From Database
+            </h1>
+          </Row>
           <button className="lanButton" onClick={getalldata}>
             Get All Data
           </button>
-          <hr className="hrline"/>
-          <Row style={{ textAlign: "center",margin:"20px" }}>
-            <Col style={{marginLeft:"20px"}}>
-            <Form.Group controlId="formGridState">
-              <Form.Label> <b>Department</b> </Form.Label>
-              <Child childToParent={childToParent}/>
-            </Form.Group>
+          <hr className="hrline" />
+          <Row style={{ textAlign: "center", margin: "20px" }}>
+            <Col style={{ marginLeft: "20px" }}>
+              <Form.Group controlId="formGridState">
+                <Form.Label>
+                  {" "}
+                  <b>Department</b>{" "}
+                </Form.Label>
+                <Child childToParent={childToParent} />
+              </Form.Group>
             </Col>
-            <Col style={{paddingTop:"10px"}}>
-            <button className="lanButton" onClick={getonlydeptdata}>
-            Get Data
-          </button>
+            <Col style={{ paddingTop: "10px" }}>
+              <button className="lanButton" onClick={getonlydeptdata}>
+                Get Data
+              </button>
             </Col>
-            
           </Row>
         </div>
       );
     } else {
       return (
-        <div style={{marginLeft:"20px"}}>
-        <Row style={{ margin: 0, padding: 0 }}>
-                <h1
-                  style={{
-                    textAlign: "center",
-                    paddingLeft: "0",
-                    paddingRight: "0",
-                    marginRight: "0",
-                  }}
-                >
-                  Get Data From Database
-                </h1>
-              </Row>
-              <hr className="hrline"/>
+        <div style={{ marginLeft: "20px" }}>
+          <Row style={{ margin: 0, padding: 0 }}>
+            <h1
+              style={{
+                textAlign: "center",
+                paddingLeft: "0",
+                paddingRight: "0",
+                marginRight: "0",
+              }}
+            >
+              Get Data From Database
+            </h1>
+          </Row>
+          <hr className="hrline" />
 
-        <Row style={{ textAlign: "center" }}>
-        <Col style={{marginLeft:"20px"}}>
-          <Form.Group  controlId="formGridState">
-            <Form.Label>Department </Form.Label>
-            <Child childToParent={childToParent}/>
-          </Form.Group>
-          </Col>
-          <Col style={{paddingTop:"14px"}} >
-            <button className="lanButton" onClick={getonlydeptdata}>
-            Get Data
-          </button>
+          <Row style={{ textAlign: "center" }}>
+            <Col style={{ marginLeft: "20px" }}>
+              <Form.Group controlId="formGridState">
+                <Form.Label>Department </Form.Label>
+                <Child childToParent={childToParent} />
+              </Form.Group>
             </Col>
-        </Row>
+            <Col style={{ paddingTop: "14px" }}>
+              <button className="lanButton" onClick={getonlydeptdata}>
+                Get Data
+              </button>
+            </Col>
+          </Row>
         </div>
       );
     }
-
-
   }
 
   return (

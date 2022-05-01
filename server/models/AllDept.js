@@ -8,7 +8,7 @@ const AllDept = new mongoose.Schema({
   No: {
     type: Number,
     require: true,
-    default: 0,
+    default: Number(0),
   },
 });
 
