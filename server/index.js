@@ -5,6 +5,7 @@ const multer = require("multer");
 const upload = multer({
   dest: "./uploads/",
 });
+const axios = require("axios");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./MiddleWare/Auth");
@@ -23,8 +24,52 @@ const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 const csvtojson = require("csvtojson");
 
+const bucketName = process.env.AWS_BUCKET_NAME;
+const region = "ap-south-1";
+const accessKeyId = process.env.AWS_ACCESS_KEY;
+const secretAccessKey = process.env.AWS_SECRET_KEY;
+
 var AWS = require("aws-sdk");
-AWS.config.update({ region: "ap-south-1" });
+AWS.config.update({ region: region });
+const util = require("util");
+const unlinkFile = util.promisify(fs.unlink);
+
+const S3 = require("aws-sdk/clients/s3");
+const s3 = new S3({
+  region,
+  accessKeyId,
+  secretAccessKey,
+});
+
+async function uploadFile(file) {
+  const fileStream = fs.createReadStream(file.path);
+  const uploadParams = {
+    Bucket: bucketName,
+    Key: file.filename,
+  };
+  const uploadURL = await s3.getSignedUrlPromise("putObject", uploadParams);
+  axios
+    .post(uploadURL, file)
+    .then((response) => {
+      const imageUrl = uploadURL.split("?")[0];
+      console.log(imageUrl);
+      return imageUrl;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  // return s3.upload(uploadParams).promise(); // this will upload file to S3
+}
+
+//Download file from S3
+function getFileStream(fileKey) {
+  const downloadParams = {
+    Key: fileKey,
+    Bucket: bucketName,
+  };
+  return s3.getObject(downloadParams).createReadStream();
+}
 
 const mongoose = require("mongoose");
 const db = process.env.DATABASE;
@@ -97,51 +142,23 @@ app.post("/deleteasset", auth, async (req, res) => {
 });
 
 app.post("/photodept", auth, upload.single("fileInput"), async (req, res) => {
-  const file = req.file;
-  console.log(file.mimetype);
-  //    if(file.mimetype!=="text/csv")
-  //    {
-  //      console.log("Not a CSV File!!..deleting file");
-  //      res.send("Not a CSV File!!");
-  //    }
-  //    else
-  //    {
-  //      try{
-  //    await csvtojson().fromFile(file.path).then( async source => {
-  //       var i,cnt=0,tot=source.length;
-  //         try{
-  //           for (i = 0; i < source.length; i++) {
-  //           const newasset=new AssetDB(source[i]);
-  //           newasset._id=source[i].UID;
-  //           const success=await newasset.save();
-  //             cnt++;
-  //           }
-  //         }catch(err) {
-  //            res.send(err.message+" ...first "+cnt+" entries were added ");
-  //         };
+  try {
+    const result = await uploadFile(req.file);
+    console.log(req.file);
+    console.log("S3 response", result);
 
-  //       if(file &&tot===cnt)
-  //   {
-  //    res.send("All Entries were added successfully");
-  //   }
-  //   });
-  // }
-  // catch(err)
-  // {
-  //   console.log(err);
-  // }
-
-  //    }
-  //    try{
-  //    await unlinkAsync(file.path).then(function (response)
-  //    {
-  //      console.log("file Deleted!");
-  //    });
-  //   }
-  //   catch(err){
-  // console.log(err);
-  //   }
+    await unlinkAsync(req.file.path).then(function (response) {
+      console.log("file Deleted!");
+    });
+    res.send({
+      status: 201,
+      message: result,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
+
 app.post("/deptincrement", auth, async (req, res) => {
   try {
     console.log(req.body);
@@ -549,8 +566,8 @@ function mail(OTP, email, name) {
   };
   try {
     var sendPromise = new AWS.SES({
-      accessKeyId: "AKIA533U6AWI6MKHV3XV",
-      secretAccessKey: "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",
+      accessKeyId: accessKeyId,
+      secretAccessKey: secretAccessKey,
       apiVersion: "2010-12-01",
     })
       .sendTemplatedEmail(params)

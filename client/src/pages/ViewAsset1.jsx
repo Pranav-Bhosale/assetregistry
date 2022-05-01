@@ -26,7 +26,6 @@ function ViewAsset() {
   const [deluid, setdeluid] = React.useState(null);
   const [delid, setdelid] = React.useState(null);
   const [show, setShow] = React.useState(false);
-  
 
   const [logedIN, setlogedIN] = React.useState(true);
   React.useEffect(() => {
@@ -72,11 +71,9 @@ function ViewAsset() {
     });
   }
 
-  function childToParent(deptstring){
+  function childToParent(deptstring) {
     setDepartment(deptstring);
   }
-
-
 
   const dropdownlist = {
     Camera: ["Web", "Analog", "IP Based", "Other"],
@@ -132,10 +129,9 @@ function ViewAsset() {
   function queriedDatadisplay(queriedData) {
     let items = [];
     queriedData.map((element, index) => {
-      
       var id = index;
       items.push(
-        <Accordion id={id} key={id+1} defaultActiveKey="1">
+        <Accordion id={id} key={id + 1} defaultActiveKey="1">
           <Accordion.Item
             eventKey="0"
             border="primary"
@@ -154,7 +150,7 @@ function ViewAsset() {
                 margin: 0,
               }}
             >
-              {id+1}
+              {id + 1}
             </p>
             <Accordion.Header>
               <Card
@@ -287,7 +283,7 @@ function ViewAsset() {
     }
   }
 
-  <drop pops></drop>
+  <drop pops></drop>;
 
   function handleClick() {
     setResmsg(null);
@@ -352,7 +348,7 @@ function ViewAsset() {
                 placeholder="Search Using UID"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                type="number"
+                type="text"
                 onChange={(e) => {
                   setUID(e.target.value);
                 }}
@@ -399,12 +395,10 @@ function ViewAsset() {
           <Col md="6" style={{ padding: 0, margin: 0 }}>
             <Row style={{ padding: 0, margin: 0 }}>
               <Col style={{ margin: 0, paddingRight: 0 }}>
-
-             
-                 <Form.Group as={Col} controlId="formGridState">
+                <Form.Group as={Col} controlId="formGridState">
                   <Form.Label>Department </Form.Label>
-                   <Child childToParent={childToParent}/>
-                </Form.Group> 
+                  <Child childToParent={childToParent} />
+                </Form.Group>
               </Col>
               <Col style={{ alignItems: "center", textAlign: "center" }}>
                 <button

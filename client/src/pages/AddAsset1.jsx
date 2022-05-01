@@ -167,8 +167,8 @@ function ViewAsset() {
                   if (response.status == 201) {
                     setResmsg(null);
                     setValidated(false);
-                    // document.getElementById("addassetform").reset();
-                    // setRedirect(true);
+                    document.getElementById("addassetform").reset();
+                    setRedirect(true);
                   } else {
                     const msg = "Error in Incrementing UID";
                     setResmsg(msg);
