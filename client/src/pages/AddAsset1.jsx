@@ -35,7 +35,6 @@ function ViewAsset() {
   const [Resmsg, setResmsg] = React.useState(null);
   const [Department, setDepartment] = React.useState("All");
   const [uploadedFile, setuploadedFile] = React.useState(null);
-
   const dropdownlist = {
     Camera: ["Web", "Analog", "IP Based", "Other"],
     Computer: ["Laptop", "Desktop", "Server", "Other"],
@@ -107,25 +106,29 @@ function ViewAsset() {
       setResmsg("Invalid Data");
     } else {
       setValidated(true);
+      var link;
       if (uploadedFile) {
         const data = new FormData();
         data.append("fileInput", uploadedFile);
-        data.append("Department", Department);
         Axios.post("http://localhost:3002/photodept", data)
           .then((response) => {
+            console.log(response);
             try {
-              Axios.post(response.url, uploadedFile, {
+              fetch(response.data.url, {
                 method: "PUT",
                 headers: {
-                  "Content-Type": "multipart/form-data",
+                  "Content-Type": "image/*",
                 },
-              }).then((response) => {
-                const imageUrl = response.url.split("?")[0];
-                console.log(imageUrl);
+                body: data,
+              }).then((resp) => {
+                console.log(resp);
               });
             } catch (e) {
               console.log(e);
             }
+            const imageUrl = response.data.url.split("?")[0];
+            console.log(imageUrl);
+            link = imageUrl;
           })
           .catch(function (error) {
             console.log(error); // setuploadedFile(null);
@@ -134,67 +137,67 @@ function ViewAsset() {
             //   "Uploaded file changed or Netwok Issue...Re-input file and try again"
             // );
           });
-      } else {
-        console.log(Department);
-        await Axios.post("http://localhost:3002/deptinfo", {
-          Department: Department,
-        }).then((response) => {
-          console.log(response);
-          if (response.status == 201) {
-            var a = Department + response.data[0].No;
-            var number = response.data[0].No + 1;
-            console.log(a);
-            setUID(a);
-            Axios.post("http://localhost:3002/addasset", {
-              UID: a,
-              AssetNumber: AssetNumber,
-              EqpType: EqpType,
-              NameOfEqp: NameOfEqp,
-              SpecsConfig: SpecsConfig,
-              Make: Make,
-              AllocationFund: AllocationFund,
-              DOP: DOP,
-              CostPerUnit: CostPerUnit,
-              Quantity: Quantity,
-              TotalCost: TotalCost,
-              Warranty: Warranty,
-              LocEqp: LocEqp,
-              SupplierName: SupplierName,
-              SupplierAddress: SupplierAddress,
-              SupplierMobNo: SupplierMobNo,
-              Utilization: Utilization,
-              Status: Status,
-              Remark: Remark,
-              Part: Part,
-            }).then((response) => {
-              if (response.data.err) {
-                const msg = "Error Adding Data ErrorCode:" + response.data.code;
-                setResmsg(msg);
-              } else {
-                Axios.post("http://localhost:3002/deptincrement", {
-                  Department: Department,
-                  number: number,
-                }).then((response) => {
-                  console.log(response);
-                  if (response.status == 201) {
-                    setResmsg(null);
-                    setValidated(false);
-                    document.getElementById("addassetform").reset();
-                    setRedirect(true);
-                  } else {
-                    const msg = "Error in Incrementing UID";
-                    setResmsg(msg);
-                  }
-                });
-              }
-            });
-          } else {
-            const msg =
-              "Error Adding Data ErrorCode:" + response.data.err.message;
-            setResmsg(msg);
-          }
-        });
       }
+      console.log(Department);
+      await Axios.post("http://localhost:3002/deptinfo", {
+        Department: Department,
+      }).then((response) => {
+        console.log(response);
+        if (response.status == 201) {
+          var a = Department + response.data[0].No;
+          var number = response.data[0].No + 1;
+          console.log(a);
+          setUID(a);
+          Axios.post("http://localhost:3002/addasset", {
+            UID: a,
+            AssetNumber: AssetNumber,
+            EqpType: EqpType,
+            NameOfEqp: NameOfEqp,
+            SpecsConfig: SpecsConfig,
+            Make: Make,
+            AllocationFund: AllocationFund,
+            DOP: DOP,
+            CostPerUnit: CostPerUnit,
+            Quantity: Quantity,
+            TotalCost: TotalCost,
+            Warranty: Warranty,
+            LocEqp: LocEqp,
+            SupplierName: SupplierName,
+            SupplierAddress: SupplierAddress,
+            SupplierMobNo: SupplierMobNo,
+            Utilization: Utilization,
+            Status: Status,
+            Remark: Remark,
+            Part: Part,
+            PhotoLink: link,
+          }).then((response) => {
+            if (response.data.err) {
+              const msg = "Error Adding Data ErrorCode:" + response.data.code;
+              setResmsg(msg);
+            } else {
+              Axios.post("http://localhost:3002/deptincrement", {
+                Department: Department,
+                number: number,
+              }).then((response) => {
+                console.log(response);
+                if (response.status == 201) {
+                  setResmsg(null);
+                  setValidated(false);
+                  // document.getElementById("addassetform").reset();
+                  // setRedirect(true);
+                } else {
+                  const msg = "Error in Incrementing UID";
+                  setResmsg(msg);
+                }
+              });
+            }
+          });
+        } else {
+          const msg =
+            "Error Adding Data ErrorCode:" + response.data.err.message;
+          setResmsg(msg);
+        }
+      });
     }
   }
 
