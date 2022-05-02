@@ -10,18 +10,21 @@ import Axios from "axios";
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const [currentuserDep,setcurrentuserDep]= useState('');
+  const [data1,setdata]=useState(Sidebardata);
   const showSidebar = () => setSidebar(!sidebar);
   const hide = () => setSidebar(false);
   const show = () => setSidebar(true);
 
-
-  window.addEventListener('load', (event) => {
+  
+  React.useEffect(()=> {
     Axios.get("http://localhost:3002/userdetails")
     .then(function (response) {
   
       if(response.status==201){
+        
         console.log(response);
         setcurrentuserDep(response.data.dep);
+        console.log(currentuserDep)
       }
       else{
         console.log("error fetching user info");
@@ -30,16 +33,18 @@ function Navbar() {
     .catch(function (error) {
       console.log(error);
     });
-  
-    // if(currentuserDep!='ALL'){
-    //      Sidebardata.splice(3, 1);
-    //      console.log("---------------");
-    // }
-  });
+     
+    
+  }, []);
 
-  // React.useEffect(() => {
-   
-  // });
+   function side(dep) {
+    if(dep!="ALL"){ 
+      const copyPostArray = Object.assign([], data1);
+      copyPostArray.splice(3, 1);
+      setdata(copyPostArray);
+      console.log("--+++++++++++=====");
+ }
+  }
 
   function rendersidebar(){
   //   Axios.get("http://localhost:3002/userdetails")
@@ -61,8 +66,9 @@ function Navbar() {
   // if(currentuserDep!='ALL'){
   //      Sidebardata.splice(5, 1);
   // }
+ 
  let items=[];
-  Sidebardata.map((item, index) => {
+  data1.map((item, index) => {
     items.push (
       <li key={index} className={item.cName}>
         <Link to={item.path}>

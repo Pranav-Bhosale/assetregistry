@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { Row, Col, Card, Accordion, Modal, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { BiSearchAlt } from "react-icons/bi";
+import {MdKeyboardArrowDown,MdKeyboardArrowUp} from "react-icons/md";
 import InputGroup from "react-bootstrap/InputGroup";
 import { FormControl } from "react-bootstrap";
 import { Redirect, useHistory } from "react-router-dom";
@@ -26,6 +27,13 @@ function ViewAsset() {
   const [deluid, setdeluid] = React.useState(null);
   const [delid, setdelid] = React.useState(null);
   const [show, setShow] = React.useState(false);
+  const [startYear,setStartYear]= React.useState(null);
+  const [endYear,setEndYear]=React.useState(null);
+  const [startCost,setStartCost]=React.useState(null);
+  const [endCost,setEndCost]=React.useState(null);
+
+  const [isActive, setIsActive] = React.useState(false);
+
 
   const [logedIN, setlogedIN] = React.useState(true);
   React.useEffect(() => {
@@ -43,7 +51,24 @@ function ViewAsset() {
       console.log(error);
       window.alert("Error!");
     }
+
+  
   }, []);
+
+  React.useEffect(() => {
+    if(!isActive){
+      setStartYear(null);
+      setEndYear(null);
+      setStartCost(null);
+      setEndCost(null);
+    }
+  });
+
+  React.useEffect(()=>
+  {
+    console.log(startYear);
+  }
+  );
 
   if (!logedIN) {
     return <Redirect to="/admin" />;
@@ -202,7 +227,7 @@ function ViewAsset() {
                       setRedirectUpdate(true);
                     }}
                   >
-                    Upate
+                    Update
                   </button>
                 </Col>
                 <Col>
@@ -228,7 +253,7 @@ function ViewAsset() {
 
   function handleClickSort() {
     setResmsg(null);
-
+    console.log(startYear)
     if (Department !== "None" && EqpType !== "None") {
       Axios.post("http://localhost:3002/viewasset/choose", {
         EqpType: EqpType,
@@ -283,7 +308,6 @@ function ViewAsset() {
     }
   }
 
-  <drop pops></drop>;
 
   function handleClick() {
     setResmsg(null);
@@ -350,12 +374,12 @@ function ViewAsset() {
                 aria-describedby="basic-addon1"
                 type="text"
                 onChange={(e) => {
-                  setUID(e.target.value);
+                setUID(e.target.value);
                 }}
               />
             </InputGroup>
           </Col>
-          <Col xs="3" style={{ alignItems: "center", textAlign: "center" }}>
+          <Col md="3" style={{ alignItems: "center", textAlign: "center" }}>
             <button className="simplebtn" onClick={handleClick}>
               Go
             </button>
@@ -363,10 +387,10 @@ function ViewAsset() {
         </Row>
         <hr style={{ padding: 0, marginTop: "20px", marginBottom: "20px" }} />
         <Row style={{ margin: 0, marginTop: "10" }}>
-          <Col md="6" style={{ padding: 0, margin: 0 }}>
-            <Row style={{ padding: 0, margin: 0 }}>
-              <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Equipment type</Form.Label>
+        <Row>
+          <Col md="4" style={{ padding: 0, margin: 0 }}>
+              <Form.Group  controlId="formGridState">
+                <Form.Label><b>Equipment type</b></Form.Label>
                 <Form.Select
                   required
                   onChange={(e) => {
@@ -376,9 +400,10 @@ function ViewAsset() {
                   {createSelectItems()}
                 </Form.Select>
               </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Name Of Equipment </Form.Label>
+              </Col>
+              <Col md="4">
+              <Form.Group  controlId="formGridState">
+                <Form.Label> <b>Name Of Equipment</b> </Form.Label>
                 <Form.Select
                   required
                   as="select"
@@ -390,27 +415,99 @@ function ViewAsset() {
                   {createSecondItems(EqpType)}
                 </Form.Select>
               </Form.Group>
-            </Row>
-          </Col>
-          <Col md="6" style={{ padding: 0, margin: 0 }}>
-            <Row style={{ padding: 0, margin: 0 }}>
-              <Col style={{ margin: 0, paddingRight: 0 }}>
+              </Col>
+           
+         
+          <Col md="4" style={{ padding: 0, margin: 0 }}>  
                 <Form.Group as={Col} controlId="formGridState">
-                  <Form.Label>Department </Form.Label>
+                  <Form.Label><b>Department</b> </Form.Label>
                   <Child childToParent={childToParent} />
                 </Form.Group>
-              </Col>
-              <Col style={{ alignItems: "center", textAlign: "center" }}>
+          </Col>
+              
+        <Col md={12}>
+          <div className="accordion-title" onClick={() => setIsActive(!isActive)} style={{textAlign:"center"}}>
+          
+        <div>{isActive ?  <MdKeyboardArrowUp style={{color:"#023d77"}} size={30}/>: <MdKeyboardArrowDown style={{color:"#023d77"}} size={30} />}</div>
+      </div>
+      {isActive && <Row style={{ margin: 0, marginTop: "10" }}>
+        <Col>
+        <Row>
+        <Col md={6}>
+        <Row>
+        <Col md={3} style={{paddingTop:"40px"}}>
+            <b>Year Range :</b>
+          </Col>
+          <Col  md={{span:3}}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Start</Form.Label>
+              <Form.Control type="number"
+               onChange={(e) => {
+                setStartYear(e.target.value);
+                }}
+                />
+            </Form.Group>
+          </Col>
+          <Col md={{span:3}}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>End</Form.Label>
+              <Form.Control type="number"
+               onChange={(e) => {
+                setEndYear(e.target.value);
+                }}
+                />
+            </Form.Group>
+          </Col>
+          </Row>
+          </Col>
+          
+
+          <Col>
+          <Row>
+          <Col md={3} style={{paddingTop:"40px"}}>
+            <b>Cost Range :</b>
+          </Col>
+          <Col md={{span:4}}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Start</Form.Label>
+              <Form.Control type="number"
+               onChange={(e) => {
+                setStartCost(e.target.value);
+                }}
+                />
+            </Form.Group>
+          </Col>
+          <Col md={{span:4}} >
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>End</Form.Label>
+              <Form.Control type="number"
+               onChange={(e) => {
+                setEndCost(e.target.value);
+                }}
+                />
+            </Form.Group>
+          </Col>
+
+          </Row>
+          </Col>
+
+
+          </Row>
+          </Col>
+        </Row>  }
+      </Col>
+        </Row>
+        
+        <Col style={{ alignItems: "center", textAlign: "center" }}>
                 <button
-                  style={{ marginTop: "20px" }}
+                  style={{ marginTop: "32px" }}
                   className="simplebtn"
                   onClick={handleClickSort}
                 >
                   Go
                 </button>
               </Col>
-            </Row>
-          </Col>
+        
         </Row>
         <hr
           className="hrline"
