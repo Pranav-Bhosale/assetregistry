@@ -23,7 +23,9 @@ const fs = require("fs");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 const csvtojson = require("csvtojson");
-
+const Axios = require("axios");
+const accessKeyId_s3 = process.env.AWS_SECRET_KEY_s3;
+const secretAccessKey_s3 = process.env.AWS_ACCESS_KEY_s3;
 const bucketName = process.env.AWS_BUCKET_NAME;
 const region = "ap-south-1";
 const accessKeyId = process.env.AWS_ACCESS_KEY;
@@ -37,15 +39,15 @@ const unlinkFile = util.promisify(fs.unlink);
 const S3 = require("aws-sdk/clients/s3");
 const s3 = new S3({
   region,
-  accessKeyId,
-  secretAccessKey,
+  accessKeyId_s3,
+  secretAccessKey_s3,
 });
 
 async function uploadFile(file) {
-  const fileStream = fs.createReadStream(file.path);
   const uploadParams = {
     Bucket: bucketName,
     Key: file.filename,
+    ContentType: "image/*",
   };
   const uploadURL = await s3.getSignedUrlPromise("putObject", uploadParams);
   return uploadURL;
@@ -133,9 +135,11 @@ app.post("/deleteasset", auth, async (req, res) => {
 
 app.post("/photodept", auth, upload.single("fileInput"), async (req, res) => {
   try {
+    const fileStream = fs.createReadStream(req.file.path);
     const result = await uploadFile(req.file);
     console.log(req.file);
     console.log("S3 response", result);
+    var imageUrl;
 
     await unlinkAsync(req.file.path).then(function (response) {
       console.log("file Deleted!");
