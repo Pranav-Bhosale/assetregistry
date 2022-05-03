@@ -8,6 +8,7 @@ class ComponentToPrint extends React.PureComponent {
     
 
     let url=this.props.data.PhotoLink;
+    console.log(url);
     return (
       <Container fluid style={{ padding: "50px", textAlign: "center" }}>
         <Row style={{ padding: 0, margin: 0 }}>

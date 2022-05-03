@@ -10,7 +10,6 @@ import Child from "./DeptDropdown";
 
 function ViewAsset(props) {
   const reqpath = window.location.origin + "/info/" + props.match.params.UID;
-  const [uidval, setuidval] = React.useState(null);
   const [data, setdata] = React.useState(null);
 
   const [redirect, setRedirect] = React.useState(false);
@@ -232,7 +231,7 @@ function ViewAsset(props) {
     }
   };
 
-  if (uidval && data) {
+  if (data) {
     return (
       <div className="navfootpad">
         <Navbar />

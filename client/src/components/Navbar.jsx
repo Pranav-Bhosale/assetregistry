@@ -107,7 +107,7 @@ function Navbar() {
               />
             </Col>
             <Col sm={8} className="navbarright">
-              <h1 className="titlenameNav">Asset Registry</h1>
+            <Link to="/" style={{textDecoration:"none"}}> <h1 className="titlenameNav">Asset Registry</h1> </Link>
               <h3 className="collegeNameNav">
                 Walchand College Of Engineering,Sangli
               </h3>
