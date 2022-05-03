@@ -13,6 +13,8 @@ import Child from "./DeptDropdown";
 import Axios from "axios";
 
 function ViewAsset() {
+ 
+  let d=new Date().toISOString().slice(0, 10);
   const history = useHistory();
   const [redirect, setRedirect] = React.useState(false);
   const [redirectUpdate, setRedirectUpdate] = React.useState(false);
@@ -27,8 +29,8 @@ function ViewAsset() {
   const [deluid, setdeluid] = React.useState(null);
   const [delid, setdelid] = React.useState(null);
   const [show, setShow] = React.useState(false);
-  const [startYear, setStartYear] = React.useState(0);
-  const [endYear, setEndYear] = React.useState(0);
+  const [startYear, setStartYear] = React.useState(d);
+  const [endYear, setEndYear] = React.useState(d);
   const [startCost, setStartCost] = React.useState(0);
   const [endCost, setEndCost] = React.useState(0);
   const [isActive, setIsActive] = React.useState(false);
@@ -55,22 +57,16 @@ function ViewAsset() {
 
   React.useEffect(() => {
     if (!isActive) {
-      setStartYear(0);
-      setEndYear(0);
+      setStartYear("");
+      setEndYear("");
       setStartCost(0);
       setEndCost(0);
     }
+    
   });
 
   React.useEffect(() => {
 
-    if (startYear === '') {
-      setStartYear(0);
-    }
-    if (endYear === '') {
-
-      setEndYear(0);
-    }
     if (startCost === '') {
       setStartCost(0);
     }
@@ -264,8 +260,11 @@ function ViewAsset() {
   function handleClickSort() {
     setResmsg(null);
     if (startYear === '') {
-      setStartYear(0);
+      setStartYear(d);
       console.log("empty '' value error")
+    }
+    if(endYear === ''){
+      setEndYear(d);
     }
     console.log(startYear);
     console.log(endYear);
@@ -273,8 +272,9 @@ function ViewAsset() {
     console.log(endCost);
 
     if (isActive) {
+      
       if (Department !== "None" && EqpType !== "None") {
-        setResmsg("search with range,department,eqp");
+        // setResmsg("search with range,department,eqp");
         Axios.post("http://localhost:3002/viewasset/range_with_dep_and_eqp", {
           EqpType: EqpType,
           NameOfEqp: NameOfEqp,
@@ -285,6 +285,8 @@ function ViewAsset() {
           endCost: endCost
         }).then((response) => {
           const res = response.data[0];
+          console.log(response.data[0]);
+          console.log("----------");
           setqueriedData(response.data);
           if (res) {
             setResmsg("Total " + response.data.length + " Entries were Found!");
@@ -538,7 +540,7 @@ function ViewAsset() {
                         <Col md={{ span: 3 }}>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Start</Form.Label>
-                            <Form.Control type="number"
+                            <Form.Control type="date"
                               onChange={(e) => {
                                 setStartYear(e.target.value);
                               }}
@@ -548,7 +550,7 @@ function ViewAsset() {
                         <Col md={{ span: 3 }}>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>End</Form.Label>
-                            <Form.Control type="number"
+                            <Form.Control type="date"
                               onChange={(e) => {
                                 setEndYear(e.target.value);
                               }}

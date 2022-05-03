@@ -35,7 +35,7 @@ const Asset = new mongoose.Schema({
     require: true,
   },
   CostPerUnit: {
-    type: String,
+    type: Number,
     require: true,
   },
   Quantity: {
@@ -43,7 +43,7 @@ const Asset = new mongoose.Schema({
     require: true,
   },
   TotalCost: {
-    type: String,
+    type: Number,
     require: true,
   },
   Warranty: {

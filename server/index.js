@@ -276,6 +276,8 @@ app.get("/viewasset/:uid", auth, async (req, res) => {
   }
 });
 
+
+
 //with dept name +type+eqp name
 app.post("/viewasset", async (req, res) => {
   const EqpType = req.body.EqpType;
@@ -299,6 +301,32 @@ app.post("/viewasset/choose", async (req, res) => {
   });
   res.json(data);
 });
+
+//with range and eqp type nameof eqp assetNumber
+app.post("/viewasset/range_with_dep_and_eqp", async (req,res)=>{
+  const EqpType = req.body.EqpType;
+  const NameOfEqp = req.body.NameOfEqp;
+  const Department = req.body.Department;
+  const startYear= req.body.startYear;
+  const endYear = req.body.endYear;
+  const startCost=req.body.startCost;
+  const endCost=req.body.endCost;
+
+
+  console.log(startYear);
+  console.log("endyear"+endYear);
+  const data = await AssetDB.find({
+    EqpType:EqpType,
+    NameOfEqp: NameOfEqp,
+    Department: Department,
+    DOP:{$gte:startYear,$lte:endYear},
+    
+    // CostPerUnit:{$gt:startCost}
+  });
+  
+  res.json(data);
+}
+);
 
 app.post("/viewasset/choose2", async (req, res) => {
   const Department = req.body.Department;
