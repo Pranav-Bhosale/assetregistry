@@ -2,10 +2,14 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const multer = require("multer");
+const path = require("path");
+const multerS3 = require("multer-s3");
 const upload = multer({
   dest: "./uploads/",
 });
-
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("./MiddleWare/Auth");
@@ -24,6 +28,7 @@ const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 const csvtojson = require("csvtojson");
 const Axios = require("axios");
+
 const accessKeyId_s3 = process.env.AWS_SECRET_KEY_s3;
 const secretAccessKey_s3 = process.env.AWS_ACCESS_KEY_s3;
 const bucketName = process.env.AWS_BUCKET_NAME;
@@ -37,11 +42,47 @@ const util = require("util");
 const unlinkFile = util.promisify(fs.unlink);
 
 const S3 = require("aws-sdk/clients/s3");
-const s3 = new S3({
+const s3 = new AWS.S3({
   region,
   accessKeyId_s3,
   secretAccessKey_s3,
+  signatureVersion: "v4",
 });
+
+function checkFileType(file, cb) {
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb("Error: Images Only!");
+  }
+}
+
+const profileImgUpload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: bucketName,
+    acl: "public-read",
+    key: function (req, file, cb) {
+      cb(
+        null,
+        path.basename(file.originalname, path.extname(file.originalname)) +
+          "-" +
+          Date.now() +
+          path.extname(file.originalname)
+      );
+    },
+  }),
+  limits: { fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  },
+}).single("profileImage");
 
 async function uploadFile(file) {
   const uploadParams = {
@@ -133,25 +174,50 @@ app.post("/deleteasset", auth, async (req, res) => {
   }
 });
 
-app.post("/photodept", auth, upload.single("fileInput"), async (req, res) => {
-  try {
-    const fileStream = fs.createReadStream(req.file.path);
-    const result = await uploadFile(req.file);
+app.post("/photodept", (req, res) => {
+  profileImgUpload(req, res, (error) => {
     console.log(req.file);
-    console.log("S3 response", result);
-    var imageUrl;
-
-    await unlinkAsync(req.file.path).then(function (response) {
-      console.log("file Deleted!");
-    });
-    res.send({
-      status: 201,
-      url: result,
-    });
-  } catch (err) {
-    console.log(err);
-  }
+    if (error) {
+      console.log("errors", error);
+      res.json({ error: error });
+    } else {
+      // If File not found
+      if (req.file === undefined) {
+        console.log("Error: No File Selected!");
+        res.json("Error: No File Selected");
+      } else {
+        // If Success
+        const imageName = req.file.key;
+        const imageLocation = req.file.location;
+        // Save the file name into database into profile model
+        res.json({
+          image: imageName,
+          location: imageLocation,
+        });
+      }
+    }
+  });
 });
+
+// app.post("/photodept", auth, upload.single("fileInput"), async (req, res) => {
+//   try {
+//     const fileStream = fs.createReadStream(req.file.path);
+//     const result = await uploadFile(req.file);
+//     console.log(req.file);
+//     console.log("S3 response", result);
+//     var imageUrl;
+
+//     await unlinkAsync(req.file.path).then(function (response) {
+//       console.log("file Deleted!");
+//     });
+//     res.send({
+//       status: 201,
+//       url: result,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
 app.post("/deptincrement", auth, async (req, res) => {
   try {
@@ -276,8 +342,6 @@ app.get("/viewasset/:uid", auth, async (req, res) => {
   }
 });
 
-
-
 //with dept name +type+eqp name
 app.post("/viewasset", async (req, res) => {
   const EqpType = req.body.EqpType;
@@ -369,29 +433,27 @@ app.post("/viewasset/choose", async (req, res) => {
 });
 
 //with range and eqp type nameof eqp assetNumber
-app.post("/viewasset/range_with_dep_and_eqp", async (req,res)=>{
+app.post("/viewasset/range_with_dep_and_eqp", async (req, res) => {
   const EqpType = req.body.EqpType;
   const NameOfEqp = req.body.NameOfEqp;
   const Department = req.body.Department;
-  const startYear= req.body.startYear;
+  const startYear = req.body.startYear;
   const endYear = req.body.endYear;
-  const startCost=req.body.startCost;
-  const endCost=req.body.endCost;
-
+  const startCost = req.body.startCost;
+  const endCost = req.body.endCost;
 
   // console.log(startYear);
   // console.log("endyear"+endYear);
   const data = await AssetDB.find({
-    EqpType:EqpType,
+    EqpType: EqpType,
     NameOfEqp: NameOfEqp,
     Department: Department,
     DOP:{$gte:startYear,$lte:endYear},
     CostPerUnit:{$gte:startCost,$lte:endCost}
   });
-  
+
   res.json(data);
-}
-);
+});
 
 
 

@@ -5,9 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import TableFaculty from "../components/TableFaculty";
 class ComponentToPrint extends React.PureComponent {
   render() {
-    
-
-    let url=this.props.data.PhotoLink;
+    let url = this.props.data.PhotoLink;
     console.log(url);
     return (
       <Container fluid style={{ padding: "50px", textAlign: "center" }}>
@@ -57,21 +55,26 @@ class ComponentToPrint extends React.PureComponent {
           status={this.props.data.Status}
           remark={this.props.data.Remark}
           part={this.props.data.Part}
+          PhotoLink={this.props.data.PhotoLink}
         />
         <br />
         <br />
         <Row>
           <Col>
-          <QRCode
-          id="qrcode"
-          value={this.props.reqpath}
-          renderAs="svg"
-          includeMargin={true}
-        />
+            <QRCode
+              id="qrcode"
+              value={this.props.reqpath}
+              renderAs="svg"
+              includeMargin={true}
+            />
           </Col>
-          <Col>
-          <img src={url} style={{width:"250px",height:"150px"}} alt="Asset Image" />
-          </Col>
+          {/* <Col>
+            <img
+              src={url}
+              style={{ width: "250px", height: "150px" }}
+              alt="Asset Image"
+            />
+          </Col> */}
         </Row>
         {/* <h5>QR Code</h5>
         <QRCode
@@ -80,7 +83,6 @@ class ComponentToPrint extends React.PureComponent {
           renderAs="svg"
           includeMargin={true}
         /> */}
-
       </Container>
     );
   }
