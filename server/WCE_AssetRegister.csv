@@ -1,103 +1,205 @@
 "_id","UID","AssetNumber","EqpType","NameOfEqp","SpecsConfig","Make","AllocationFund","DOP","CostPerUnit","Quantity","TotalCost","Warranty","LocEqp","SupplierName","SupplierAddress","SupplierMobNo","Utilization","Status","Remark","Part","Department","__v"
-"ELN0","ELN0","WCE/DRF/2015-16/ELN/3-107/784","Printer","Laser","DIGITAL COPIER HP LESSERJET PRO MFPM128FL","Canon","DRF 2015-16","2016-03-14",15986,"1",15986,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN1","ELN1","WCE/ DRF/ 2016-17/ELN/3-111/816","Computer","Laptop","HP LAPTOP","HP","DRF/2016-17","2016-10-14",50751,"1",50751,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN2","ELN2","WCE/ DRF/ 2016-17/ELN/3-111/817","Computer","Laptop","HP LAPTOP","HP","DRF/2016-17","2016-10-14",50751,"1",50751,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN3","ELN3","WCE/ DRF/ 2016-17/ELN/3-111/818","Computer","Laptop","HP LAPTOP","HP","DRF/2016-17","2016-10-14",50751,"1",50751,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN4","ELN4","WCE/ DRF/ 2016-17/ELN/3-111/819","Computer","Laptop","HP LAPTOP","HP","DRF/2016-17","2016-10-14",50751,"1",50751,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN5","ELN5","WCE/DRF/2015-16/ELN/3-108/787","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN6","ELN6","WCE/DRF/2015-16/ELN/3-108/788","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN7","ELN7","WCE/DRF/2015-16/ELN/3-108/789","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN8","ELN8","WCE/DRF/2015-16/ELN/3-109/790","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN9","ELN9","WCE/DRF/2015-16/ELN/3-109/791","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN10","ELN10","WCE/DRF/2015-16/ELN/3-109/792","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN11","ELN11","WCE/DRF/2015-16/ELN/3-109/793","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN12","ELN12","WCE/DRF/2015-16/ELN/3-109/794","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN13","ELN13","WCE/DRF/2015-16/ELN/3-109/795","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN14","ELN14","WCE/DRF/2015-16/ELN/3-109/796","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN15","ELN15","WCE/DRF/2015-16/ELN/3-109/797","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN16","ELN16","WCE/DRF/2015-16/ELN/3-109/798","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN17","ELN17","WCE/DRF/2015-16/ELN/3-109/799","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN18","ELN18","WCE/DRF/2015-16/ELN/3-109/800","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN19","ELN19","WCE/DRF/2015-16/ELN/3-109/801","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN20","ELN20","WCE/DRF/2015-16/ELN/3-109/802","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN21","ELN21","WCE/DRF/2015-16/ELN/3-109/803","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN22","ELN22","WCE/DRF/2015-16/ELN/3-109/804","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN23","ELN23","WCE/DRF/2015-16/ELN/3-109/805","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN24","ELN24","WCE/DRF/2015-16/ELN/3-109/806","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN25","ELN25","WCE/DRF/2015-16/ELN/3-109/807","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN26","ELN26","WCE/DRF/2015-16/ELN/3-109/808","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN27","ELN27","WCE/DRF/2015-16/ELN/3-109/809","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN28","ELN28","WCE/DRF/2015-16/ELN/3-109/810","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN29","ELN29","WCE/DRF/2015-16/ELN/3-109/811","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN30","ELN30","WCE/DRF/2015-16/ELN/3-109/812","Computer","Desktop","INTEL CORE I5-4570 DESLTOP WITH MONITOR","DELL MAKE","DRF/2015-16","2016-03-18",48333,"1",48333,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN31","ELN31","WCE/DRF/2015-16/ELN/3-109/813","Printer","Laser","MF4820 Printer","CANON","DRF/2016-17","2017-10-20",12459,"1",12459,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN32","ELN32","WCE/ DRF/ 2016-17/ELN/3-119/906","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN33","ELN33","WCE/ DRF/ 2016-17/ELN/3-119/907","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN34","ELN34","WCE/ DRF/ 2016-17/ELN/3-119/908","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN35","ELN35","WCE/ DRF/ 2016-17/ELN/3-119/909","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN36","ELN36","WCE/ DRF/ 2016-17/ELN/3-119/910","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN37","ELN37","WCE/ DRF/ 2016-17/ELN/3-119/911","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN38","ELN38","WCE/ DRF/ 2016-17/ELN/3-119/912","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN39","ELN39","WCE/ DRF/ 2016-17/ELN/3-119/913","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN40","ELN40","WCE/ DRF/ 2016-17/ELN/3-119/914","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN41","ELN41","WCE/ DRF/ 2016-17/ELN/3-119/915","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN42","ELN42","WCE/ DRF/ 2016-17/ELN/3-119/916","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN43","ELN43","WCE/ DRF/ 2016-17/ELN/3-119/917","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN44","ELN44","WCE/ DRF/ 2016-17/ELN/3-119/918","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN45","ELN45","WCE/ DRF/ 2016-17/ELN/3-119/919","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN46","ELN46","WCE/ DRF/ 2016-17/ELN/3-119/920","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-13",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN47","ELN47","WCE/ DRF/ 2016-17/ELN/3-121/944","Monitor","LED","24"" FULL HD WALL MOUNT MONITOR","SAMSUNG","DRF/2016-17","2017-02-18",12499,"1",12499,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN48","ELN48","WCE/ DIP/ 2016-17/ELN/3-122/948","Printer","Laser","DESKJET Printer A4 SIZE 8PPM","HP","DRF/2016-17","2017-02-03",,"1",,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN49","ELN49","WCE/ DIP/ 2016-17/ELN/3-122/949","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-03",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN50","ELN50","WCE/ DIP/ 2016-17/ELN/3-122/950","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-03",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN51","ELN51","WCE/ DIP/ 2016-17/ELN/3-122/951","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-03",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN52","ELN52","WCE/ DIP/ 2016-17/ELN/3-122/952","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2016-17","2017-02-03",48760,"1",48760,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN53","ELN53","WCE/ DRF/ 2017-18/ELN/3-123/957","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN54","ELN54","WCE/ DRF/ 2017-18/ELN/3-123/958","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN55","ELN55","WCE/ DRF/ 2017-18/ELN/3-123/959","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN56","ELN56","WCE/ DRF/ 2017-18/ELN/3-124/960","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN57","ELN57","WCE/ DRF/ 2017-18/ELN/3-124/961","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN58","ELN58","WCE/ DRF/ 2017-18/ELN/3-124/962","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN59","ELN59","WCE/ DRF/ 2017-18/ELN/3-124/963","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN60","ELN60","WCE/ DRF/ 2017-18/ELN/3-124/964","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN61","ELN61","WCE/ DRF/ 2017-18/ELN/3-124/965","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN62","ELN62","WCE/ DRF/ 2017-18/ELN/3-124/966","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN63","ELN63","WCE/ DRF/ 2017-18/ELN/3-124/967","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN64","ELN64","WCE/ DRF/ 2017-18/ELN/3-124/968","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN65","ELN65","WCE/ DRF/ 2017-18/ELN/3-124/969","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN66","ELN66","WCE/ DRF/ 2017-18/ELN/3-124/970","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN67","ELN67","WCE/ DRF/ 2017-18/ELN/3-124/971","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN68","ELN68","WCE/ DRF/ 2017-18/ELN/3-125/972","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN69","ELN69","WCE/ DRF/ 2017-18/ELN/3-125/973","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN70","ELN70","WCE/ DRF/ 2017-18/ELN/3-125/974","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN71","ELN71","WCE/ DRF/ 2017-18/ELN/3-126/975","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN72","ELN72","WCE/ DRF/ 2017-18/ELN/3-126/976","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN73","ELN73","WCE/ DRF/ 2017-18/ELN/3-126/977","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN74","ELN74","WCE/ DRF/ 2017-18/ELN/3-126/978","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN75","ELN75","WCE/ DRF/ 2017-18/ELN/3-126/979","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN76","ELN76","WCE/ DRF/ 2017-18/ELN/3-126/980","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN77","ELN77","WCE/ DRF/ 2017-18/ELN/3-126/981","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN78","ELN78","WCE/ DRF/ 2017-18/ELN/3-126/982","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN79","ELN79","WCE/ DRF/ 2017-18/ELN/3-126/983","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN80","ELN80","WCE/ DRF/ 2017-18/ELN/3-126/984","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN81","ELN81","WCE/ DRF/ 2017-18/ELN/3-126/985","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN82","ELN82","WCE/ DRF/ 2017-18/ELN/3-126/986","Computer","Desktop","HP Prodesk280 G3(C15/8GB/1TB/DRW/WIN10Pro/3Yer","HP","DRF/2017-18","2018-02-28",46778.6,"1",46778.6,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN83","ELN83","WCE/CFF/2019-20/ELN/3-136/1019","Printer","Laser","MF3010 Printer","CANON","CFF/2019/20","2018-10-20",12850,"1",12850,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN84","ELN84","WCE/DRF/2015-16/ELN/3-109/814","Printer","Laser","MF4820 Printer","CANON","DRF/2015-16","2019-09-16",12459,"1",12459,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN85","ELN85","WCE/DRF/2015-16/ELN/3-109/815","Printer","Laser","MF4820 Printer","CANON","DRF/2015-16","2019-10-20",12459,"1",12459,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN86","ELN86","WCE/ DRF/ 2019-20/ELN/3-138/1043","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN87","ELN87","WCE/ DRF/ 2019-20/ELN/3-138/1044","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN88","ELN88","WCE/ DRF/ 2019-20/ELN/3-138/1045","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN89","ELN89","WCE/ DRF/ 2019-20/ELN/3-138/1046","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN90","ELN90","WCE/ DRF/ 2019-20/ELN/3-138/1047","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN91","ELN91","WCE/ DRF/ 2019-20/ELN/3-138/1048","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN92","ELN92","WCE/ DRF/ 2019-20/ELN/3-138/1049","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN93","ELN93","WCE/ DRF/ 2019-20/ELN/3-138/1050","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN94","ELN94","WCE/ DRF/ 2019-20/ELN/3-138/1051","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN95","ELN95","WCE/ DRF/ 2019-20/ELN/3-138/1052","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN96","ELN96","WCE/ DRF/ 2019-20/ELN/3-138/1053","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN97","ELN97","WCE/ DRF/ 2019-20/ELN/3-138/1054","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN98","ELN98","WCE/ DRF/ 2019-20/ELN/3-138/1055","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN99","ELN99","WCE/ DRF/ 2019-20/ELN/3-138/1056","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN100","ELN100","WCE/ DRF/ 2019-20/ELN/3-138/1057","Computer","Desktop","DELL CPU WITH MONITOR","DELL MAKE","DRF/2019-20","2020-06-11",72570,"1",72570,"","","","","","","Working","FOUND","1 of 1","ELN",0
-"ELN101","ELN101","WCE/ DRF/ 2019-20/ELN/3-138/1058","Other","Xerox Machine","XEROX","XEROX","DRF/2019-20","2020-04-20",30333,"1",30333,"","","","","","","Working","FOUND","1 of 1","ELN",0
+"IT0","IT0","WCE/IT/1175","Other","Projector","EPSON Projector-EB-575WI with resolution WXGA, Brightness-2700 Lumens","EPSON","TEQIP","2015-01-31",119340,"1",119340,"","Others","Siddhivinayak Complex, Guest House, Sangli (MS) INDIA 416 416","","","","Working","Transfer from CCF","","IT",0
+"IT1","IT1","WCE/IT/835","Network_Device","Switch","Switch Layer 2 with 48 10/100/1000 Base T210G Base -XSFP","Extream","PG Research & Development 14-15","2015-05-08",76440,"1",76440,"","Main Lab","Veetrag Computers Pvt. Ltd","","","","Working","Found","","IT",0
+"IT2","IT2","WCE/IT/836","Network_Device","Switch","Switch Layer 2 with 48 10/100/1000 Base T210G Base -XSFP","Extream","PG Research & Development 14-15","2015-05-08",76440,"1",76440,"","Main Lab","Sun Computer","","","","Working","Found","","IT",0
+"IT3","IT3","WCE/IT/863","UPS","Other","UPS Prostar","Prostar","DRF14-15","2015-08-21",77433,"1",77433,"","PG - I Lab","Sun Computer","","","","Working","Found","","IT",0
+"IT4","IT4","WCE/IT/864","UPS","Other","UPS Prostar","Prostar","DRF14-15","2015-08-21",77433,"1",77433,"","PG - I Lab","Silicon","","","","Working","Found","","IT",0
+"IT5","IT5","WCE/IT/865","UPS","Other","UPS Prostar","Prostar","DRF14-15","2015-08-21",77433,"1",77433,"","PG - I Lab","Silicon","","","","Working","Found","","IT",0
+"IT6","IT6","WCE/IT/894","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Silicon","","","","Working","Found","","IT",0
+"IT7","IT7","WCE/IT/895","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT8","IT8","WCE/IT/896","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT9","IT9","WCE/IT/897","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT10","IT10","WCE/IT/898","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT11","IT11","WCE/IT/899","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT12","IT12","WCE/IT/900","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT13","IT13","WCE/IT/901","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT14","IT14","WCE/IT/902","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT15","IT15","WCE/IT/903","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT16","IT16","WCE/IT/904","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT17","IT17","WCE/IT/905","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT18","IT18","WCE/IT/906","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT19","IT19","WCE/IT/907","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT20","IT20","WCE/IT/908","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT21","IT21","WCE/IT/909","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT22","IT22","WCE/IT/910","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT23","IT23","WCE/IT/911","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT24","IT24","WCE/IT/912","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT25","IT25","WCE/IT/913","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","DRF 15-16","2015-11-04",77175,"1",77175,"","PG - I Lab","Sun computer","","","","Working","Found","","IT",0
+"IT26","IT26","WCE/IT/914","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","AICTE/RPS 15/16","2015-11-04",73500,"1",73500,"","HOD ,RRR","Sun computer","","","","Working","Found","","IT",0
+"IT27","IT27","WCE/IT/915","Computer","Desktop","HP ENVY 700 xt Desktop                           Intel 4th Gen i7-4790 1TB HDD 12 GB RAM 2 GB nvidia GeForce GT720","HP","AICTE/RPS 15/16","2015-11-04",73500,"1",73500,"","HOD ,RRR","Sun computer","","","","Working","Found","","IT",0
+"IT28","IT28","WCE/IT/942","Computer","Laptop","Dell Laptop (i7 Win 8.1 Pro) Intel core i-7 5600U","Dell","AICTE RPS Dr.S.P.S","2016-02-20",88800,"1",88800,"","HOD","Sun computer","","","","Working","Found","","IT",0
+"IT29","IT29","WCE/IT/944","Computer","Desktop","HP Desktop (Intel core i7 With Preloaded operating system CPU: Intel Core i7-4770,3.4 GHz 8MB Cache Chipset Intel Q8 Series Memory 4 GB 1600MHz DDR3 Ram 500 Gb HDD Monitor 47 cm LED/TFT","HP","AICTE RPS Dr.S.P.S","2016-03-05",56470,"1",56470,"","HOD","Veetrag computers","","","","Working","Found","","IT",0
+"IT30","IT30","WCE/IT/945","Monitor","LED","LED TV Display Size 127 cm (50, Brand - Panasonic LED Display Type - Direct LED, Smart TV - No, Usb -1 ,HD Technology Full HD 1920 x 1080 Model Name TH - 50a410D","Panasonic","WCE/IT/DRF 15-16","2016-03-11",61333,"1",61333,"","Seminar Hall","Sun Computer","","","","Working","Found","","IT",0
+"IT31","IT31","WCE/IT/1176","Computer","Server","SERVER HP BL460C BLADE 10Gb/20Gb, E5 2680V3","HP","DRF 1617","2016-03-19",896500,"1",896500,"","","Silicon","","","","Working","Transfer from CCF","","IT",0
+"IT32","IT32","WCE/IT/954","UPS","Other","Emerson Mak online UPS and batteries","Libert UPS Exide Batteries","P.G.Euipment DRF - 16-17","2016-10-11",107710,"1",107710,"","Micro Lab","SUN COMPUTER,SANGLI","","","","Working","Found","","IT",0
+"IT33","IT33","WCE/IT/951","Other","Projector","EPSON Business Projector EB- 945(2)","EPSON","DRF PG 16-17","2016-10-21",55275,"1",55275,"","Store","Prase infocom  & power solution pvt. Ltd","","","","Working","Found","","IT",0
+"IT34","IT34","WCE/IT/952","Other","Projector","EPSON Business Projector EB- 945(2)","EPSON","DRF PG 16-17","2016-10-21",55275,"1",55275,"","Store","Veetrag Computers","","","","Working","Found","","IT",0
+"IT35","IT35","WCE/IT/953","Battery","Battery","12v , 100Ah Exide SMF Battries 30 qty","EXIDE","DRF PG 16-17","2016-11-21",156630,"1",156630,"","DATA Center","Veetrag Computers","","","","Working","Found","","IT",0
+"IT36","IT36","WCE/IT/1177","Network_Device","Switch","Extreme Make 24 Port L2 switch with Switching fabric  56 Gbps and  41.6 MPPS,  min.  256 MB DRAM and 256 MB Flash with Two 10G SFP + MM optics  STAG NO 1638N-408719","EXTREME","DRF 1617","2016-12-23",167165,"1",167165,"","","Prase infocom  & power solution pvt. Ltd","","","","Working","Transfer from CCF","","IT",0
+"IT37","IT37","WCE/IT/985","Other","Other","IOT Laboratory KIT","","TEQIP-II 2016-17","2017-01-06",449460,"1",449460,"","Store","TrueServer Technologies Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT38","IT38","WCE/IT/1045","Software","Other","Annual license fee for (100 Stuednt of 10 instructor)","Online","TEQIP-II","2017-03-27",437184,"1",437184,"","","Procom Enterprises","","","","Working","Found","","IT",0
+"IT39","IT39","WCE/IT/1046","Other","Other","IR2004N A3 Size Basic Photocopier machine I NPG 59 Toner","Canon","DRF-2017-18","2018-01-23",54225,"1",54225,"","Store","iGroup Infotech","","","","Working","Found","","IT",0
+"IT40","IT40","WCE/IT/1082","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Gajraj System","","","","Working","Found","","IT",0
+"IT41","IT41","WCE/IT/1083","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT42","IT42","WCE/IT/1084","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT43","IT43","WCE/IT/1085","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT44","IT44","WCE/IT/1086","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT45","IT45","WCE/IT/1087","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT46","IT46","WCE/IT/1088","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT47","IT47","WCE/IT/1089","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT48","IT48","WCE/IT/1090","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT49","IT49","WCE/IT/1091","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT50","IT50","WCE/IT/1092","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT51","IT51","WCE/IT/1093","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT52","IT52","WCE/IT/1094","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT53","IT53","WCE/IT/1095","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT54","IT54","WCE/IT/1096","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT55","IT55","WCE/IT/1097","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT56","IT56","WCE/IT/1098","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT57","IT57","WCE/IT/1099","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT58","IT58","WCE/IT/1100","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT59","IT59","WCE/IT/1101","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT60","IT60","WCE/IT/1102","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT61","IT61","WCE/IT/1103","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT62","IT62","WCE/IT/1104","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT63","IT63","WCE/IT/1105","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT64","IT64","WCE/IT/1106","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT65","IT65","WCE/IT/1107","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT66","IT66","WCE/IT/1108","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT67","IT67","WCE/IT/1109","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT68","IT68","WCE/IT/1110","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT69","IT69","WCE/IT/1111","Computer","Desktop","Dell Optiplex 3050 MT","Dell","DRF","2018-03-09",60463,"1",60463,"","Micro Lab","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT70","IT70","WCE/IT/1081","Computer","Laptop","Laptop","Dell","PGR&D","2018-03-15",77260,"1",77260,"","Store","Archon Corporation Pvt.Ltd.","","","","Working","Found","","IT",0
+"IT71","IT71","WCE/IT/1048","Other","Other","2 Tone Air conditioner : Llyod make / Voltas make","Voltas","PGR&D","2018-03-22",64040,"1",64040,"","DATA Center","Sun Computer","","","","Working","Found","","IT",0
+"IT72","IT72","WCE/IT/1049","Other","Other","2 Tone Air conditioner : Llyod make / Voltas make","Voltas","PGR&D","2018-03-22",64040,"1",64040,"","DATA Center","Veetrag Computers","","","","Working","Found","","IT",0
+"IT73","IT73","WCE/IT/1116","Computer","Laptop","Laptop Dell Inspiron 8567 Core i7 8GB 1 TB HDD ubuntu/ 2GB Graphics Card","Dell","PGR&D","2019-03-13",51010,"1",51010,"","BSS","Veetrag Computers","","","","Working","Found","","IT",0
+"IT74","IT74","WCE/IT/1117","Computer","Laptop","Laptop Dell Inspiron 8567 Core i7 8GB 1 TB HDD ubuntu/ 2GB Graphics Card","Dell","PGR&D","2019-03-13",51010,"1",51010,"","BSS","Sun Computer","","","","Working","Found","","IT",0
+"IT75","IT75","WCE/IT/1119","Computer","Laptop","Dell Laptop 3579","Dell","DRF","2019-03-19",87338,"1",87338,"","UBC","Sun Computer","","","","Working","Found","","IT",0
+"IT76","IT76","WCE/IT/1120","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT77","IT77","WCE/IT/1121","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT78","IT78","WCE/IT/1122","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT79","IT79","WCE/IT/1123","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT80","IT80","WCE/IT/1124","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT81","IT81","WCE/IT/1125","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT82","IT82","WCE/IT/1126","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT83","IT83","WCE/IT/1127","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT84","IT84","WCE/IT/1128","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT85","IT85","WCE/IT/1129","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT86","IT86","WCE/IT/1130","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT87","IT87","WCE/IT/1131","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","PKK","Veetrag Computers","","","","Working","Found","","IT",0
+"IT88","IT88","WCE/IT/1132","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT89","IT89","WCE/IT/1133","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT90","IT90","WCE/IT/1134","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT91","IT91","WCE/IT/1135","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT92","IT92","WCE/IT/1136","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT93","IT93","WCE/IT/1137","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT94","IT94","WCE/IT/1138","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT95","IT95","WCE/IT/1139","Computer","Desktop","Dell Optiplex 7060 MT","Dell","DRF","2019-03-19",56188,"1",56188,"","Micro Lab","Veetrag Computers","","","","Working","Found","","IT",0
+"IT96","IT96","WCE/IT/1146","Software","Application","Turnitin originality check License","Turnitin","TEQIP-II","2019-10-09",518189,"1",518189,"","Server","Veetrag Computers","","","","Working","Found","","IT",0
+"IT97","IT97","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT98","IT98","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT99","IT99","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT100","IT100","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT101","IT101","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT102","IT102","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT103","IT103","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT104","IT104","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT105","IT105","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT106","IT106","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT107","IT107","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT108","IT108","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT109","IT109","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT110","IT110","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT111","IT111","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT112","IT112","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT113","IT113","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT114","IT114","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT115","IT115","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT116","IT116","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT117","IT117","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT118","IT118","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT119","IT119","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT120","IT120","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT121","IT121","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT122","IT122","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT123","IT123","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT124","IT124","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT125","IT125","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT126","IT126","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT127","IT127","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT128","IT128","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT129","IT129","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT130","IT130","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT131","IT131","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT132","IT132","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT133","IT133","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT134","IT134","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT135","IT135","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT136","IT136","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT137","IT137","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT138","IT138","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT139","IT139","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT140","IT140","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT141","IT141","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT142","IT142","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT143","IT143","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT144","IT144","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT145","IT145","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT146","IT146","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT147","IT147","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT148","IT148","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT149","IT149","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT150","IT150","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT151","IT151","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT152","IT152","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT153","IT153","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT154","IT154","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT155","IT155","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT156","IT156","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT157","IT157","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT158","IT158","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT159","IT159","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT160","IT160","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT161","IT161","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT162","IT162","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT163","IT163","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT164","IT164","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT165","IT165","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT166","IT166","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT167","IT167","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT168","IT168","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT169","IT169","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT170","IT170","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT171","IT171","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT172","IT172","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT173","IT173","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT174","IT174","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT175","IT175","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT176","IT176","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT177","IT177","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT178","IT178","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT179","IT179","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT180","IT180","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT181","IT181","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT182","IT182","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT183","IT183","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT184","IT184","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT185","IT185","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT186","IT186","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT187","IT187","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT188","IT188","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT189","IT189","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT190","IT190","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT191","IT191","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT192","IT192","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT193","IT193","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT194","IT194","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT195","IT195","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT196","IT196","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT197","IT197","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT198","IT198","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT199","IT199","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT200","IT200","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT201","IT201","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT202","IT202","","","","","","","",,"",,"","","","","","","","","","IT",0
+"IT203","IT203","","","","","","","",,"",,"","","","","","","","","","IT",0

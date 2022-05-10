@@ -35,6 +35,28 @@ function ViewAsset() {
   const [Resmsg, setResmsg] = React.useState(null);
   const [Department, setDepartment] = React.useState("All");
   const [uploadedFile, setuploadedFile] = React.useState(null);
+  const [logedIN, setlogedIN] = React.useState(true);
+
+  React.useEffect(() => {
+    try {
+      Axios.post("http://localhost:3002/islogedin", {}).then((response) => {
+        if (response && response.status == 266) {
+          setlogedIN(true);
+          console.log("266");
+        } else {
+          console.log("login aain");
+          setlogedIN(false);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      window.alert("Error!");
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(Department);
+  }, [Department]);
 
   const dropdownlist = {
     Camera: ["Web", "Analog", "IP Based", "Other"],
@@ -56,6 +78,7 @@ function ViewAsset() {
     Software: ["System(OS)", "Application", "Other"],
     Other: ["Projector", "Xerox Machine", "Other"],
   };
+
   function createSelectItems() {
     let items = [];
     for (const key of Object.keys(dropdownlist)) {
@@ -68,9 +91,9 @@ function ViewAsset() {
     setDepartment(deptstring);
   }
 
-  useEffect(() => {
-    console.log(Department);
-  }, [Department]);
+  if (!logedIN) {
+    return <Redirect to="/admin" />;
+  }
 
   function createSecondItems(val) {
     let items = [];
