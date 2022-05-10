@@ -36,8 +36,10 @@ function ViewAsset(props) {
   const [Part, setPart] = React.useState(null);
   const [Resmsg, setResmsg] = React.useState(null);
   const [Department, setDepartment] = React.useState("None");
-
+  const [photo, setphoto] = React.useState("");
   const [logedIN, setlogedIN] = React.useState(true);
+  const [uploadedFile, setuploadedFile] = React.useState(null);
+
   const dropdownlist = {
     Camera: ["Web", "Analog", "IP Based", "Other"],
     Computer: ["Laptop", "Desktop", "Server", "Other"],
@@ -84,13 +86,13 @@ function ViewAsset(props) {
       setPart(data.Part);
       setRemark(data.Remark);
       setSupplierMobNo(data.SupplierMobNo);
+      setphoto(data.PhotoLink);
     }
   }, [data]);
 
-  function childToParent(deptstring){
+  function childToParent(deptstring) {
     setDepartment(deptstring);
   }
-
 
   React.useEffect(() => {
     Axios.get("http://localhost:3002/addasset/" + props.match.params.UID)
@@ -181,43 +183,7 @@ function ViewAsset(props) {
     );
   }
 
-  const postreq = () => {
-    Axios.post("https://wce-asset-registry.herokuapp.com/addasset", {
-      Department: Department,
-      //UID: UID,
-      AssetNumber: AssetNumber,
-      EqpType: EqpType,
-      NameOfEqp: NameOfEqp,
-      SpecsConfig: SpecsConfig,
-      Make: Make,
-      AllocationFund: AllocationFund,
-      DOP: DOP,
-      CostPerUnit: CostPerUnit,
-      Quantity: Quantity,
-      TotalCost: TotalCost,
-      Warranty: Warranty,
-      LocEqp: LocEqp,
-      SupplierName: SupplierName,
-      SupplierAddress: SupplierAddress,
-      SupplierMobNo: SupplierMobNo,
-      Utilization: Utilization,
-      Status: Status,
-      Remark: Remark,
-      Part: Part,
-    }).then((response) => {
-      if (response.data.err) {
-        const msg = "Error Adding Data ErrorCode:" + response.data.code;
-        setResmsg(msg);
-      } else {
-        setResmsg(null);
-        setValidated(false);
-        document.getElementById("addassetform").reset();
-        setRedirect(true);
-      }
-    });
-  };
-
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     setResmsg(null);
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -227,9 +193,107 @@ function ViewAsset(props) {
       setResmsg("Invalid Data");
     } else {
       setValidated(true);
-      setResmsg("Valid Data");
+      var link;
+      if (uploadedFile) {
+        const data = new FormData();
+        data.append("profileImage", uploadedFile, uploadedFile.name);
+        await Axios.post("http://localhost:3002/photodept", data, {
+          headers: {
+            accept: "application/json",
+            "Accept-Language": "en-US,en;q=0.8",
+            "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
+          },
+        })
+          .then((response) => {
+            if (200 === response.status) {
+              if (response.data.error) {
+                if ("LIMIT_FILE_SIZE" === response.data.error.code) {
+                  setResmsg("File size Exceeded");
+                } else {
+                  setResmsg(response.data.error);
+                }
+              } else {
+                link = response.data.location;
+                console.log("filedata", response.data);
+              }
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        console.log(Department);
+        await Axios.post("http://localhost:3002/updateAsset", {
+          UID: UID,
+          Department: Department,
+          AssetNumber: AssetNumber,
+          EqpType: EqpType,
+          NameOfEqp: NameOfEqp,
+          SpecsConfig: SpecsConfig,
+          Make: Make,
+          AllocationFund: AllocationFund,
+          DOP: DOP,
+          CostPerUnit: CostPerUnit,
+          Quantity: Quantity,
+          TotalCost: TotalCost,
+          Warranty: Warranty,
+          LocEqp: LocEqp,
+          SupplierName: SupplierName,
+          SupplierAddress: SupplierAddress,
+          SupplierMobNo: SupplierMobNo,
+          Utilization: Utilization,
+          Status: Status,
+          Remark: Remark,
+          Part: Part,
+          PhotoLink: link,
+        }).then((response) => {
+          if (response.data.err) {
+            const msg = "Error Adding Data ErrorCode:" + response.data.code;
+            setResmsg(msg);
+          } else {
+            setResmsg(null);
+            setValidated(false);
+            document.getElementById("addassetform").reset();
+            setRedirect(true);
+          }
+        });
+      } else {
+        await Axios.post("http://localhost:3002/updateAsset", {
+          UID: UID,
+          Department: Department,
+          AssetNumber: AssetNumber,
+          EqpType: EqpType,
+          NameOfEqp: NameOfEqp,
+          SpecsConfig: SpecsConfig,
+          Make: Make,
+          AllocationFund: AllocationFund,
+          DOP: DOP,
+          CostPerUnit: CostPerUnit,
+          Quantity: Quantity,
+          TotalCost: TotalCost,
+          Warranty: Warranty,
+          LocEqp: LocEqp,
+          SupplierName: SupplierName,
+          SupplierAddress: SupplierAddress,
+          SupplierMobNo: SupplierMobNo,
+          Utilization: Utilization,
+          Status: Status,
+          Remark: Remark,
+          Part: Part,
+          PhotoLink: photo,
+        }).then((response) => {
+          if (response.data.err) {
+            const msg = "Error Adding Data ErrorCode:" + response.data.code;
+            setResmsg(msg);
+          } else {
+            setResmsg(null);
+            setValidated(false);
+            document.getElementById("addassetform").reset();
+            setRedirect(true);
+          }
+        });
+      }
     }
-  };
+  }
 
   if (data) {
     return (
@@ -261,12 +325,18 @@ function ViewAsset(props) {
               <Row>
                 <Form.Group as={Col} controlId="formGridState">
                   <Form.Label>Department </Form.Label>
-                  <Child childToParent={childToParent}/>
+                  <Child childToParent={childToParent} />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formFile" className="mb-3">
                   <Form.Label>Choose Image</Form.Label>
-                  <Form.Control type="file" accept="image/*" />
+                  <Form.Control
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      setuploadedFile(e.target.files[0]);
+                    }}
+                  />
                 </Form.Group>
               </Row>
             </Col>
@@ -516,6 +586,13 @@ function ViewAsset(props) {
           <hr className="hrline" />
           <br />
           <p style={{ textAlign: "center" }}>{Resmsg}</p>
+          <div style={{ textAlign: "center" }}>
+            <img
+              src={photo}
+              style={{ width: "250px", height: "150px" }}
+              alt="Asset Image"
+            />
+          </div>
           <div style={{ textAlign: "center" }}>
             <button className="lanButton" type="submit">
               Save And Next

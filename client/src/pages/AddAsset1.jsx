@@ -35,6 +35,7 @@ function ViewAsset() {
   const [Resmsg, setResmsg] = React.useState(null);
   const [Department, setDepartment] = React.useState("All");
   const [uploadedFile, setuploadedFile] = React.useState(null);
+
   const dropdownlist = {
     Camera: ["Web", "Analog", "IP Based", "Other"],
     Computer: ["Laptop", "Desktop", "Server", "Other"],
@@ -151,6 +152,7 @@ function ViewAsset() {
             console.log(a);
             setUID(a);
             Axios.post("http://localhost:3002/addasset", {
+              Department: Department,
               UID: a,
               AssetNumber: AssetNumber,
               EqpType: EqpType,
@@ -212,6 +214,7 @@ function ViewAsset() {
             console.log(a);
             setUID(a);
             Axios.post("http://localhost:3002/addasset", {
+              Department: Department,
               UID: a,
               AssetNumber: AssetNumber,
               EqpType: EqpType,
