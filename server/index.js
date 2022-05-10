@@ -139,6 +139,23 @@ app.post("/addasset", auth, async (req, res) => {
   }
 });
 
+app.post("/addasset", auth, async (req, res) => {
+  console.log(req.body);
+  try {
+    const newasset = new AssetDB(req.body);
+    newasset._id = req.body.UID;
+    const success = await newasset.save();
+    if (success) {
+      res.json({ message: "Added Successfully" });
+    } else {
+      res.json({ err: "Error adding data" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.json({ err: "Error adding data", code: err.code });
+  }
+});
+
 app.get("/addasset/:uid", async (req, res) => {
   const uid = req.params.uid;
   try {
@@ -299,6 +316,32 @@ app.post("/importCSV", auth, upload.single("fileInput"), async (req, res) => {
   try {
     await unlinkAsync(file.path).then(function (response) {
       console.log("file Deleted!");
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/depalldata", auth, async (req, res) => {
+  try {
+    var data = await AssetDB.find({ Department: req.body.Department });
+    var jsonData = JSON.parse(JSON.stringify(data));
+    const json2csvParser = new Json2csvParser({ header: true });
+    const csv = json2csvParser.parse(jsonData);
+    fs.writeFile("WCE_AssetRegister.csv", csv, function (error) {
+      if (error) throw error;
+      console.log("File generated  successfully!");
+      res.setHeader(
+        "Content-disposition",
+        "attachment; filename=WCE_AssetRegister.csv"
+      );
+      res.setHeader("Content-Type", "text/csv");
+      res.download(__dirname + "/WCE_AssetRegister.csv", function (err) {
+        if (err) {
+          console.log(err);
+        }
+        res.end();
+      });
     });
   } catch (err) {
     console.log(err);

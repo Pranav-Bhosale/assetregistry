@@ -108,10 +108,20 @@ function ImportExportCSV() {
         console.log(error);
       });
   }
+
   function getonlydeptdata() {
-    setResmsgexport(
-      "Wait..file will be downloaded soon, function not set yet!!"
-    );
+    setResmsgexport("Wait..file will be downloaded soon!!");
+    Axios.post("http://localhost:3002/depalldata", {
+      Department: Department,
+    })
+      .then(function (response) {
+        console.log(response);
+        fileDownload(response.data, "WCE_AssetRegister-" + Department + ".csv");
+        setResmsgexport("File has downloaded..");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     //axios change above line
   }
   function deptwiseexport() {
