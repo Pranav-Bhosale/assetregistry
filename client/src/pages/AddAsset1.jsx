@@ -96,6 +96,11 @@ function ViewAsset() {
     document.getElementById("addassetform").reset();
   }
 
+  // const singleFileUploadHandler = (event) => {
+
+  //   // If file selected
+  // };
+
   async function handleSubmit(event) {
     setResmsg(null);
     const form = event.currentTarget;
@@ -107,97 +112,188 @@ function ViewAsset() {
     } else {
       setValidated(true);
       var link;
+
       if (uploadedFile) {
         const data = new FormData();
-        data.append("fileInput", uploadedFile);
-        Axios.post("http://localhost:3002/photodept", data)
+        data.append("profileImage", uploadedFile, uploadedFile.name);
+        await Axios.post("http://localhost:3002/photodept", data, {
+          headers: {
+            accept: "application/json",
+            "Accept-Language": "en-US,en;q=0.8",
+            "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
+          },
+        })
           .then((response) => {
-            console.log(response);
-            try {
-              fetch(response.data.url, {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "image/*",
-                },
-                body: data,
-              }).then((resp) => {
-                console.log(resp);
-              });
-            } catch (e) {
-              console.log(e);
-            }
-            const imageUrl = response.data.url.split("?")[0];
-            console.log(imageUrl);
-            link = imageUrl;
-          })
-          .catch(function (error) {
-            console.log(error); // setuploadedFile(null);
-            // document.getElementById("csvinputform").reset();
-            // setResmsg(
-            //   "Uploaded file changed or Netwok Issue...Re-input file and try again"
-            // );
-          });
-      }
-      console.log(Department);
-      await Axios.post("http://localhost:3002/deptinfo", {
-        Department: Department,
-      }).then((response) => {
-        console.log(response);
-        if (response.status == 201) {
-          var a = Department + response.data[0].No;
-          var number = response.data[0].No + 1;
-          console.log(a);
-          setUID(a);
-          Axios.post("http://localhost:3002/addasset", {
-            UID: a,
-            AssetNumber: AssetNumber,
-            EqpType: EqpType,
-            NameOfEqp: NameOfEqp,
-            SpecsConfig: SpecsConfig,
-            Make: Make,
-            AllocationFund: AllocationFund,
-            DOP: DOP,
-            CostPerUnit: CostPerUnit,
-            Quantity: Quantity,
-            TotalCost: TotalCost,
-            Warranty: Warranty,
-            LocEqp: LocEqp,
-            SupplierName: SupplierName,
-            SupplierAddress: SupplierAddress,
-            SupplierMobNo: SupplierMobNo,
-            Utilization: Utilization,
-            Status: Status,
-            Remark: Remark,
-            Part: Part,
-            PhotoLink: link,
-          }).then((response) => {
-            if (response.data.err) {
-              const msg = "Error Adding Data ErrorCode:" + response.data.code;
-              setResmsg(msg);
-            } else {
-              Axios.post("http://localhost:3002/deptincrement", {
-                Department: Department,
-                number: number,
-              }).then((response) => {
-                console.log(response);
-                if (response.status == 201) {
-                  setResmsg(null);
-                  setValidated(false);
-                  // document.getElementById("addassetform").reset();
-                  // setRedirect(true);
+            if (200 === response.status) {
+              if (response.data.error) {
+                if ("LIMIT_FILE_SIZE" === response.data.error.code) {
+                  setResmsg("File size Exceeded");
                 } else {
-                  const msg = "Error in Incrementing UID";
-                  setResmsg(msg);
+                  setResmsg(response.data.error);
                 }
-              });
+              } else {
+                link = response.data.location;
+                console.log("filedata", response.data);
+              }
             }
+          })
+          .catch((error) => {
+            console.log(error);
           });
-        } else {
-          const msg =
-            "Error Adding Data ErrorCode:" + response.data.err.message;
-          setResmsg(msg);
-        }
-      });
+        console.log(Department);
+        await Axios.post("http://localhost:3002/deptinfo", {
+          Department: Department,
+        }).then((response) => {
+          console.log(response);
+          if (response.status == 201) {
+            var a = Department + response.data[0].No;
+            var number = response.data[0].No + 1;
+            console.log(a);
+            setUID(a);
+            Axios.post("http://localhost:3002/addasset", {
+              UID: a,
+              AssetNumber: AssetNumber,
+              EqpType: EqpType,
+              NameOfEqp: NameOfEqp,
+              SpecsConfig: SpecsConfig,
+              Make: Make,
+              AllocationFund: AllocationFund,
+              DOP: DOP,
+              CostPerUnit: CostPerUnit,
+              Quantity: Quantity,
+              TotalCost: TotalCost,
+              Warranty: Warranty,
+              LocEqp: LocEqp,
+              SupplierName: SupplierName,
+              SupplierAddress: SupplierAddress,
+              SupplierMobNo: SupplierMobNo,
+              Utilization: Utilization,
+              Status: Status,
+              Remark: Remark,
+              Part: Part,
+              PhotoLink: link,
+            }).then((response) => {
+              if (response.data.err) {
+                const msg = "Error Adding Data ErrorCode:" + response.data.code;
+                setResmsg(msg);
+              } else {
+                Axios.post("http://localhost:3002/deptincrement", {
+                  Department: Department,
+                  number: number,
+                }).then((response) => {
+                  console.log(response);
+                  if (response.status == 201) {
+                    setResmsg(null);
+                    setValidated(false);
+                    document.getElementById("addassetform").reset();
+                    setRedirect(true);
+                  } else {
+                    const msg = "Error in Incrementing UID";
+                    setResmsg(msg);
+                  }
+                });
+              }
+            });
+          } else {
+            const msg =
+              "Error Adding Data ErrorCode:" + response.data.err.message;
+            setResmsg(msg);
+          }
+        });
+      } else {
+        console.log(Department);
+        await Axios.post("http://localhost:3002/deptinfo", {
+          Department: Department,
+        }).then((response) => {
+          console.log(response);
+          if (response.status == 201) {
+            var a = Department + response.data[0].No;
+            var number = response.data[0].No + 1;
+            console.log(a);
+            setUID(a);
+            Axios.post("http://localhost:3002/addasset", {
+              UID: a,
+              AssetNumber: AssetNumber,
+              EqpType: EqpType,
+              NameOfEqp: NameOfEqp,
+              SpecsConfig: SpecsConfig,
+              Make: Make,
+              AllocationFund: AllocationFund,
+              DOP: DOP,
+              CostPerUnit: CostPerUnit,
+              Quantity: Quantity,
+              TotalCost: TotalCost,
+              Warranty: Warranty,
+              LocEqp: LocEqp,
+              SupplierName: SupplierName,
+              SupplierAddress: SupplierAddress,
+              SupplierMobNo: SupplierMobNo,
+              Utilization: Utilization,
+              Status: Status,
+              Remark: Remark,
+              Part: Part,
+              PhotoLink: link,
+            }).then((response) => {
+              if (response.data.err) {
+                const msg = "Error Adding Data ErrorCode:" + response.data.code;
+                setResmsg(msg);
+              } else {
+                Axios.post("http://localhost:3002/deptincrement", {
+                  Department: Department,
+                  number: number,
+                }).then((response) => {
+                  console.log(response);
+                  if (response.status == 201) {
+                    setResmsg(null);
+                    setValidated(false);
+                    document.getElementById("addassetform").reset();
+                    setRedirect(true);
+                  } else {
+                    const msg = "Error in Incrementing UID";
+                    setResmsg(msg);
+                  }
+                });
+              }
+            });
+          } else {
+            const msg =
+              "Error Adding Data ErrorCode:" + response.data.err.message;
+            setResmsg(msg);
+          }
+        });
+      }
+
+      // if (uploadedFile) {
+      //   const data = new FormData();
+      //   data.append("fileInput", uploadedFile);
+      //   Axios.post("http://localhost:3002/photodept", data)
+      //     .then((response) => {
+      //       console.log(response);
+      //       try {
+      //         fetch(response.data.url, {
+      //           method: "PUT",
+      //           headers: {
+      //             "Content-Type": "image/*",
+      //           },
+      //           body: data,
+      //         }).then((resp) => {
+      //           console.log(resp);
+      //         });
+      //       } catch (e) {
+      //         console.log(e);
+      //       }
+      //       const imageUrl = response.data.url.split("?")[0];
+      //       console.log(imageUrl);
+      //       link = imageUrl;
+      //     })
+      //     .catch(function (error) {
+      //       console.log(error); // setuploadedFile(null);
+      //       // document.getElementById("csvinputform").reset();
+      //       // setResmsg(
+      //       //   "Uploaded file changed or Netwok Issue...Re-input file and try again"
+      //       // );
+      //     });
+      // }
     }
   }
 

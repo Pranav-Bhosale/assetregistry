@@ -31,7 +31,7 @@ function InfoAll() {
   return (
     <div className="navfootpad" style={{ textAlign: "center" }}>
       <TitleBar />
-      
+
       {data && (
         <TableFaculty
           uid={data[0].UID}
@@ -55,14 +55,14 @@ function InfoAll() {
           status={data[0].Status}
           remark={data[0].Remark}
           part={data[0].Part}
-          link={data[0].PhotoLink}
+          PhotoLink={data[0].PhotoLink}
         />
       )}
-      
+
       <hr className="hrline" />
       <p style={{ textAlign: "center" }}>{Resmsg}</p>
-     
-      <Footer/>
+
+      <Footer />
     </div>
   );
 }

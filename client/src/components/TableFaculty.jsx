@@ -90,12 +90,13 @@ function TableFaculty(props) {
           <td>Part</td>
           <td>{props.part}</td>
         </tr>
-        <tr style={{textAlign:"center" }}>
-            <td style={{textAlign:"center",paddingTop:"55px" }}>
-              Image
-            </td>
-           <img src={props.link} style={{width:"250px",height:"150px"}} alt="Asset Image" />
-        
+        <tr style={{ textAlign: "center" }}>
+          <td style={{ textAlign: "center", paddingTop: "55px" }}>Image</td>
+          <img
+            src={props.PhotoLink}
+            style={{ width: "250px", height: "150px" }}
+            alt="Asset Image"
+          />
         </tr>
       </tbody>
     </Table>
