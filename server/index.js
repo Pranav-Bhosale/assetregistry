@@ -289,6 +289,72 @@ app.post("/viewasset", async (req, res) => {
   res.json(data);
 });
 
+//range with only equipment 1 ==========
+app.post("/viewasset/range_with_only_eqp", async (req, res) => {
+  const EqpType = req.body.EqpType;
+  const NameOfEqp = req.body.NameOfEqp;
+  const startYear= req.body.startYear;
+  const endYear = req.body.endYear;
+  const startCost=req.body.startCost;
+  const endCost=req.body.endCost;
+
+
+  const data = await AssetDB.find({
+    EqpType: EqpType,
+    NameOfEqp: NameOfEqp,
+    DOP:{$gte:startYear,$lte:endYear},
+    CostPerUnit:{$gte:startCost,$lte:endCost}
+  });
+  res.json(data);
+});
+
+
+
+//2
+app.post("/viewasset/cost_range_with_only_eqp", async (req, res) => {
+  const EqpType = req.body.EqpType;
+  const NameOfEqp = req.body.NameOfEqp;
+  // const startYear= req.body.startYear;
+  // const endYear = req.body.endYear;
+  const startCost=req.body.startCost;
+  const endCost=req.body.endCost;
+
+
+  const data = await AssetDB.find({
+    EqpType: EqpType,
+    NameOfEqp: NameOfEqp,
+    // DOP:{$gte:startYear,$lte:endYear},
+    CostPerUnit:{$gte:startCost,$lte:endCost}
+  });
+  res.json(data);
+});
+
+//3
+
+app.post("/viewasset/date_range_with_only_eqp", async (req, res) => {
+  const EqpType = req.body.EqpType;
+  const NameOfEqp = req.body.NameOfEqp;
+  const startYear= req.body.startYear;
+  const endYear = req.body.endYear;
+  // const startCost=req.body.startCost;
+  // const endCost=req.body.endCost;
+
+
+  const data = await AssetDB.find({
+    EqpType: EqpType,
+    NameOfEqp: NameOfEqp,
+    DOP:{$gte:startYear,$lte:endYear}
+    // CostPerUnit:{$gte:startCost,$lte:endCost}
+  });
+  res.json(data);
+});
+
+
+//with dep
+
+
+
+
 //with type+eqp name
 app.post("/viewasset/choose", async (req, res) => {
   const EqpType = req.body.EqpType;
@@ -297,7 +363,7 @@ app.post("/viewasset/choose", async (req, res) => {
   const data = await AssetDB.find({
     EqpType: EqpType,
     NameOfEqp: NameOfEqp,
-    AssetNumber: { $regex: Department },
+    Department: Department,
   });
   res.json(data);
 });
@@ -313,29 +379,139 @@ app.post("/viewasset/range_with_dep_and_eqp", async (req,res)=>{
   const endCost=req.body.endCost;
 
 
-  console.log(startYear);
-  console.log("endyear"+endYear);
+  // console.log(startYear);
+  // console.log("endyear"+endYear);
   const data = await AssetDB.find({
     EqpType:EqpType,
     NameOfEqp: NameOfEqp,
     Department: Department,
     DOP:{$gte:startYear,$lte:endYear},
-    
-    // CostPerUnit:{$gt:startCost}
+    CostPerUnit:{$gte:startCost,$lte:endCost}
   });
   
   res.json(data);
 }
 );
 
+
+
+
+app.post("/viewasset/date_range_with_dep_and_eqp", async (req,res)=>{
+  const EqpType = req.body.EqpType;
+  const NameOfEqp = req.body.NameOfEqp;
+  const Department = req.body.Department;
+  const startYear= req.body.startYear;
+  const endYear = req.body.endYear;
+  // const startCost=req.body.startCost;
+  // const endCost=req.body.endCost;
+
+
+  
+  const data = await AssetDB.find({
+    EqpType:EqpType,
+    NameOfEqp: NameOfEqp,
+    Department: Department,
+    DOP:{$gte:startYear,$lte:endYear},
+    // CostPerUnit:{$gte:startCost,$lte:endCost}
+  });
+  
+  res.json(data);
+}
+);
+
+app.post("/viewasset/cost_range_with_dep_and_eqp", async (req,res)=>{
+  const EqpType = req.body.EqpType;
+  const NameOfEqp = req.body.NameOfEqp;
+  const Department = req.body.Department;
+  // const startYear= req.body.startYear;
+  // const endYear = req.body.endYear;
+  const startCost=req.body.startCost;
+  const endCost=req.body.endCost;
+
+
+  // console.log(startYear);
+  // console.log("endyear"+endYear);
+  const data = await AssetDB.find({
+    EqpType:EqpType,
+    NameOfEqp: NameOfEqp,
+    Department: Department,
+    // DOP:{$gte:startYear,$lte:endYear},
+    CostPerUnit:{$gte:startCost,$lte:endCost}
+  });
+  
+  res.json(data);
+}
+);
+
+
+
+//range_with_only_eqp == viewasset
+
+
+
+
 app.post("/viewasset/choose2", async (req, res) => {
   const Department = req.body.Department;
   const data = await AssetDB.find({
-    AssetNumber: { $regex: Department },
+    Department: Department,
   });
 
   res.json(data);
 });
+
+//1
+app.post("/viewasset/range_with_only_dep", async (req, res) => {
+  const Department = req.body.Department;
+  const startYear= req.body.startYear;
+  const endYear = req.body.endYear;
+  const startCost=req.body.startCost;
+  const endCost=req.body.endCost;
+
+  const data = await AssetDB.find({
+    Department: Department,
+    DOP:{$gte:startYear,$lte:endYear},
+    CostPerUnit:{$gte:startCost,$lte:endCost}
+  });
+
+  res.json(data);
+});
+
+//2
+app.post("/viewasset/cost_range_with_only_dep", async (req, res) => {
+  const Department = req.body.Department;
+  // const startYear= req.body.startYear;
+  // const endYear = req.body.endYear;
+  const startCost=req.body.startCost;
+  const endCost=req.body.endCost;
+
+  const data = await AssetDB.find({
+    Department: Department,
+    // DOP:{$gte:startYear,$lte:endYear},
+    CostPerUnit:{$gte:startCost,$lte:endCost}
+  });
+
+  res.json(data);
+});
+
+
+
+app.post("/viewasset/date_range_with_only_dep", async (req, res) => {
+  const Department = req.body.Department;
+  const startYear= req.body.startYear;
+  const endYear = req.body.endYear;
+  // const startCost=req.body.startCost;
+  // const endCost=req.body.endCost;
+
+  const data = await AssetDB.find({
+    Department: Department,
+    DOP:{$gte:startYear,$lte:endYear}
+    // CostPerUnit:{$gte:startCost,$lte:endCost}
+  });
+
+  res.json(data);
+});
+
+
 
 app.get("/viewasset/sort", auth, async (req, res) => {
   const uid = req.params.uid;

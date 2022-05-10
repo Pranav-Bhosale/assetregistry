@@ -31,10 +31,12 @@ function ViewAsset() {
   const [show, setShow] = React.useState(false);
   const [startYear, setStartYear] = React.useState(d);
   const [endYear, setEndYear] = React.useState(d);
-  const [startCost, setStartCost] = React.useState(0);
-  const [endCost, setEndCost] = React.useState(0);
+  const [startCost, setStartCost] = React.useState(parseInt(0));
+  const [endCost, setEndCost] = React.useState(Number.MAX_SAFE_INTEGER);
   const [isActive, setIsActive] = React.useState(false);
   const [logedIN, setlogedIN] = React.useState(true);
+  const [considerDate,setConsiderDate] = React.useState(false);
+  const [considerCost,setConsiderCost]=React.useState(false);
 
   React.useEffect(() => {
     try {
@@ -57,21 +59,19 @@ function ViewAsset() {
 
   React.useEffect(() => {
     if (!isActive) {
-      setStartYear("");
-      setEndYear("");
-      setStartCost(0);
-      setEndCost(0);
+      setStartCost(parseInt(0));
+      setEndCost(Number.MAX_SAFE_INTEGER);
     }
-    
+    console.log(startYear+"===");
   });
 
   React.useEffect(() => {
 
     if (startCost === '') {
-      setStartCost(0);
+      setStartCost(parseInt(0));
     }
     if (endCost === '') {
-      setEndCost(0);
+      setEndCost(Number.MAX_SAFE_INTEGER);
     }
   }
   );
@@ -261,7 +261,6 @@ function ViewAsset() {
     setResmsg(null);
     if (startYear === '') {
       setStartYear(d);
-      console.log("empty '' value error")
     }
     if(endYear === ''){
       setEndYear(d);
@@ -270,9 +269,15 @@ function ViewAsset() {
     console.log(endYear);
     console.log(startCost);
     console.log(endCost);
-
-    if (isActive) {
+    setqueriedData([]);
+    
+    if (isActive&& (considerCost || considerDate)) {
       
+      if((considerDate && startYear>endYear)||(considerCost && startCost>endCost)){
+        setResmsg("please select valid range!");
+        setResmesgcolor("red");
+      }
+      else if(considerCost&&considerDate){
       if (Department !== "None" && EqpType !== "None") {
         // setResmsg("search with range,department,eqp");
         Axios.post("http://localhost:3002/viewasset/range_with_dep_and_eqp", {
@@ -345,6 +350,157 @@ function ViewAsset() {
         setResmesgcolor("red");
       }
 
+    }
+    else if(considerCost){
+      if (Department !== "None" && EqpType !== "None") {
+        // setResmsg("search with range,department,eqp");
+        Axios.post("http://localhost:3002/viewasset/cost_range_with_dep_and_eqp", {
+          EqpType: EqpType,
+          NameOfEqp: NameOfEqp,
+          Department: Department,
+          // startYear: startYear,
+          // endYear: endYear,
+          startCost: startCost,
+          endCost: endCost
+        }).then((response) => {
+          const res = response.data[0];
+          console.log(response.data[0]);
+          console.log("----------");
+          setqueriedData(response.data);
+          if (res) {
+            setResmsg("Total " + response.data.length + " Entries were Found!");
+            queriedDatadisplay(queriedData);
+            setResmesgcolor("black");
+          } else {
+            setResmsg("No Data Found!");
+            setResmesgcolor("red");
+          }
+        });
+      } else if (EqpType !== "None") {
+        setResmsg("search with range and eqp");
+        Axios.post("http://localhost:3002/viewasset/cost_range_with_only_eqp", {
+          EqpType: EqpType,
+          NameOfEqp: NameOfEqp,
+          // startYear: startYear,
+          // endYear: endYear,
+          startCost: startCost,
+          endCost: endCost
+        }).then((response) => {
+          const res = response.data[0];
+          setqueriedData(response.data);
+          if (res) {
+            setResmsg("Total " + response.data.length + " Entries were Found!");
+            queriedDatadisplay(queriedData);
+            setResmesgcolor("black");
+          } else {
+            setResmsg("No Data Found!");
+            setResmesgcolor("red");
+          }
+        });
+      } else if (EqpType === "None") {
+        setResmsg("search with range and department");
+        Axios.post("http://localhost:3002/viewasset/cost_range_with_only_dep", {
+          Department: Department,
+          // startYear: startYear,
+          // endYear: endYear,
+          startCost: startCost,
+          endCost: endCost
+        }).then((response) => {
+          const res = response.data[0];
+          setqueriedData(response.data);
+          if (res) {
+            setResmsg("Total " + response.data.length + " Entries were Found!");
+            queriedDatadisplay(queriedData);
+            setResmesgcolor("black");
+          } else {
+            setResmsg("No Data Found!");
+            setResmesgcolor("red");
+          }
+        });
+      }
+      else {
+        //should get all data if Eqptype & dept both are none
+        setResmsg("Please Select Filters!");
+        setResmesgcolor("red");
+      }
+
+    }
+
+    else if(considerDate){
+      if (Department !== "None" && EqpType !== "None") {
+        // setResmsg("search with range,department,eqp");
+        Axios.post("http://localhost:3002/viewasset/date_range_with_dep_and_eqp", {
+          EqpType: EqpType,
+          NameOfEqp: NameOfEqp,
+          Department: Department,
+          startYear: startYear,
+          endYear: endYear,
+          // startCost: startCost,
+          // endCost: endCost
+        }).then((response) => {
+          const res = response.data[0];
+          console.log(response.data[0]);
+          console.log("----------");
+          setqueriedData(response.data);
+          if (res) {
+            setResmsg("Total " + response.data.length + " Entries were Found!");
+            queriedDatadisplay(queriedData);
+            setResmesgcolor("black");
+          } else {
+            setResmsg("No Data Found!");
+            setResmesgcolor("red");
+          }
+        });
+      } else if (EqpType !== "None") {
+        setResmsg("search with range and eqp");
+        Axios.post("http://localhost:3002/viewasset/date_range_with_only_eqp", {
+          EqpType: EqpType,
+          NameOfEqp: NameOfEqp,
+          startYear: startYear,
+          endYear: endYear,
+          // startCost: startCost,
+          // endCost: endCost
+        }).then((response) => {
+          const res = response.data[0];
+          setqueriedData(response.data);
+          if (res) {
+            setResmsg("Total " + response.data.length + " Entries were Found!");
+            queriedDatadisplay(queriedData);
+            setResmesgcolor("black");
+          } else {
+            setResmsg("No Data Found!");
+            setResmesgcolor("red");
+          }
+        });
+      } else if (EqpType === "None") {
+        setResmsg("search with range and department");
+        Axios.post("http://localhost:3002/viewasset/date_range_with_only_dep", {
+          Department: Department,
+          startYear: startYear,
+          endYear: endYear,
+          // startCost: startCost,
+          // endCost: endCost
+        }).then((response) => {
+          const res = response.data[0];
+          setqueriedData(response.data);
+          if (res) {
+            setResmsg("Total " + response.data.length + " Entries were Found!");
+            queriedDatadisplay(queriedData);
+            setResmesgcolor("black");
+          } else {
+            setResmsg("No Data Found!");
+            setResmesgcolor("red");
+          }
+        });
+      }
+      else {
+        //should get all data if Eqptype & dept both are none
+        setResmsg("Please Select Filters!");
+        setResmesgcolor("red");
+      }
+
+    }
+
       //==========          
     }
 
@@ -406,6 +562,7 @@ function ViewAsset() {
       }
     }
   }
+
 
 
   function handleClick() {
@@ -529,11 +686,12 @@ function ViewAsset() {
 
                 <div>{isActive ? <MdKeyboardArrowUp style={{ color: "#023d77" }} size={30} /> : <MdKeyboardArrowDown style={{ color: "#023d77" }} size={30} />}</div>
               </div>
-              {isActive && <Row style={{ margin: 0, marginTop: "10" }}>
+              { isActive && <Row style={{ margin: 0, marginTop: "10" }}>
                 <Col>
                   <Row>
                     <Col md={6}>
                       <Row>
+                      
                         <Col md={3} style={{ paddingTop: "40px" }}>
                           <b>Year Range :</b>
                         </Col>
@@ -546,6 +704,7 @@ function ViewAsset() {
                               }}
                             />
                           </Form.Group>
+                          
                         </Col>
                         <Col md={{ span: 3 }}>
                           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -555,6 +714,15 @@ function ViewAsset() {
                                 setEndYear(e.target.value);
                               }}
                             />
+                          </Form.Group>
+                        </Col>
+                        
+                        <Col md={{ offset: 0,span: 1 }} style={{paddingLeft:"30px"}}>
+                          <Form.Group className="mb-3" style={{paddingTop:"15px"}}>
+                          <Form.Label></Form.Label>
+                            <Form.Check name="date" onClick={(e) => {
+                                setConsiderDate(!considerDate);
+                              }} intline  ></Form.Check>
                           </Form.Group>
                         </Col>
                       </Row>
@@ -571,7 +739,7 @@ function ViewAsset() {
                             <Form.Label>Start</Form.Label>
                             <Form.Control type="number"
                               onChange={(e) => {
-                                setStartCost(e.target.value);
+                                setStartCost(parseInt(e.target.value));
                               }}
                             />
                           </Form.Group>
@@ -581,9 +749,17 @@ function ViewAsset() {
                             <Form.Label>End</Form.Label>
                             <Form.Control type="number"
                               onChange={(e) => {
-                                setEndCost(e.target.value);
+                                setEndCost(parseInt(e.target.value));
                               }}
                             />
+                          </Form.Group>
+                        </Col>
+                        <Col md={{ offset: 0,span: 1 }} style={{paddingLeft:"30px"}}>
+                          <Form.Group className="mb-3" style={{paddingTop:"15px"}}>
+                          <Form.Label></Form.Label>
+                            <Form.Check name="cost" onClick={(e) => {
+                                setConsiderCost(!considerCost);
+                              }} intline  ></Form.Check>
                           </Form.Group>
                         </Col>
 
