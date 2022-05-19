@@ -30,7 +30,7 @@ function ViewAsset(props) {
         if (response && response.status == 201) {
           setText("New OTP has been sent to registered email..Enter OTP");
         } else {
-          console.log(response);
+          console.log(response + " ");
         }
       });
     } catch (error) {
