@@ -278,7 +278,6 @@ function  queriedDatadisplay(queriedData) {
 </Modal>
 
       <div className="formRow">
-
         <Row style={{ margin: 0, padding: 0, }} >
           <Col xs="9"  style={{ margin: 0, paddingRight: 0, }}>
 
